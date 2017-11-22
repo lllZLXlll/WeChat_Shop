@@ -1,0 +1,22 @@
+<!-- <import src="../components/swiper/swiper.wxml" /> -->
+
+<!--index.wxml-->
+<view>
+  <!-- banner图片 -->
+  <view class="bannerView">
+   <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+      circular="{{circular}}"
+    > 
+    <block wx:for="{{imgUrls}}">
+       <swiper-item>  
+        <image src="{{item}}" class="imageClass"/>
+       </swiper-item>
+    </block>
+   </swiper>
+  </view>
+  <view class="textView">
+    <text class="text">销量最高</text>
+  </view>
+
+</view>
