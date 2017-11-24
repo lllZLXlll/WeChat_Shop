@@ -1,22 +1,44 @@
 <!-- <import src="../components/swiper/swiper.wxml" /> -->
 
 <!--index.wxml-->
-<view>
+<view class="bodyView">
   <!-- banner图片 -->
   <view class="bannerView">
    <swiper indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
       circular="{{circular}}"
     > 
-    <block wx:for="{{imgUrls}}">
+    <block wx:for="{{imgUrls}}" >
        <swiper-item>  
-        <image src="{{item}}" class="imageClass"/>
+        <image src="{{item}}" class="maxImage" />
        </swiper-item>
     </block>
    </swiper>
   </view>
-  <view class="textView">
-    <text class="text">销量最高</text>
+
+  <view class="ppView">
+    <text class="ppText">品牌街</text>
+  </view>
+
+   <view class='ppImageView'>
+    <block wx:for="{{imgUrls}}">
+      <view class="ppImageItemView">
+        <image src="{{item}}" class="ppImage"/>
+      </view>
+    </block>
+  </view>
+
+  <view class="ppView">
+    <text class="ppText">店家推荐</text>
+  </view>
+
+  <view class="tjImageView">
+    <block wx:for="{{imgUrls}}">
+      <view class="tjImageItemView" bindtap='toPage'>
+        <image src="{{item}}" class="maxImage" />
+      </view>
+    </block>
+
   </view>
 
 </view>
