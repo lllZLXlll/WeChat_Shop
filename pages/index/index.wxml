@@ -10,7 +10,7 @@
     > 
     <block wx:for="{{imgUrls}}" >
        <swiper-item>  
-        <image src="{{item}}" class="maxImage" />
+        <image src="{{item}}" class="maxImage" mode="aspectFill" />
        </swiper-item>
     </block>
    </swiper>

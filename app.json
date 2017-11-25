@@ -1,12 +1,13 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/product/product",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "某某店铺",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
@@ -23,7 +24,7 @@
       {
         "selectedIconPath": "images/tabBar/shop_1.png",
         "iconPath": "images/tabBar/shop_2.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/product/product",
         "text": "商品"
       },
       {

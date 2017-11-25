@@ -1,0 +1,51 @@
+
+<!--product.wxml-->
+<view class="bodyView">
+  <view class="searchView">
+    <view class="classificationView" bindtap="classClick">
+      <image src="{{classificationImage}}" class="classificationImageClass" />
+    </view> 
+    <view class="searchInputView">
+      <input placeholder="输入商品名称" class="searchInput" auto-focus/>
+    </view>
+    <view class="classificationView" bindtap="searchClick">
+      <image src="{{searchImage}}" class="classificationImageClass" />
+    </view>
+  </view>
+
+   <!-- 选项卡切换  -->
+   <scroll-view>
+    <view class="swiper-tab">  
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量</view>  
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格</view>  
+    </view>  
+    
+    <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange">  
+        <swiper-item>  
+          <view >
+            <view class="productItemView">
+              <view class="productImageView">
+                <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg" class="productImage" mode="aspectFill" />
+              </view>
+              <view class="productTitleView">
+                <text>小米手环2智能蓝牙男女款</text>
+              </view>
+              <view class="productPriceView">
+                <text class="proceMinText">￥</text>
+                <text class="proceText">149</text>
+                <text class="countText">5.1万人付款</text>
+              </view>
+            </view> 
+          </view>  
+        </swiper-item>
+        <swiper-item>  
+          <view>我是呵呵</view>  
+        </swiper-item>
+        <swiper-item>  
+          <view>我是嘿嘿</view>  
+        </swiper-item>  
+    </swiper>
+    </scroll-view>
+
+</view>
