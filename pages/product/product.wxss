@@ -63,16 +63,32 @@
 .swiper-box{ 
   display: flex; 
   flex: 1;
-  height: 900rpx; 
   width: 100%; 
   overflow: hidden; 
 }  
 
 /* 商品列表item */
+.contentView {
+  background-color: #e9e9e9;
+  width: 100%;
+}
+
+.productView {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+
+.marginView {
+  width: 10rpx;
+}
+
 .productItemView {
-  width: 50%;
+  margin-bottom: 10rpx;
+  width: 49.3%;
   height: 450rpx;
-  padding-right: 8rpx;
+  background-color: #fff;
 }
 
 .productImageView {
@@ -94,6 +110,7 @@
   white-space:  nowrap;
   text-overflow: ellipsis;
   padding-left: 10rpx;
+  padding-right: 10rpx;
 }
 
 .productPriceView {
@@ -111,13 +128,38 @@
 
 .proceText {
   color: red;
-  font-size: 34rpx;
-  align-self: flex-end;
+  font-size: 32rpx;
+  display: flex;
+  align-items: flex-end;
 }
 
 .countText {
   margin-left: 20rpx;
   color: #999;
-  font-size: 26rpx;
+  font-size: 22rpx;
+  display: flex;
   align-self: flex-end;
+}
+
+.shoppingCartClass {
+  width: 35rpx;
+  height: 35rpx;
+  display: flex;
+  align-self: flex-end;
+}
+
+.productBottomView1 {
+  flex-direction: row;
+  display: flex;
+  flex: 1;
+}
+
+.productBottomView2 {
+  display: flex;
+  flex: 3;
+}
+
+.productBottomView3 {
+  display: flex;
+  flex: 1;
 }
