@@ -9,7 +9,12 @@ Page({
     // tab切换  
     currentTab: 0,
     // 屏幕剩余高度
-    second_height: 0,
+    windowHeight: 0,
+    // 滚动视图位置
+    scrollTop: 0,
+    // 分类图片
+    icon_class: '../../images/product/icon_class2.png',
+
     // product data
     productData: [
       {
@@ -32,6 +37,18 @@ Page({
       },
     ],
   },
+  // 界面渲染回调
+  onLoad: function() {
+    var _this = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        _this.setData({
+          windowHeight: res.windowHeight
+        });
+      },
+    })
+  },
+
 
   classClick: function() {
     console.log('分类');
@@ -57,5 +74,40 @@ Page({
         currentTab: e.target.dataset.current
       })
     }
-  }  
+  },
+  // 商品列表滚动到顶部回调
+  topRefresh: function() {
+    // wx.showToast({
+    //   title: '滚动到顶部回调',
+    //   icon: 'success',
+    //   mask: true,
+    // })
+  },
+  // 商品列表滚动到底部回调
+  bottomRefresh: function(e) {
+    // console.log(e)
+    // wx.showToast({
+    //   title: '滚动到底部回调',
+    //   icon: 'success',
+    //   mask: true,
+
+    // })
+  } ,
+
+  // 回到顶部
+  toTop: function() {
+    var _this = this;
+    this.setData({scrollTop: 0});
+  },
+
+  // 切换分类
+  setIconClass: function() {
+    var _this = this;
+    console.log(_this)
+    if (_this.data.icon_class == '../../images/product/icon_class2.png')
+      this.setData({ icon_class: '../../images/product/icon_class1.png' });
+    else
+      this.setData({ icon_class: '../../images/product/icon_class2.png' });
+  },
+
 })

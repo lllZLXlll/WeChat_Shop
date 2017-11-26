@@ -6,7 +6,7 @@
       <image src="{{classificationImage}}" class="classificationImageClass" />
     </view> 
     <view class="searchInputView">
-      <input placeholder="输入商品名称" class="searchInput" auto-focus/>
+      <input placeholder="输入商品名称" class="searchInput"/>
     </view>
     <view class="classificationView" bindtap="searchClick">
       <image src="{{searchImage}}" class="classificationImageClass" />
@@ -16,13 +16,15 @@
    <!-- 选项卡切换  -->
     <scroll-view>
       <view class="swiper-tab">  
-        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部</view>  
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合</view>  
         <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量</view>  
         <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格</view>  
       </view>  
     </scroll-view>
    
-    <view class="contentView" >
+    <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
+      bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
+    >
       <view wx:if="{{currentTab == 0}}" class="productView">
         <block wx:for="{{productData}}" wx:key="{{item.id}}" >
           <view class="productItemView">
@@ -44,10 +46,19 @@
           <view wx:if="{{index % 2 == 0}}">
             <view class="marginView" />
           </view>
-        </block> 
+        </block>
       </view>
-      
-    </view>   
+      <!--  底部刷新提示view  -->
+      <view class="footerView">
+        <text>正在加载更多...</text>
+      </view>
+    </scroll-view>   
   
+    <view class="toTopView" bindtap="setIconClass">
+      <image class="bottomIcon" src="{{icon_class}}" />
+    </view>
+    <view class="toTopView" style="bottom: 20rpx;" bindtap="toTop">
+      <image class="bottomIcon" src="../../images/product/icon_toTop.png" />
+    </view>
 
 </view>
