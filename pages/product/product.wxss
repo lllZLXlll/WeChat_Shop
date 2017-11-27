@@ -1,7 +1,7 @@
 /**index.wxss**/
 .bodyView {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex: 1;
 }
 
 .topView {
@@ -54,6 +54,9 @@
   width: 100%;  
   text-align: center;  
   line-height: 80rpx;
+  border-bottom-width: 1rpx;
+  border-bottom-color: #eee;
+  border-bottom-style: solid;
 }  
 .swiper-tab-list{  
   font-size: 32rpx;  
@@ -75,12 +78,9 @@
 
 /* 商品列表item */
 .contentView {
-  display: flex;
-  flex: 1;
   background-color: #e9e9e9;
   width: 100%;
-  height: 1000rpx;
-  margin-top: 160rpx;
+  padding-top: 160rpx;
 }
 
 .productView {
@@ -94,6 +94,7 @@
   width: 10rpx;
 }
 
+/* 布局1  */
 .productItemView {
   margin-bottom: 10rpx;
   width: 49.3%;
@@ -240,3 +241,68 @@
 }
 
 
+/* 布局2  */
+.contentView2 {
+  margin-top: 160rpx;
+}
+
+.productItemView2 {
+  margin-bottom: 10rpx;
+  width: 100%;
+  height: 230rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+}
+
+.productItemleft{
+  display: flex;
+  flex: 1;
+}
+
+.productItemRight {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  margin-left: 15rpx;
+  border-top-width: 1rpx;
+  border-top-color: #eee;
+  border-top-style: solid;
+}
+
+.productTitleView2 {
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  padding-right: 15rpx;
+  color: #333;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  font-size: 32rpx;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  display: flex;
+  flex:2.5;
+}
+
+.productInfo {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.priceView2 {
+  display: flex;
+  flex: 1;
+  padding-left: 0;
+
+}
+
+.showView {
+  display: block;
+}
+.hiddenView {
+  display: none;
+}

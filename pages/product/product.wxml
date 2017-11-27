@@ -43,40 +43,72 @@
       </scroll-view> 
     </view>
    
-     <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
-      bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
-      bindscroll="scrollFun"
-    >
-      <view wx:if="{{currentTab == 0}}" class="productView">
-        <block wx:for="{{productData}}" wx:key="{{item.id}}" >
-          <view class="productItemView">
-            <view class="productImageView">
-              <image src="{{item.image}}" class="productImage" mode="aspectFill" />
+    <!-- 布局1  -->
+    <view wx:if="{{classification == 1}}">
+      <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
+        bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
+       style="height: {{windowHeight}}px"
+      >
+        <view wx:if="{{currentTab == 0 && classification == 1}}" class="productView">
+          <block wx:for="{{productData}}" wx:key="{{item.id}}" >
+            <view class="productItemView">
+              <view class="productImageView">
+                <image src="{{item.image}}" class="productImage" mode="aspectFill" />
+              </view>
+              <view class="productTitleView">
+                <text>{{item.productTitle}}</text>
+              </view>
+              <view class="productPriceView">
+                <view class="productBottomView1">
+                  <text class="proceMinText">￥</text>
+                  <text class="proceText">{{item.price}}</text>
+                </view> 
+                <view class="productBottomView2"><text class="countText">{{item.count}}</text></view> 
+                <view class="productBottomView3"><image src="../../images/product/icon_shoppingCart.png" class="shoppingCartClass"/></view> 
+              </view>
             </view>
-            <view class="productTitleView">
-              <text>{{item.productTitle}}</text>
+            <view wx:if="{{index % 2 == 0}}">
+              <view class="marginView" />
             </view>
-            <view class="productPriceView">
-              <view class="productBottomView1">
-                <text class="proceMinText">￥</text>
-                <text class="proceText">{{item.price}}</text>
-              </view> 
-              <view class="productBottomView2"><text class="countText">{{item.count}}</text></view> 
-              <view class="productBottomView3"><image src="../../images/product/icon_shoppingCart.png" class="shoppingCartClass"/></view> 
+          </block>
+        </view>
+      </scroll-view> 
+    </view>   
+
+    <!-- 布局2  -->
+    <view wx:if="{{classification == 2}}">
+      <scroll-view class="contentView2" scroll-y="true" bindscrolltolower='bottomRefresh'
+        bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
+        style="height: {{windowHeight}}px"
+      > 
+        <view wx:if="{{currentTab == 0 && classification == 2}}">
+          <block wx:for="{{productData}}" wx:key="{{item.id}}">
+            <view class="productItemView2">
+              <view class="productItemleft">
+                <image src="{{item.image}}" class="productImage" mode="aspectFill" />
+              </view>
+              <view class="productItemRight">
+                <text class="productTitleView2">{{item.productTitle}}</text>
+                <text class="productTitleView2 productInfo">{{item.productInfo}}</text>
+                <view class="productPriceView priceView2">
+                  <view class="productBottomView1">
+                    <text class="proceMinText">￥</text>
+                    <text class="proceText">{{item.price}}</text>
+                  </view> 
+                  <view class="productBottomView2"><text class="countText">{{item.count}}</text></view> 
+                  <view class="productBottomView3">
+                    <image src="../../images/product/icon_shoppingCart.png" class="shoppingCartClass"/>
+                  </view> 
+                </view>
+              </view>
             </view>
-          </view>
-          <view wx:if="{{index % 2 == 0}}">
-            <view class="marginView" />
-          </view>
-        </block>
-      </view>
-      
-      <view class="footerView">
-        <text>正在加载更多...</text>
-      </view>
-      
-    </scroll-view>   
+
+          </block>
+        </view>
+      </scroll-view> 
+    </view>
   
+    <!-- 底部悬浮按钮 -->
     <view class="toTopView" bindtap="setIconClass">
       <image class="bottomIcon" src="{{icon_class}}" />
     </view>
