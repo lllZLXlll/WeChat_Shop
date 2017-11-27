@@ -124,7 +124,11 @@ Page({
     var _this = this;
     this.setData({scrollTop: 0});
   },
-
+  scrollFun: function(e) {
+    console.log(e)
+    var _this = this;
+    this.setData({ scrollTop: e.detail.scrollTop });
+  },
   // 切换分类
   setIconClass: function() {
     var _this = this;
