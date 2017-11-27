@@ -4,6 +4,12 @@ const app = getApp()
 
 Page({
   data: {
+    // 侧边栏数据 begin
+    open: false,
+    windowWidth: wx.getSystemInfoSync().windowWidth,
+    translate: '',
+    // 侧边栏数据 end
+
     searchImage: '../../images/product/icon_search.png',
     classificationImage: '../../images/product/icon_classification.png',
     // tab切换  
@@ -56,6 +62,22 @@ Page({
   searchClick: function () {
     console.log('搜索');
   },
+
+  // 侧边栏切换效果 begin
+  tap_ch: function (e) {
+    if (this.data.open) {
+      this.setData({
+        translate: 'transform: translateX(0px)'
+      })
+      this.data.open = false;
+    } else {
+      this.setData({
+        translate: 'transform: translateX(' + this.data.windowWidth * 0.5 + 'px)'
+      })
+      this.data.open = true;
+    }
+  },
+  // 侧边栏切换效果 end
 
   // tab改变回调
   bindChange: function (e) {
