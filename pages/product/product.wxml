@@ -1,7 +1,8 @@
 <!--product.wxml-->
 <view class="bodyView">
-  <view class="page-bottom">
-    <view class="page-content">
+
+  <view class="page-bottom" style="{{translate}}">
+    <view class="page-content" bindtap="tap_ch">
       <view  class="wc">
           <text>第一个item1</text>
       </view>
@@ -16,29 +17,32 @@
       </view>
     </view>
   </view>
-  <view  class="page-top" style="{{translate}}">
-    <view class="searchView">
-      <view class="classificationView" bindtap="tap_ch">
-        <image src="{{classificationImage}}" class="classificationImageClass" />
-      </view> 
-      <view class="searchInputView">
-        <input placeholder="输入商品名称" class="searchInput"/>
-      </view>
-      <view class="classificationView" bindtap="searchClick">
-        <image src="{{searchImage}}" class="classificationImageClass" />
-      </view>
-    </view> 
 
-   <!-- 选项卡切换  -->
-    <scroll-view>
-      <view class="swiper-tab">  
-        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合</view>  
-        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量</view>  
-        <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格</view>  
-      </view>  
-    </scroll-view>
+  <view class="page-top">
+    <view class="topView">
+      <view class="searchView">
+        <view class="classificationView" bindtap="tap_ch">
+          <image src="{{classificationImage}}" class="classificationImageClass" />
+        </view> 
+        <view class="searchInputView">
+          <input placeholder="输入商品名称" class="searchInput"/>
+        </view>
+        <view class="classificationView" bindtap="searchClick">
+          <image src="{{searchImage}}" class="classificationImageClass" />
+        </view>
+      </view> 
+
+    <!-- 选项卡切换  -->
+      <scroll-view class="swiperView">
+        <view class="swiper-tab">  
+          <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合</view>  
+          <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量</view>  
+          <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格</view>  
+        </view>  
+      </scroll-view> 
+    </view>
    
-    <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
+     <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
       bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
     >
       <view wx:if="{{currentTab == 0}}" class="productView">
@@ -64,10 +68,11 @@
           </view>
         </block>
       </view>
-      <!--  底部刷新提示view  -->
+      
       <view class="footerView">
         <text>正在加载更多...</text>
       </view>
+      
     </scroll-view>   
   
     <view class="toTopView" bindtap="setIconClass">
@@ -75,7 +80,7 @@
     </view>
     <view class="toTopView" style="bottom: 20rpx;" bindtap="toTop">
       <image class="bottomIcon" src="../../images/product/icon_toTop.png" />
-    </view>
+    </view> 
 
   </view>
 </view>

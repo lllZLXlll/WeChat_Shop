@@ -7,13 +7,15 @@ Page({
     // 侧边栏数据 begin
     open: false,
     windowWidth: wx.getSystemInfoSync().windowWidth,
-    translate: '',
+    translate: 'transform: translateX(-1000px)',
     // 侧边栏数据 end
 
     searchImage: '../../images/product/icon_search.png',
     classificationImage: '../../images/product/icon_classification.png',
     // tab切换  
     currentTab: 0,
+    // 屏幕高度
+    screenHeight: 0,
     // 屏幕剩余高度
     windowHeight: 0,
     // 滚动视图位置
@@ -49,7 +51,8 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         _this.setData({
-          windowHeight: res.windowHeight
+          windowHeight: res.windowHeight,
+          screenHeight: res.screenHeight,
         });
       },
     })
@@ -67,12 +70,12 @@ Page({
   tap_ch: function (e) {
     if (this.data.open) {
       this.setData({
-        translate: 'transform: translateX(0px)'
+        translate: 'transform: translateX(-1000px)'
       })
       this.data.open = false;
     } else {
       this.setData({
-        translate: 'transform: translateX(' + this.data.windowWidth * 0.5 + 'px)'
+        translate: 'transform: translateX(0px)'
       })
       this.data.open = true;
     }
