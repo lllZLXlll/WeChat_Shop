@@ -45,6 +45,7 @@
    
     <!-- 布局1  -->
     <view wx:if="{{classification == 1}}">
+      <view style="width: 100%;height: 160rpx;"></view>
       <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
         bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
        style="height: {{windowHeight}}px"

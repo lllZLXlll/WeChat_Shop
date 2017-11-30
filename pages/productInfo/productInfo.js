@@ -1,7 +1,4 @@
 //index.js
-//获取应用实例
-const app = getApp()
-
 Page({
   data: {
     imgUrls: [
@@ -18,8 +15,8 @@ Page({
   },
   toPage: function(object) {
     console.log(object)
-    wx.navigateTo({
-      url: '../productInfo/productInfo'
+    wx.switchTab({
+      url: '../logs/logs',
     })
   },
 })

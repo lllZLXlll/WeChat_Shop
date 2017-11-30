@@ -1,0 +1,43 @@
+<!-- <import src="../components/swiper/swiper.wxml" /> -->
+
+<!--index.wxml-->
+<view class="bodyView">
+  <!-- banner图片 -->
+  <view class="bannerView">
+   <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+      circular="{{circular}}" class="swiper"
+    > 
+    <block wx:for="{{imgUrls}}" >
+       <swiper-item>  
+        <image src="{{item}}" class="maxImage" mode="aspectFill" />
+       </swiper-item>
+    </block>
+   </swiper>
+  </view>
+
+  <!-- 内容  -->
+  <view class="productContentView">
+  
+    <!-- 标题，价格，销量等  -->
+    <view class="productInfoView">
+    
+      <text class="productTitle">小米手环2 什么什么什么小米手环2 什么什么什么小米手环2 什么什么什么小米手环2 什么什么什么小米手环2 什么什么什么</text>
+      <text class="productPrice"><text class="productPriceMin">￥</text>170.89</text>
+      <text class="productShowPrice">￥190.99</text>
+      <view class="productInfoBottomView">
+        <view class="productBottomText">
+          <text class='textLeft'>快递：0.00</text>
+        </view>
+        <view class="productBottomText">
+          <text>销量：124单</text>
+        </view>
+        <view class="productBottomText">
+          <text>赣州</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</view>
