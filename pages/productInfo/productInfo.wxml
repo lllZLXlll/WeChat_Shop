@@ -21,23 +21,59 @@
   
     <!-- 标题，价格，销量等  -->
     <view class="productInfoView">
-    
-      <text class="productTitle">小米手环2 什么什么什么小米手环2 什么什么什么小米手环2 什么什么什么小米手环2 什么什么什么小米手环2 什么什么什么</text>
-      <text class="productPrice"><text class="productPriceMin">￥</text>170.89</text>
-      <text class="productShowPrice">￥190.99</text>
+      <text class="productTitle">小米手环2 什么什么什么小米手环2么</text>
+
       <view class="productInfoBottomView">
         <view class="productBottomText">
-          <text class='textLeft'>快递：0.00</text>
+          <text class="productPrice"><text class="productPriceMin">￥</text>170.89</text>
+        </view>
+        <view class="productBottomText">
+          <text class="productShowPrice">￥190.99</text>
+        </view>
+        <view class="productBottomText">
+          <text></text>
+        </view>
+      </view>
+
+      <view class="productInfoBottomView">
+        <view class="productBottomText">
+          <text>快递：0.00</text>
         </view>
         <view class="productBottomText">
           <text>销量：124单</text>
         </view>
         <view class="productBottomText">
-          <text>赣州</text>
+          <text></text>
+        </view>
+      </view>
+
+      <view class="productInfoBottomView renzhengMargin">
+        <view class="productBottomText renzheng">
+          <image src="../../images/productInfo/icon_ok.png" class="icon_image" />
+          <text class="icon_text">正品保证</text>
+        </view>
+        <view class="productBottomText renzheng">
+          <image src="../../images/productInfo/icon_ok.png" class="icon_image" />
+          <text class="icon_text">正品保证</text>
+        </view>
+        <view class="productBottomText renzheng">
+          <image src="../../images/productInfo/icon_ok.png" class="icon_image" />
+          <text class="icon_text">正品保证</text>
         </view>
       </view>
     </view>
 
-  </view>
+    <!-- 选择、产品参数  -->
+    <view class="selectView">
+      <view class="selectItemView selectBorder">
+        <text class="selectText">选择 产品分类</text>
+        <image src="../../images/productInfo/icon_goTo.png" class="icon_image" />
+      </view>
+      <view class="selectItemView">
+        <text class="selectText">产品参数</text>
+        <image src="../../images/productInfo/icon_goTo.png" class="icon_image" />
+      </view>
+    </view>
 
+  </view>
 </view>
