@@ -75,5 +75,21 @@
       </view>
     </view>
 
+    <!-- 图文详情  -->
+    <view class="imageTextInfoView">
+      <view class="imageTextTitle">
+        <text>图文详情</text>
+      </view>
+
+      <view class="tjImageView">
+        <block wx:for="{{imgUrls}}">
+          <view class="tjImageItemView">
+            <image src="{{item}}" class="maxImage" />
+          </view>
+        </block>
+      </view>
+
+    </view>
+
   </view>
 </view>
