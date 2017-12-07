@@ -80,7 +80,6 @@
       <view class="imageTextTitle">
         <text>图文详情</text>
       </view>
-
       <view class="tjImageView">
         <block wx:for="{{imgUrls}}">
           <view class="tjImageItemView">
@@ -88,8 +87,36 @@
           </view>
         </block>
       </view>
-
     </view>
-
   </view>
+
+  <view class="bottomView"></view>
+</view>
+
+<!-- 底部footer  -->
+<view class="footerView">
+  <view class="footerItemView">
+    <view class="itemView">
+      <image src="../../images/productInfo/icon_msg.png" class="iconImage" />
+      <text>客服</text>
+    </view>
+    <view class="itemView">
+      <image src="../../images/productInfo/icon_collection.png" class="iconImage" />
+      <text>收藏</text>
+    </view>
+    <view class="itemView">
+      <image src="../../images/productInfo/icon_collection1.png" class="iconImage" />
+      <text>已收藏</text>
+    </view>
+  </view>
+
+  <view class="footerItemView footerItemView2">
+    <view class="btnItemView viewColor">
+      <text>加入购物车</text>
+    </view>
+    <view class="btnItemView">
+      <text>立即购买</text>
+    </view>
+  </view>
+
 </view>
