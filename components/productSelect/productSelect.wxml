@@ -4,37 +4,71 @@
     <view class="page-bg" bindtap="tap_ch_select" />
 
     <scroll-view class="page-content" scroll-y="true">
-    
-      <view class="page-topView">
+
+      <view class="page-topView viewHeight">
 
         <view class="page_leftView">
-          <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg" 
-            class="productSelectImage" mode="aspectFill" />
+          <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg" class="productSelectImage" mode="aspectFill" />
         </view>
 
         <view class="page_rightView">
           <view class="deleteView">
             <view bindtap="tap_ch_select">
-              <image src="../../images/productInfo/icon_delete.png" 
-                class="deleteSelectImage" mode="aspectFill" />
+              <image src="../../images/productInfo/icon_delete.png" class="deleteSelectImage" mode="aspectFill" />
             </view>
           </view>
 
           <view class="productSelectPirceView">
-
+            <text class="redText">￥149</text>
+            <text>库存1492件</text>
+            <text>请选择 颜色分类</text>
           </view>
-
         </view>
-        
-        
+
       </view>
 
-      
-    
+      <view class="page-topView page-classView">
+        <text class="classText">颜色分类</text>
+
+        <view class="selectClassView">
+          <view class="classViewBG"> <text class="classText">手环2 黑色</text> </view>
+          <view class="classViewBG"> <text class="classText">手环2+红色腕带</text> </view>
+          <view class="classViewBG"> <text class="classText">手环2 蓝色</text> </view>
+          <view class="classViewBG"> <text class="classText">手环2+橙色腕带</text> </view>
+          <view class="classViewBG"> <text class="classText">手环2 红色</text> </view>
+        </view>
+      </view>
+
+      <view class="page-topView product-count-view">
+        <view class="count-view-left">
+          <text class="classText">购买数量</text>
+        </view>
+
+        <view class="count-view-left count-view-right">
+          <view class="classViewBG count-margin" bindtap='remove_select_product'>
+            <image src="../../images/productInfo/icon_remove.png" class="countImage" />
+          </view>
+          
+          <view class="classViewBG count-margin"> 
+            <text class="classText">{{select_product_count}}</text> 
+          </view>
+          
+          <view class="classViewBG count-margin" bindtap='add_select_product'>
+            <image src="../../images/productInfo/icon_add.png" class="countImage" />
+          </view>
+        </view>
+      </view>
+
     </scroll-view>
 
-    <view class="page-btn" bindtap="tap_ch_select">
-      <text>完成</text>
+    <view class="page-btn-view">
+      <view class="page-btn" bindtap="tap_ch_select">
+        <text>加入购物车</text>
+      </view>
+      <view class="page-btn page-btn-purchase" bindtap="tap_ch_select">
+        <text>立即购买</text>
+      </view>
     </view>
-  </view>
+      
+    </view>
 </template>

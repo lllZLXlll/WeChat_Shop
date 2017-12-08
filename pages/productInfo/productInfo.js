@@ -16,6 +16,8 @@ Page({
     translate: 'transform: translateX(-1000px)',
     // 产品分类选择样式
     translate_select: 'transform: translateX(-1000px)',
+    // 选择商品数量
+    select_product_count: 1,
   },
   toPage: function(object) {
     console.log(object)
@@ -54,5 +56,20 @@ Page({
   },
   // 侧边栏切换效果 end
   
+  // 增，删减选择的商品
+  remove_select_product: function(e) {
+    if (this.data.select_product_count > 1) {
+      this.setData({
+        select_product_count: this.data.select_product_count - 1
+      });
+    }
+  },
+
+  add_select_product: function (e) {
+    console.log(e)
+      this.setData({
+        select_product_count: this.data.select_product_count + 1
+      });
+  },
 
 })
