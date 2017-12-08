@@ -1,9 +1,14 @@
 {
   "pages":[
+
     "pages/index/index",
     "pages/product/product",
     "pages/productInfo/productInfo",
-    "pages/logs/logs"
+    "pages/logs/logs",
+
+
+    "components/productParam/productParam",
+    "components/productSelect/productSelect"
   ],
   "window":{
     "backgroundTextStyle":"light",

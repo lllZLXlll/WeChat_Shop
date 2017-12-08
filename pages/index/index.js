@@ -20,6 +20,8 @@ Page({
     console.log(object)
     wx.navigateTo({
       url: '../productInfo/productInfo'
+
+      // url: '../../components/productSelect/productSelect'
     })
   },
 })

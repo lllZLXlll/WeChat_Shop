@@ -1,0 +1,79 @@
+<!-- 选择、分类、参数  -->
+<template name="productParam">
+  <view class="page-bottom" style="{{translate}}">
+    <view class="page-bg" bindtap="tap_ch" />
+    
+    <view class="page-btn page-Title">
+        <text>产品参数</text>
+    </view>
+    <scroll-view class="page-content" scroll-y="true">
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>保修期</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>12个月</text>
+        </view>
+      </view>
+
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>兼容平台</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>android、ios</text>
+        </view>
+      </view>
+
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>功能</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>智能提醒 睡眠监测 社交娱乐 计步</text>
+        </view>
+      </view>
+
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>第二个item2</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>好像问宁围观分集介绍的方式的覅上士大夫士大夫地方灌灌灌灌的纠纷圣诞节分厘卡圣诞节法律手段失落的房间</text>
+        </view>
+      </view>
+
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>第二个item2</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>好像问宁围观分集介绍的方式的覅上士大夫士大夫地方灌灌灌灌的纠纷圣诞节分厘卡圣诞节法律手段失落的房间</text>
+        </view>
+      </view>
+
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>第二个item2</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>好像问宁围观分集介绍的方式的覅上士大夫士大夫地方灌灌灌灌的纠纷圣诞节分厘卡圣诞节法律手段失落的房间</text>
+        </view>
+      </view>
+
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>第二个item2</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>好像问宁围观分集介绍的方式的覅上士大夫士大夫地方灌灌灌灌的纠纷圣诞节分厘卡圣诞节法律手段失落的房间</text>
+        </view>
+      </view>
+    
+    </scroll-view>
+
+    <view class="page-btn" bindtap="tap_ch">
+      <text>完成</text>
+    </view>
+  </view>
+</template>

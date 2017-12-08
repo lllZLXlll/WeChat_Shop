@@ -1,0 +1,24 @@
+<!-- 选择、分类、参数  -->
+<template name="productSelect">
+  <view class="page-bottom" style="{{translate_select}}">
+    <view class="page-bg" bindtap="tap_ch_select" />
+
+    <scroll-view class="page-content" scroll-y="true">
+      <view class="page-itemView">
+        <view class="page-leftView">
+          <text>保修期</text>
+        </view>
+        <view class="page-leftView page-rightView">
+          <text>12个月</text>
+        </view>
+      </view>
+
+      
+    
+    </scroll-view>
+
+    <view class="page-btn" bindtap="tap_ch_select">
+      <text>完成</text>
+    </view>
+  </view>
+</template>

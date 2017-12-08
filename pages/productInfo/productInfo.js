@@ -12,8 +12,10 @@ Page({
     interval: 3000,
     duration: 1000,
     circular: true,
-    // 筛选样式
+    // 产品参数样式
     translate: 'transform: translateX(-1000px)',
+    // 产品分类选择样式
+    translate_select: 'transform: translateX(-1000px)',
   },
   toPage: function(object) {
     console.log(object)
@@ -32,6 +34,20 @@ Page({
     } else {
       this.setData({
         translate: 'transform: translateX(0px)'
+      })
+      this.data.open = true;
+    }
+  },
+
+  tap_ch_select: function (e) {
+    if (this.data.open) {
+      this.setData({
+        translate_select: 'transform: translateX(-1000px)'
+      })
+      this.data.open = false;
+    } else {
+      this.setData({
+        translate_select: 'transform: translateX(0px)'
       })
       this.data.open = true;
     }
