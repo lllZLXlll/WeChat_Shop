@@ -154,5 +154,11 @@ Page({
         });
     }
   },
+  toProductInfo: function (object) {
+    console.log(object)
+    wx.navigateTo({
+      url: '../productInfo/productInfo'
+    })
+  },
 
 })

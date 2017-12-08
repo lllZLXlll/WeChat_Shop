@@ -12,6 +12,8 @@ Page({
     interval: 3000,
     duration: 1000,
     circular: true,
+    // 筛选样式
+    translate: 'transform: translateX(-1000px)',
   },
   toPage: function(object) {
     console.log(object)
@@ -19,4 +21,22 @@ Page({
       url: '../logs/logs',
     })
   },
+
+  // 侧边栏切换效果 begin
+  tap_ch: function (e) {
+    if (this.data.open) {
+      this.setData({
+        translate: 'transform: translateX(-1000px)'
+      })
+      this.data.open = false;
+    } else {
+      this.setData({
+        translate: 'transform: translateX(0px)'
+      })
+      this.data.open = true;
+    }
+  },
+  // 侧边栏切换效果 end
+  
+
 })

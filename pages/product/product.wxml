@@ -52,7 +52,7 @@
       >
         <view wx:if="{{currentTab == 0 && classification == 1}}" class="productView">
           <block wx:for="{{productData}}" wx:key="{{item.id}}" >
-            <view class="productItemView">
+            <view class="productItemView" bindtap='toProductInfo'>
               <view class="productImageView">
                 <image src="{{item.image}}" class="productImage" mode="aspectFill" />
               </view>
@@ -84,7 +84,7 @@
       > 
         <view wx:if="{{currentTab == 0 && classification == 2}}">
           <block wx:for="{{productData}}" wx:key="{{item.id}}">
-            <view class="productItemView2">
+            <view class="productItemView2" bindtap='toProductInfo'>
               <view class="productItemleft">
                 <image src="{{item.image}}" class="productImage" mode="aspectFill" />
               </view>

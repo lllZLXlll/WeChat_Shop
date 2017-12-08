@@ -236,7 +236,7 @@
   display: flex;
   flex: 6;
   background-color: #000;
-  opacity: 0.2;
+  opacity: 0.3;
 }
 
 
