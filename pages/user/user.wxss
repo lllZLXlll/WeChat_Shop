@@ -1,0 +1,113 @@
+text {
+  color: #999;
+  font-size: 30rpx;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.bodyView {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #e9e9e9;
+}
+
+.view-user-Info {
+  width: 100%;
+  height: 260rpx;
+  background-color: #eee;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 20rpx 0 20rpx;
+}
+
+.user-info-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 90rpx;
+}
+
+.user-info-text {
+  margin-left: 40rpx;
+  font-size: 34rpx;
+  color: #fff;
+}
+
+/* 全部订单、代付款、代发货、待收货 */
+.view-order {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 140rpx;
+  background-color: #fff;
+}
+
+.view-order-item {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-order-image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.user-order-text {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: #333;
+}
+
+/* 地址、资料等 */
+.view-data {
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.view-data-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80rpx;
+  background-color: #fff;
+  border-bottom-width: 1rpx;
+  border-bottom-color: #eee;
+  border-bottom-style: solid;
+  align-items: center;
+  /* padding: 0 20rpx 0 20rpx; */
+}
+
+.user-data-image {
+  width: 35rpx;
+  height: 35rpx;
+}
+
+.data-text {
+  
+  display: flex;
+  flex: 8;
+}
+
+.felxView {
+  display: flex;
+  flex: 1;
+}
+
+.paddingLeft {
+  padding-left: 20rpx;
+}
+
+.paddingRight {
+  justify-content: flex-end;
+  padding-right: 20rpx;
+}

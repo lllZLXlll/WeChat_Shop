@@ -1,0 +1,84 @@
+<view class="bodyView">
+
+  <!-- 用户头像，信息 -->
+  <view class="view-user-Info" style="background-image: url('/images/user/image_userInfo_bg.png')">
+
+    <view wx:if="{{userInfo.avatarUrl != null}}">
+      <image src="{{userInfo.avatarUrl}}" class="user-info-image" />
+    </view>
+    <view wx:else>
+      <image src="../../images/user/image_userInfo_image.png" class="user-info-image" />
+    </view>
+
+    <view wx:if="{{userInfo.nickName != null}}">
+      <text class="user-info-text">{{userInfo.nickName}}</text>
+    </view>
+    <view wx:else bindtap='userLogin'>
+      <text class="user-info-text">点击登录</text>
+    </view>
+
+  </view>
+
+  <!-- 全部订单、代付款、代发货、待收货 -->
+  <view class="view-order">
+    <view class="view-order-item">
+      <image src="../../images/user/icon_order.png" class="user-order-image" />
+      <text class="user-order-text">全部订单</text>
+    </view>
+
+    <view class="view-order-item">
+      <image src="../../images/user/icon_payment.png" class="user-order-image" />
+      <text class="user-order-text">待付款</text>
+    </view>
+
+    <view class="view-order-item">
+      <image src="../../images/user/icon_sendCargo.png" class="user-order-image" />
+      <text class="user-order-text">待发货</text>
+    </view>
+
+    <view class="view-order-item">
+      <image src="../../images/user/icon_receiveCargo.png" class="user-order-image" />
+      <text class="user-order-text">待收货</text>
+    </view>
+  </view>
+
+  <!-- 地址、资料等 -->
+  <view class="view-data">
+
+    <view class="view-data-item">
+      <view class="felxView paddingLeft">
+        <image src="../../images/user/icon_address.png" class="user-data-image" />
+      </view>
+      <text class="data-text">我的收货地址</text>
+
+      <view class="felxView paddingRight">
+        <image src="../../images/productInfo/icon_goTo.png" class="user-data-image" />
+      </view>
+    </view>
+
+
+    <view class="view-data-item">
+      <view class="felxView paddingLeft">
+        <image src="../../images/user/icon_collect.png" class="user-data-image" />
+      </view>
+      <text class="data-text">我的收藏</text>
+
+      <view class="felxView paddingRight">
+        <image src="../../images/productInfo/icon_goTo.png" class="user-data-image" />
+      </view>
+    </view>
+
+    <view class="view-data-item">
+      <view class="felxView paddingLeft">
+        <image src="../../images/user/icon_edit.png" class="user-data-image" />
+      </view>
+      <text class="data-text">编辑资料</text>
+
+      <view class="felxView paddingRight">
+        <image src="../../images/productInfo/icon_goTo.png" class="user-data-image" />
+      </view>
+    </view>
+  </view>
+
+
+</view>

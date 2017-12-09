@@ -22,7 +22,7 @@ Page({
     scrollTop: 0,
     // 分类图片
     icon_class: '../../images/product/icon_class2.png',
-    classification: 1,
+    classification: 2,
 
     // product data
     productData: [

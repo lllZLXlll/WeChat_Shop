@@ -5,6 +5,7 @@
     "pages/product/product",
     "pages/productInfo/productInfo",
     "pages/shoppingCart/shoppingCart",
+    "pages/user/user",
     "pages/logs/logs",
 
 
@@ -43,7 +44,7 @@
       {
        "selectedIconPath": "images/tabBar/user_1.png",
         "iconPath": "images/tabBar/user_2.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/user/user",
         "text": "我的"
       }
     ]
