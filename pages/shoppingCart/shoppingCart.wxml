@@ -1,0 +1,44 @@
+<import src="../../components/shoppingCartItem/shoppingCartItem.wxml" />
+
+<view class="bodyView">
+
+  <!-- 头部  -->
+  <view class="view-title">
+    <view class="view-title-left">
+      <text class="title-text">购物车</text>
+    </view>
+    <view class="view-title-right">
+      <image src="../../images/shoppingCart/icon_garbage.png" class="iconClass" />
+    </view>
+  </view>
+
+  <view class="view-content-item">
+    <!-- 购物车列表 -->
+    <template is="shoppingCartItem" />
+    <template is="shoppingCartItem" />
+    <template is="shoppingCartItem" />
+    <template is="shoppingCartItem" />
+  </view>
+
+  <!-- 底部结算 -->
+  <view class="view-bottom">
+    <view class="view-bottom-left">
+      <image src="../../images/shoppingCart/icon_select_2.png" class="iconClass" />
+      <text class="bottom-left-text">全选</text>
+    </view>
+
+    <view class="view-bottom-center">
+      <!-- <text class="bottom-center-text1">不含运费</text> -->
+      <text class="bottom-center-text2">不含运费,合计:</text>
+      <text class="bottom-center-text3">￥14995.00</text>
+    </view>
+
+    <view class="view-bottom-right">
+      <text class="clearing-text">结算(1)</text>
+    </view>
+
+
+  </view>
+
+
+</view>

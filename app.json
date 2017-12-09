@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/product/product",
     "pages/productInfo/productInfo",
+    "pages/shoppingCart/shoppingCart",
     "pages/logs/logs",
 
 
@@ -32,6 +33,12 @@
         "iconPath": "images/tabBar/shop_2.png",
         "pagePath": "pages/product/product",
         "text": "商品"
+      },
+      {
+        "selectedIconPath": "images/tabBar/shoppingCart_1.png",
+        "iconPath": "images/tabBar/shoppingCart_2.png",
+        "pagePath": "pages/shoppingCart/shoppingCart",
+        "text": "购物车"
       },
       {
        "selectedIconPath": "images/tabBar/user_1.png",
