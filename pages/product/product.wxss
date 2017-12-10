@@ -1,4 +1,9 @@
-/**index.wxss**/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
 .bodyView {
   display: flex;
   flex: 1;

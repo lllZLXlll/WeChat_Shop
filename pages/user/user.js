@@ -45,6 +45,14 @@ Page({
               })
             }
           })
+        } else {
+          wx.getUserInfo({
+            success(e) {
+              _this.setData({
+                userInfo: e.userInfo
+              });
+            }
+          })
         }
       }
     })
@@ -69,6 +77,13 @@ Page({
             },
           })
         } else {
+          wx.getUserInfo({
+            success(e) {
+              _this.setData({
+                userInfo: e.userInfo
+              });
+            }
+          })
           if (_this.data.userInfo.nickName == null) {
             wx.openSetting({
               success(e) {

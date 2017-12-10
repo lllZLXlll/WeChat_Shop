@@ -92,7 +92,7 @@ text {
 }
 
 .data-text {
-  
+  color: #333;
   display: flex;
   flex: 8;
 }

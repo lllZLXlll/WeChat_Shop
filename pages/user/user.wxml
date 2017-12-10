@@ -13,15 +13,12 @@
     <view wx:if="{{userInfo.nickName != null}}">
       <text class="user-info-text">{{userInfo.nickName}}</text>
     </view>
-    <view wx:else bindtap='getUserInfo'>
-      <text class="user-info-text">点击登录</text>
-    </view>
 
   </view>
 
   <!-- 全部订单、代付款、代发货、待收货 -->
   <view class="view-order">
-    <view class="view-order-item">
+    <view class="view-order-item" bindtap='getUserInfo'>
       <image src="../../images/user/icon_order.png" class="user-order-image" />
       <text class="user-order-text">全部订单</text>
     </view>
