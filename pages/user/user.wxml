@@ -13,6 +13,9 @@
     <view wx:if="{{userInfo.nickName != null}}">
       <text class="user-info-text">{{userInfo.nickName}}</text>
     </view>
+    <view wx:else bindtap='getUserInfo'>
+      <text class="user-info-text" style='color: #333;'>点击登录</text>
+    </view>
 
   </view>
 
