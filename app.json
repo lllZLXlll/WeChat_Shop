@@ -6,6 +6,8 @@
     "pages/productInfo/productInfo",
     "pages/shoppingCart/shoppingCart",
     "pages/user/user",
+    "pages/receivingAddress/receivingAddress",
+    
     "pages/logs/logs",
 
 

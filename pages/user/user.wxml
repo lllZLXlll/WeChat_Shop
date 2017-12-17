@@ -46,7 +46,7 @@
   <!-- 地址、资料等 -->
   <view class="view-data">
     <view class="paddingView">
-      <view class="view-data-item">
+      <view class="view-data-item" bindtap='toPageReceivingAddress'>
         <view class="felxView paddingLeft">
           <image src="../../images/user/icon_address.png" class="user-data-image" />
         </view>

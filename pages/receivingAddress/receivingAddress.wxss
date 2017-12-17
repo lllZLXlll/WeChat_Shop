@@ -1,0 +1,116 @@
+page {
+  background-color: #e9e9e9;
+}
+
+text {
+  color: #333;
+  font-size: 30rpx;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.bodyView {
+  margin-bottom: 120rpx;
+}
+
+.page-bottom-btn {
+  width: 100%;
+  height: 100rpx;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.btn-text {
+  color: #fff;
+  font-size: 34rpx;
+}
+
+.view-address-item {
+  display: flex;
+  flex: 1;
+  background-color: #fff;
+  padding: 0 20rpx 0 20rpx;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.view-address-top {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 60rpx;
+}
+
+.view-address-top-left {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.view-address-top-right {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.view-address-center {
+  display: flex;
+  flex: 1;
+  border-bottom-color: #eee;
+  border-bottom-width: 1rpx;
+  border-bottom-style: solid;
+  padding: 10rpx 0 20rpx 0;
+}
+
+.view-address-bottom {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: 80rpx;
+  justify-content: center;
+}
+
+.view-address-bottom-left {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.view-address-bottom-right {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+}
+
+.iconClass {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.iconClass2 {
+  width: 35rpx;
+  height: 35rpx;
+}
+
+.bottom-text {
+  margin-left: 15rpx;
+}
+
+.redText {
+  color: red;
+}

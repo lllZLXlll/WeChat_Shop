@@ -1,0 +1,40 @@
+
+<view class="bodyView">
+
+  <!-- 地址列表 -->
+  <block wx:for="{{addressList}}" wx:key="{{item.id}}" >
+    <view class="view-address-item">
+      <view class="view-address-top">
+        <view class="view-address-top-left">
+          <text>{{item.userName}}</text>
+        </view>
+        <view class="view-address-top-right">
+          <text>{{item.telNumber}}</text>
+        </view>
+      </view>
+
+      <view class="view-address-center">
+        <text>{{item.provinceName}}{{item.cityName}}{{item.countyName}} {{item.detailInfo}}</text>
+      </view>
+
+      <view class="view-address-bottom">
+        <view wx:if="{{item.status == 1}}" class="view-address-bottom-left">
+          <image src="../../images/shoppingCart/icon_select_2.png" class="iconClass2" />
+          <text class="bottom-text redText">默认地址</text>
+        </view>
+        <view wx:else class="view-address-bottom-left">
+          <image src="../../images/shoppingCart/icon_select_1.png" class="iconClass2" />
+          <text class="bottom-text">设为默认地址</text>
+        </view>
+        <view class="view-address-bottom-right">
+          <image src="../../images/shoppingCart/icon_garbage.png" class="iconClass" />
+          <text class="bottom-text">删除</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+   <view class="page-bottom-btn" bindtap="addReceivingAddress">
+      <text class="btn-text">添加收货地址</text>
+    </view>
+</view>
