@@ -1,7 +1,8 @@
 <view class="bodyView">
 
   <!-- 用户头像，信息 -->
-  <view class="view-user-Info" style="background-image: url({{userInfo.avatarUrl}})">
+  <view class="view-user-Info" 
+    style="background-image: url({{userInfo.avatarUrl}});background-size:100%;">
 
     <view wx:if="{{userInfo.avatarUrl != null}}">
       <image src="{{userInfo.avatarUrl}}" class="user-info-image" />
