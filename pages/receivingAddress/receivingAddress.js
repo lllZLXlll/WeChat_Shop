@@ -134,5 +134,86 @@ Page({
         }
       },
     });
-  }
+  },
+
+  // 设置为默认地址
+  setAddressStatus: function(e) {
+    // bindtap 通过 data-id 传参 通过 e.currentTarget.dataset.id 取值
+    var _this = this;
+
+    try {
+      // 从微信缓存中读取openid
+      var openid = wx.getStorageSync('openid')
+      if (openid) {
+        wx.request({
+          url: 'http://127.0.0.1:8080/zlx/setAddressStatusById',
+          data: {
+            id: e.currentTarget.dataset.id,
+            openid: openid
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            console.log(res.data)
+            if (res.data.error == 'code-0000') {
+             _this.getAddressData();
+            } else {
+              wx.showToast({
+                title: res.data.message,
+                image: '../../images/user/icon_error.png'
+              })
+            }
+          }
+        });
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+  },
+  // 删除地址
+  delAddressStatus: function (e) {
+    // bindtap 通过 data-id 传参 通过 e.currentTarget.dataset.id 取值
+    var _this = this;
+
+    // 弹出确认框，用户确认后删除
+    wx.showModal({
+      title: '提示',
+      content: '确定删除地址吗？',
+      success: function (res) {
+        if (res.confirm) {
+          try {
+            // 从微信缓存中读取openid
+            var openid = wx.getStorageSync('openid')
+            if (openid) {
+              wx.request({
+                url: 'http://127.0.0.1:8080/zlx/delAddressStatusById',
+                data: {
+                  id: e.currentTarget.dataset.id,
+                  status: e.currentTarget.dataset.status,
+                  openid: openid
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function (res) {
+                  console.log(res.data)
+                  if (res.data.error == 'code-0000') {
+                    _this.getAddressData();
+                  } else {
+                    wx.showToast({
+                      title: res.data.message,
+                      image: '../../images/user/icon_error.png'
+                    })
+                  }
+                }
+              });
+            }
+          } catch (e) {
+            // Do something when catch error
+          }
+        }
+      }
+    })
+  },
 })

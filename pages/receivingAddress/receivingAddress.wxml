@@ -22,11 +22,11 @@
           <image src="../../images/shoppingCart/icon_select_2.png" class="iconClass2" />
           <text class="bottom-text redText">默认地址</text>
         </view>
-        <view wx:else class="view-address-bottom-left">
+        <view wx:else class="view-address-bottom-left" data-id='{{item.id}}' bindtap='setAddressStatus'>
           <image src="../../images/shoppingCart/icon_select_1.png" class="iconClass2" />
           <text class="bottom-text">设为默认地址</text>
         </view>
-        <view class="view-address-bottom-right">
+        <view class="view-address-bottom-right" data-id='{{item.id}}' data-status='{{item.status}}' bindtap='delAddressStatus'>
           <image src="../../images/shoppingCart/icon_garbage.png" class="iconClass" />
           <text class="bottom-text">删除</text>
         </view>
