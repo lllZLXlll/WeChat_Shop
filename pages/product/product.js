@@ -21,8 +21,8 @@ Page({
     // 滚动视图位置
     scrollTop: 0,
     // 分类图片
-    icon_class: '../../images/product/icon_class2.png',
-    classification: 2,
+    icon_class: '../../images/product/icon_class1.png',
+    classification: 1,
 
     // product data
     productData: [

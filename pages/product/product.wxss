@@ -246,10 +246,6 @@
 
 
 /* 布局2  */
-.contentView2 {
-  margin-top: 160rpx;
-}
-
 .productItemView2 {
   margin-bottom: 10rpx;
   width: 100%;
