@@ -69,7 +69,7 @@
         </view>
       </view>
 
-      <view class="view-data-item">
+      <!-- <view class="view-data-item">
         <view class="felxView paddingLeft">
           <image src="../../images/user/icon_edit.png" class="user-data-image" />
         </view>
@@ -78,7 +78,7 @@
         <view class="felxView paddingRight">
           <image src="../../images/productInfo/icon_goTo.png" class="user-data-image" />
         </view>
-      </view>
+      </view> -->
 
       <view class="view-data-item noneBorder">
         <view class="felxView paddingLeft">
