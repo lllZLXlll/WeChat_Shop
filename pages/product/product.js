@@ -89,6 +89,7 @@ Page({
     });
   },
 
+
   // 上拉加载
   loadPage: function() {
     var _this = this;
@@ -168,14 +169,33 @@ Page({
    * 点击tab切换 
    */
   swichNav: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
+    var _this = this;
+    if (_this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
-      that.setData({
+      _this.setData({
         currentTab: e.target.dataset.current
       })
     }
+
+    // ......
+    wx.request({
+      url: serverUrl + 'queryProductList',
+      data: {
+        name: _this.data.inputValue,
+
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.error == 'code-0000') {
+          // 登录成功，用户openid保存到微信存储中
+          _this.setData({ page: res.data.page });
+        }
+      }
+    });
   },
   // 商品列表滚动到顶部回调
   topRefresh: function() {
