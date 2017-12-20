@@ -31,7 +31,7 @@
         <view class="classificationView" bindtap="searchClick">
           <image src="{{searchImage}}" class="classificationImageClass" />
         </view>
-      </view> 
+      </view>
 
 
       <scroll-view class="swiperView">
@@ -45,26 +45,25 @@
    
     <!-- 布局1  -->
     <view wx:if="{{classification == 1}}">
-      <scroll-view class="contentView" scroll-y="true" bindscrolltolower='bottomRefresh'
-        bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
+      <scroll-view class="contentView" scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" scroll-top="{{scrollTop}}"
        style="height: {{windowHeight}}px"
       >
         <view style="width: 100%;height: 160rpx;"></view>
         <view wx:if="{{currentTab == 0 && classification == 1}}" class="productView">
-          <block wx:for="{{productData}}" wx:key="{{item.id}}" >
+          <block wx:for="{{page.page}}" wx:key="{{item.id}}" >
             <view class="productItemView" bindtap='toProductInfo'>
               <view class="productImageView">
-                <image src="{{item.image}}" class="productImage" mode="aspectFill" />
+                <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
               </view>
               <view class="productTitleView">
-                <text>{{item.productTitle}}</text>
+                <text>{{item.name}}</text>
               </view>
               <view class="productPriceView">
                 <view class="productBottomView1">
                   <text class="proceMinText">￥</text>
                   <text class="proceText">{{item.price}}</text>
                 </view> 
-                <view class="productBottomView2"><text class="countText">{{item.count}}</text></view> 
+                <view class="productBottomView2"><text class="countText">{{item.salesVolume}}人付款</text></view> 
                 <view class="productBottomView3"><image src="../../images/product/icon_shoppingCart.png" class="shoppingCartClass"/></view> 
               </view>
             </view>
@@ -74,30 +73,30 @@
           </block>
         </view>
       </scroll-view> 
-    </view>   
+    </view>
 
     <!-- 布局2  -->
-    <view wx:if="{{classification == 2}}">
+    <view class="contentView" wx:if="{{classification == 2}}">
       <scroll-view scroll-y="true" bindscrolltolower='bottomRefresh'
         bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
         style="height: {{windowHeight}}px"
       > 
         <view style="width: 100%;height: 160rpx;"></view>
         <view wx:if="{{currentTab == 0 && classification == 2}}">
-          <block wx:for="{{productData}}" wx:key="{{item.id}}">
+          <block wx:for="{{page.page}}" wx:key="{{item.id}}">
             <view class="productItemView2" bindtap='toProductInfo'>
               <view class="productItemleft">
-                <image src="{{item.image}}" class="productImage" mode="aspectFill" />
+                <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
               </view>
               <view class="productItemRight">
-                <text class="productTitleView2">{{item.productTitle}}</text>
-                <text class="productTitleView2 productInfo">{{item.productInfo}}</text>
+                <text class="productTitleView2">{{item.name}}</text>
+                <text class="productTitleView2 productInfo">{{item.expressFee == 0 ? '包邮' : item.expressFee + '元'}}</text>
                 <view class="productPriceView priceView2">
                   <view class="productBottomView1">
                     <text class="proceMinText">￥</text>
                     <text class="proceText">{{item.price}}</text>
                   </view> 
-                  <view class="productBottomView2"><text class="countText">{{item.count}}</text></view> 
+                  <view class="productBottomView2"><text class="countText">{{item.salesVolume}}人付款</text></view> 
                   <view class="productBottomView3">
                     <image src="../../images/product/icon_shoppingCart.png" class="shoppingCartClass"/>
                   </view> 

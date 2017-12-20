@@ -1,5 +1,6 @@
 //获取应用实例
 const app = getApp()
+const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
@@ -39,7 +40,7 @@ Page({
               });
               //发起网络请求
               wx.request({
-                url: 'http://127.0.0.1:8080/zlx/login',
+                url: serverUrl + 'login',
                 data: {
                   jdCode: res.code,
                   nickName: e.userInfo.nickName,
@@ -71,7 +72,7 @@ Page({
                               });
                               //发起网络请求
                               wx.request({
-                                url: 'http://127.0.0.1:8080/zlx/login',
+                                url: serverUrl + 'login',
                                 data: {
                                   jdCode: res.code,
                                   nickName: e.userInfo.nickName,
@@ -136,7 +137,7 @@ Page({
                     });
                     //发起网络请求
                     wx.request({
-                      url: 'http://127.0.0.1:8080/zlx/login',
+                      url: serverUrl + 'login',
                       data: {
                         jdCode: res.code,
                         nickName: e.userInfo.nickName,

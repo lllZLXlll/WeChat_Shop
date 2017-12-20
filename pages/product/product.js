@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
@@ -20,43 +21,48 @@ Page({
     windowHeight: 0,
     // 滚动视图位置
     scrollTop: 0,
-    // 分类图片
+    // 分类图标图片
     icon_class: '../../images/product/icon_class1.png',
     classification: 1,
 
-    // product data
+    // 商品列表临时数据
     productData: [
-      {
-        productId: 1, productTitle: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, count: '1.1万人付款', productInfo: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环2', price: 349, count: '2.1万人付款', productInfo: '包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环3', price: 549, count: '3.1万人付款', productInfo: '包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环1', price: 149.99, count: '1.1万人付款', productInfo: '不包邮', image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环2', price: 349, count: '2.1万人付款', productInfo: '包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环3', price: 549, count: '3.1万人付款', productInfo: '包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环3', price: 549, count: '3.1万人付款', productInfo: '不包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环1', price: 149.99, count: '1.1万人付款', productInfo: '包邮', image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环2', price: 349, count: '2.1万人付款', productInfo: '包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
-      },
-      {
-        productId: 1, productTitle: '小米手环3', price: 549, count: '3.1万人付款', productInfo: '不包邮', image: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      // {
+      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      // },
+      
     ],
+
+    // 商品列表数据
+    page: [
+
+    ],
+
+    // 当前页数
+    pageNum: 1,
+    // 列表数据总页数  
+    totalPageNum: 2,
   },
   // 界面渲染回调
   onLoad: function() {
@@ -69,6 +75,53 @@ Page({
         });
       },
     })
+
+    //发起网络请求
+    wx.request({
+      url: serverUrl + 'queryProductList',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.error == 'code-0000') {
+          // 登录成功，用户openid保存到微信存储中
+          _this.setData({ page: res.data.page});
+        }
+      }
+    });
+  },
+
+  // 上拉加载
+  loadPage: function() {
+    var _this = this;
+
+    // 总页数等于当前页数不加载
+    if (_this.data.totalPageNum <= _this.data.pageNum) {
+      return;
+    }
+
+    //发起网络请求
+    wx.request({
+      url: serverUrl + 'queryProductList',
+      data: {
+        pageNum: _this.data.pageNum + 1,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.error == 'code-0000') {
+          // 登录成功，用户openid保存到微信存储中
+          _this.setData({ 
+            productData: _this.data.page.page.concat(res.data.page.page),
+            pageNum: _this.data.pageNum + 1,
+          });
+        }
+      }
+    });
+
   },
 
 
