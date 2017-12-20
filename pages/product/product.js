@@ -25,44 +25,13 @@ Page({
     icon_class: '../../images/product/icon_class1.png',
     classification: 1,
 
-    // 商品列表临时数据
-    productData: [
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      // {
-      //   productId: 1, name: '小米手环小米手环1小米手环1123123小米手环小米手环1小米手环1123123', price: 149.99, salesVolume: '1.1万人付款', expressFee: '包邮',     image:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
-      // },
-      
-    ],
-
     // 商品列表数据
-    page: [
+    page: [],
+    isLoad: false,
+    isBottomText: false,
 
-    ],
-
-    // 当前页数
-    pageNum: 1,
-    // 列表数据总页数  
-    totalPageNum: 2,
+    // 搜索框的值
+    inputValue: '',    
   },
   // 界面渲染回调
   onLoad: function() {
@@ -86,26 +55,26 @@ Page({
         console.log(res.data)
         if (res.data.error == 'code-0000') {
           // 登录成功，用户openid保存到微信存储中
-          _this.setData({ page: res.data.page});
+          _this.setData({ page: res.data.page });
         }
       }
     });
+   
   },
 
-  // 上拉加载
-  loadPage: function() {
+  getProductData: function() {
     var _this = this;
 
-    // 总页数等于当前页数不加载
-    if (_this.data.totalPageNum <= _this.data.pageNum) {
+    // 如果输入框没有值就不请求
+    if (_this.data.inputValue == null && _this.data.inputValue == '') {
       return;
     }
 
-    //发起网络请求
+    // 发起网络请求
     wx.request({
       url: serverUrl + 'queryProductList',
       data: {
-        pageNum: _this.data.pageNum + 1,
+        name: _this.data.inputValue
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -114,14 +83,56 @@ Page({
         console.log(res.data)
         if (res.data.error == 'code-0000') {
           // 登录成功，用户openid保存到微信存储中
+          _this.setData({ page: res.data.page });
+        }
+      }
+    });
+  },
+
+  // 上拉加载
+  loadPage: function() {
+    var _this = this;
+    if (_this.data.isLoad)
+      return;
+    else 
+      _this.setData({isLoad: true});
+
+    // 总页数等于当前页数不加载
+    if (_this.data.page.pageTotalNum <= _this.data.page.pageNum) {
+      _this.setData({isBottomText: true});
+      return;
+    }
+
+    //发起网络请求
+    wx.request({
+      url: serverUrl + 'queryProductList',
+      data: {
+        pageNum: _this.data.page.pageNum + 1,
+        name: _this.data.inputValue
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.error == 'code-0000') {
+          // 登录成功，用户openid保存到微信存储中
+          res.data.page.page = _this.data.page.page.concat(res.data.page.page);
           _this.setData({ 
-            productData: _this.data.page.page.concat(res.data.page.page),
-            pageNum: _this.data.pageNum + 1,
+            page: res.data.page,
+            isLoad: false
           });
         }
       }
     });
 
+  },
+
+  // 获取搜索框的值
+  bindKeyInput: function (e) {
+    this.setData({
+      inputValue: e.detail.value
+    })
   },
 
 

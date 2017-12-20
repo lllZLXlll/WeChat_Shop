@@ -26,9 +26,9 @@
           <image src="{{classificationImage}}" class="classificationImageClass" />
         </view> 
         <view class="searchInputView">
-          <input placeholder="输入商品名称" class="searchInput"/>
+          <input placeholder="输入商品名称" class="searchInput" confirm-type='search' bindinput="bindKeyInput" bindconfirm='getProductData' />
         </view>
-        <view class="classificationView" bindtap="searchClick">
+        <view class="classificationView" bindtap="getProductData">
           <image src="{{searchImage}}" class="classificationImageClass" />
         </view>
       </view>
@@ -72,13 +72,17 @@
             </view>
           </block>
         </view>
+        
+        <!-- 列表底部组件 -->
+        <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
+        <view wx:else class="view-bottom-text"><image src="../../images/product/icon_loading.gif" class="loadingImage"/></view>
+
       </scroll-view> 
     </view>
 
     <!-- 布局2  -->
-    <view class="contentView" wx:if="{{classification == 2}}">
-      <scroll-view scroll-y="true" bindscrolltolower='bottomRefresh'
-        bindscrolltoupper="topRefresh" enable-back-to-top="true" scroll-top="{{scrollTop}}"
+    <view class="" wx:if="{{classification == 2}}">
+      <scroll-view scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" scroll-top="{{scrollTop}}"
         style="height: {{windowHeight}}px"
       > 
         <view style="width: 100%;height: 160rpx;"></view>
@@ -103,9 +107,13 @@
                 </view>
               </view>
             </view>
-
           </block>
         </view>
+        
+        <!-- 列表底部组件 -->
+        <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
+        <view wx:else class="view-bottom-text"><image src="../../images/product/icon_loading.gif" class="loadingImage"/></view>
+
       </scroll-view> 
     </view>
   
