@@ -31,7 +31,11 @@ Page({
     isBottomText: false,
 
     // 搜索框的值
-    inputValue: '',    
+    inputValue: '', 
+    // 按销量排序搜索
+    salesVolumeSort: null,
+    // 按价格排序搜索
+    priceSort: null,
   },
   // 界面渲染回调
   onLoad: function() {
@@ -109,7 +113,9 @@ Page({
       url: serverUrl + 'queryProductList',
       data: {
         pageNum: _this.data.page.pageNum + 1,
-        name: _this.data.inputValue
+        name: _this.data.inputValue,
+        salesVolumeSort: _this.data.salesVolumeSort,
+        priceSort: _this.data.priceSort,
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -170,6 +176,7 @@ Page({
    */
   swichNav: function (e) {
     var _this = this;
+
     if (_this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -178,12 +185,31 @@ Page({
       })
     }
 
+    // 切换tab之后设置排序条件的值
+    if (_this.data.currentTab == 0) {
+      _this.setData({
+        salesVolumeSort: null,
+        priceSort: null,
+      });
+    } else if (_this.data.currentTab == 1) {
+      _this.setData({
+        salesVolumeSort: 2,
+        priceSort: null,
+      });
+    } else {
+      _this.setData({
+        salesVolumeSort: null,
+        priceSort: 2,
+      });
+    }
+
     // ......
     wx.request({
       url: serverUrl + 'queryProductList',
       data: {
         name: _this.data.inputValue,
-
+        salesVolumeSort: _this.data.salesVolumeSort,
+        priceSort: _this.data.priceSort,
       },
       header: {
         'content-type': 'application/json' // 默认值

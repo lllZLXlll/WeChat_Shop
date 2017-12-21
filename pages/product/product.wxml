@@ -38,7 +38,9 @@
         <view class="swiper-tab">  
           <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合</view>  
           <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量</view>  
-          <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格</view>  
+          <view class="swiper-tab-list-image {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格
+            <image src="../../images/product/icon_sort_asc.png" class="sortImageClass"/>
+          </view>  
         </view>  
       </scroll-view> 
     </view> 

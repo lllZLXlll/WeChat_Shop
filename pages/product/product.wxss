@@ -62,13 +62,34 @@
   border-bottom-width: 1rpx;
   border-bottom-color: #eee;
   border-bottom-style: solid;
+  display: flex;  
+  flex-direction: row;
+  align-items: center;
 }  
+
 .swiper-tab-list{  
   font-size: 32rpx;  
   display: inline-block;  
   width: 33.33%;  
-  color: #999;  
-}  
+  color: #999;
+} 
+
+.swiper-tab-list-image{  
+  font-size: 32rpx;  
+  display: flex;  
+  width: 33.33%;  
+  color: #999;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+} 
+
+.sortImageClass {
+  margin-left: 20rpx;
+  width: 35rpx;
+  height: 35rpx;
+}
+
 .on{ 
   color: #333;  
   border-bottom: 5rpx solid #ff8200;
