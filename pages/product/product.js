@@ -36,6 +36,9 @@ Page({
     salesVolumeSort: null,
     // 按价格排序搜索
     priceSort: null,
+    // 价格排序图片
+    priceSortImage: '../../images/product/icon_sort_asc.png',
+
   },
   // 界面渲染回调
   onLoad: function() {
@@ -177,7 +180,7 @@ Page({
   swichNav: function (e) {
     var _this = this;
 
-    if (_this.data.currentTab === e.target.dataset.current) {
+    if (_this.data.currentTab === e.target.dataset.current && e.target.dataset.current != 2) {
       return false;
     } else {
       _this.setData({
@@ -193,17 +196,25 @@ Page({
       });
     } else if (_this.data.currentTab == 1) {
       _this.setData({
-        salesVolumeSort: 2,
+        salesVolumeSort: 1,
         priceSort: null,
       });
     } else {
-      _this.setData({
-        salesVolumeSort: null,
-        priceSort: 2,
-      });
+      if (_this.data.priceSort == 1) {
+        _this.setData({
+          salesVolumeSort: null,
+          priceSort: 2,
+          priceSortImage: '../../images/product/icon_sort_desc.png'
+        });
+      } else {
+        _this.setData({
+          salesVolumeSort: null,
+          priceSort: 1,
+          priceSortImage: '../../images/product/icon_sort_asc.png'
+        });
+      }
     }
 
-    // ......
     wx.request({
       url: serverUrl + 'queryProductList',
       data: {
