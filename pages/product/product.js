@@ -14,7 +14,7 @@ Page({
     searchImage: '../../images/product/icon_search.png',
     classificationImage: '../../images/product/icon_classification.png',
     // tab切换  
-    currentTab: 0,
+    currentTab: '0',
     // 屏幕高度
     screenHeight: 0,
     // 屏幕剩余高度
@@ -33,9 +33,9 @@ Page({
     // 搜索框的值
     inputValue: '', 
     // 按销量排序搜索
-    salesVolumeSort: null,
+    salesVolumeSort: '',
     // 按价格排序搜索
-    priceSort: null,
+    priceSort: '',
     // 价格排序图片
     priceSortImage: '../../images/product/icon_sort_asc.png',
 
@@ -52,36 +52,20 @@ Page({
       },
     })
 
-    //发起网络请求
-    wx.request({
-      url: serverUrl + 'queryProductList',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        if (res.data.error == 'code-0000') {
-          // 登录成功，用户openid保存到微信存储中
-          _this.setData({ page: res.data.page });
-        }
-      }
-    });
+    _this.getProductData();
    
   },
 
   getProductData: function() {
     var _this = this;
 
-    // 如果输入框没有值就不请求
-    if (_this.data.inputValue == null && _this.data.inputValue == '') {
-      return;
-    }
-
     // 发起网络请求
     wx.request({
       url: serverUrl + 'queryProductList',
       data: {
-        name: _this.data.inputValue
+        name: _this.data.inputValue,
+        salesVolumeSort: _this.data.salesVolumeSort,
+        priceSort: _this.data.priceSort,
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -90,12 +74,24 @@ Page({
         console.log(res.data)
         if (res.data.error == 'code-0000') {
           // 登录成功，用户openid保存到微信存储中
-          _this.setData({ page: res.data.page });
+          _this.setData({ 
+            page: res.data.page,
+            isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
+          });
         }
       }
     });
   },
 
+  srechData: function() {
+    var _this = this;
+
+    // 如果输入框没有值就不请求
+    if (_this.data.inputValue == null && _this.data.inputValue == '') {
+      return;
+    }
+    _this.getProductData();
+  },
 
   // 上拉加载
   loadPage: function() {
@@ -180,7 +176,7 @@ Page({
   swichNav: function (e) {
     var _this = this;
 
-    if (_this.data.currentTab === e.target.dataset.current && e.target.dataset.current != 2) {
+    if ((_this.data.currentTab === e.target.dataset.current) && e.target.dataset.current != 2) {
       return false;
     } else {
       _this.setData({
@@ -191,48 +187,31 @@ Page({
     // 切换tab之后设置排序条件的值
     if (_this.data.currentTab == 0) {
       _this.setData({
-        salesVolumeSort: null,
-        priceSort: null,
+        salesVolumeSort: '',
+        priceSort: '',
       });
     } else if (_this.data.currentTab == 1) {
       _this.setData({
         salesVolumeSort: 1,
-        priceSort: null,
+        priceSort: '',
       });
     } else {
       if (_this.data.priceSort == 1) {
         _this.setData({
-          salesVolumeSort: null,
+          salesVolumeSort: '',
           priceSort: 2,
           priceSortImage: '../../images/product/icon_sort_desc.png'
         });
       } else {
         _this.setData({
-          salesVolumeSort: null,
+          salesVolumeSort: '',
           priceSort: 1,
           priceSortImage: '../../images/product/icon_sort_asc.png'
         });
       }
     }
 
-    wx.request({
-      url: serverUrl + 'queryProductList',
-      data: {
-        name: _this.data.inputValue,
-        salesVolumeSort: _this.data.salesVolumeSort,
-        priceSort: _this.data.priceSort,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        if (res.data.error == 'code-0000') {
-          // 登录成功，用户openid保存到微信存储中
-          _this.setData({ page: res.data.page });
-        }
-      }
-    });
+    _this.getProductData();
   },
   // 商品列表滚动到顶部回调
   topRefresh: function() {

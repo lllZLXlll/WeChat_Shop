@@ -26,7 +26,7 @@
           <image src="{{classificationImage}}" class="classificationImageClass" />
         </view> 
         <view class="searchInputView">
-          <input placeholder="输入商品名称" class="searchInput" confirm-type='search' bindinput="bindKeyInput" bindconfirm='getProductData' />
+          <input placeholder="输入商品名称" class="searchInput" confirm-type='search' bindinput="bindKeyInput" bindconfirm='srechData' />
         </view>
         <view class="classificationView" bindtap="getProductData">
           <image src="{{searchImage}}" class="classificationImageClass" />
