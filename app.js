@@ -6,5 +6,12 @@ App({
   globalData: {
     // 服务器地址 test
     serverUrl: 'http://localhost:8080/zlx/',
+
+    // 请求成功返回字符串
+    requestOk: 'request:ok',
+    // 请求失败返回字符串
+    requestFail: 'request:fail ',
+    // 请求超时返回字符串
+    requestTimeout: 'request:fail timeout',
   }
 })

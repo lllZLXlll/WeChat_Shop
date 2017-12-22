@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
@@ -24,12 +25,9 @@ Page({
       var openid = wx.getStorageSync('openid')
       if (openid) {
         wx.request({
-          url: 'http://127.0.0.1:8080/zlx/queryReceivingAddressListById',
+          url: serverUrl + 'queryReceivingAddressListById',
           data: {
             openid: openid
-          },
-          header: {
-            'content-type': 'application/json'
           },
           success: function (res) {
             // 隐藏提示框
@@ -73,7 +71,7 @@ Page({
   addAddress: function (res, openid) {
     var _this = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/zlx/addReceivingAddress',
+      url: serverUrl + 'addReceivingAddress',
       data: {
         userName: res.userName,
         postalCode: res.postalCode,
@@ -84,9 +82,6 @@ Page({
         nationalCode: res.nationalCode,
         telNumber: res.telNumber,
         openid: openid
-      },
-      header: {
-        'content-type': 'application/json'
       },
       success: function (res) {
         console.log(res.data)
@@ -106,7 +101,7 @@ Page({
             success(e) {
               //发起网络请求
               wx.request({
-                url: 'http://127.0.0.1:8080/zlx/login',
+                url: serverUrl + 'login',
                 data: {
                   jdCode: res.code,
                   nickName: e.userInfo.nickName,
@@ -115,9 +110,6 @@ Page({
                   province: e.userInfo.province,
                   city: e.userInfo.city,
                   avatarUrl: e.userInfo.avatarUrl,
-                },
-                header: {
-                  'content-type': 'application/json' // 默认值
                 },
                 success: function (res) {
                   console.log(res.data)
@@ -146,13 +138,10 @@ Page({
       var openid = wx.getStorageSync('openid')
       if (openid) {
         wx.request({
-          url: 'http://127.0.0.1:8080/zlx/setAddressStatusById',
+          url: serverUrl + 'setAddressStatusById',
           data: {
             id: e.currentTarget.dataset.id,
             openid: openid
-          },
-          header: {
-            'content-type': 'application/json'
           },
           success: function (res) {
             console.log(res.data)
@@ -187,14 +176,11 @@ Page({
             var openid = wx.getStorageSync('openid')
             if (openid) {
               wx.request({
-                url: 'http://127.0.0.1:8080/zlx/delAddressStatusById',
+                url: serverUrl + 'delAddressStatusById',
                 data: {
                   id: e.currentTarget.dataset.id,
                   status: e.currentTarget.dataset.status,
                   openid: openid
-                },
-                header: {
-                  'content-type': 'application/json'
                 },
                 success: function (res) {
                   console.log(res.data)

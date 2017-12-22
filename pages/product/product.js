@@ -56,9 +56,23 @@ Page({
    
   },
 
-  getProductData: function() {
+  // 展示加载框
+  showToast: function() {
+    wx.showLoading({
+      title: '加载中...',
+      // mask: true,
+    })
+  },
+
+  // 隐藏加载框
+  hideoast: function () {
+    wx.hideLoading();
+  },
+
+  getProductData: function (e, loadPage) {
     var _this = this;
 
+    _this.showToast();
     // 发起网络请求
     wx.request({
       url: serverUrl + 'queryProductList',
@@ -67,17 +81,39 @@ Page({
         salesVolumeSort: _this.data.salesVolumeSort,
         priceSort: _this.data.priceSort,
       },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
       success: function (res) {
-        console.log(res.data)
         if (res.data.error == 'code-0000') {
+
+          _this.hideoast();
+
+          _this.setData({ isLoad: false });
+
           // 登录成功，用户openid保存到微信存储中
           _this.setData({ 
             page: res.data.page,
             isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
           });
+
+          if (loadPage) {
+            loadPage();
+          }
+        }
+      },
+      complete: function(e) {
+        _this.hideoast();
+
+        if (e.errMsg == app.globalData.requestTimeout) {
+          wx.showToast({
+            title: '网络请求超时',
+            image: '../../images/user/icon_error.png'
+          });
+          _this.setData({isBottomText: true });
+        } else if (e.errMsg == app.globalData.requestFail) {
+          wx.showToast({
+            title: '网络请求失败',
+            image: '../../images/user/icon_error.png'
+          });
+          _this.setData({ isBottomText: true });
         }
       }
     });
@@ -211,7 +247,7 @@ Page({
       }
     }
 
-    _this.getProductData();
+    _this.getProductData(null, _this.loadPage);
   },
   // 商品列表滚动到顶部回调
   topRefresh: function() {
@@ -235,9 +271,10 @@ Page({
   // 回到顶部
   toTop: function() {
     var _this = this;
-    this.setData({scrollTop: 0});
+    _this.setData({scrollTop: 0});
   },
-  
+
+
   // 切换分类
   setIconClass: function() {
     var _this = this;
@@ -260,5 +297,10 @@ Page({
       url: '../productInfo/productInfo'
     })
   },
+
+  // 空方法
+  fun: function() {
+
+  }
 
 })
