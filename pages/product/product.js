@@ -6,6 +6,9 @@ const serverUrl = app.globalData.serverUrl;
 Page({
   data: {
     // 侧边栏数据 begin
+
+    // 商品分类数据
+    productTypeData: [],
     open: false,
     windowWidth: wx.getSystemInfoSync().windowWidth,
     translate: 'transform: translateX(-1000px)',
@@ -152,9 +155,6 @@ Page({
         salesVolumeSort: _this.data.salesVolumeSort,
         priceSort: _this.data.priceSort,
       },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
       success: function (res) {
         console.log(res.data)
         if (res.data.error == 'code-0000') {
@@ -187,16 +187,30 @@ Page({
 
   // 侧边栏切换效果 begin
   tap_ch: function (e) {
-    if (this.data.open) {
-      this.setData({
+    var _this = this;
+    if (_this.data.open) {
+      _this.setData({
         translate: 'transform: translateX(-1000px)'
       })
-      this.data.open = false;
+      _this.data.open = false;
     } else {
-      this.setData({
+      // 查询商品分类
+      wx.request({
+        url: serverUrl + 'queryProductType',
+        success: function (res) {
+          console.log(res.data)
+          if (res.data.error == 'code-0000') {
+            _this.setData({
+              productTypeData: res.data.resultList
+            });
+          }
+        }
+      });
+
+      _this.setData({
         translate: 'transform: translateX(0px)'
       })
-      this.data.open = true;
+      _this.data.open = true;
     }
   },
   // 侧边栏切换效果 end
@@ -298,9 +312,5 @@ Page({
     })
   },
 
-  // 空方法
-  fun: function() {
-
-  }
 
 })
