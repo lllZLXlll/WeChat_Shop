@@ -23,11 +23,10 @@ Page({
       productCalsss: [],
       // 选择的商品对象
       product: {},
-      
-      // 选择的商品分类
-      selectClassText: '请选择 颜色分类',
       // 选择的商品数量
       select_product_count: 1,
+      // 选择分类商品的id
+      select_product_id: -1,
     },
 
 
@@ -52,6 +51,7 @@ Page({
           selectProductInfo.productCalsss = res.data.resultMap.productCalsss;
           selectProductInfo.product.price = res.data.resultMap.price;
           selectProductInfo.product.count = res.data.resultMap.count;
+          selectProductInfo.product.productImage = res.data.resultMap.productImage;
           selectProductInfo.product.id = -1;
 
           _this.setData({
@@ -123,35 +123,32 @@ Page({
 
   // 增，删减选择的商品
   remove_select_product: function (e) {
-    if (this.data.selectProductInfo.selectClassId != -1) {
-      var selectProductInfo = this.data.selectProductInfo;
-      if (selectProductInfo.select_product_count > 1) {
-        selectProductInfo.select_product_count = selectProductInfo.select_product_count - 1;
-        this.setData({
-          selectProductInfo: this.data.selectProductInfo
-        });
-      }
-    }
-  },
-
-  add_select_product: function (e) {
-    if (this.data.selectProductInfo.selectClassId != -1) {
-      var selectProductInfo = this.data.selectProductInfo;
-      selectProductInfo.select_product_count = selectProductInfo.select_product_count + 1;
+    var selectProductInfo = this.data.selectProductInfo;
+    if (selectProductInfo.select_product_count > 1) {
+      selectProductInfo.select_product_count = selectProductInfo.select_product_count - 1;
       this.setData({
         selectProductInfo: this.data.selectProductInfo
       });
     }
   },
 
-  // 在商品选择分类界面选择分类
-  selectProduct: function(e) {
+  add_select_product: function (e) {
     var selectProductInfo = this.data.selectProductInfo;
-    var id = e.currentTarget.dataset.id;
-    selectProductInfo.selectClassId = id;
-    selectProductInfo.product = selectProductInfo.productCalsss[id];
+    selectProductInfo.select_product_count = selectProductInfo.select_product_count + 1;
+    this.setData({
+      selectProductInfo: this.data.selectProductInfo
+    });
+  },
 
-    this.setData({selectProductInfo: selectProductInfo});
+  // 在商品选择分类界面选择分类
+  selectProduct: function (e) {
+    var selectProductInfo = this.data.selectProductInfo;
+    var index = e.currentTarget.dataset.index;
+    selectProductInfo.product = selectProductInfo.productCalsss[index];
+    selectProductInfo.select_product_id = selectProductInfo.product.id;
+    this.setData({
+      selectProductInfo: selectProductInfo,
+    });
   },
 
 })

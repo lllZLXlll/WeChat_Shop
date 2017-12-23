@@ -307,21 +307,20 @@
   border-bottom-width: 1rpx;
   border-bottom-color: #eee;
   border-bottom-style: solid;
+  padding: 0 20rpx 0 20rpx;
 }
 
 .page_leftView {
   display: flex;
-  width: 30%;
-  padding-left: 20rpx;
+  width: 25%;
 }
 
 .page_rightView {
-  width: 70%;
+  width: 67%;
   color: #000;
-  /* padding-left: 20rpx; */
   display: flex;
   flex-direction: column;
-  padding-right: 20rpx;
+  padding-left: 20rpx;
 }
 
 .productSelectImage {
@@ -343,9 +342,7 @@
 
 .productSelectPirceView {
   display: flex;
-  flex: 3;
-  /* align-items: center; */
-  justify-content: flex-start;
+  flex: 1;
   font-size: 30rpx;
   color: #333;
   flex-direction: column;
@@ -354,6 +351,12 @@
 .redText {
   color: red;
   font-size: 34rpx;
+}
+
+.text-view {
+  overflow: hidden;
+  white-space:  nowrap;
+  text-overflow: ellipsis;
 }
 
 .page-classView {
@@ -383,6 +386,11 @@
   border-radius: 30rpx;
   font-size: 28rpx;
   margin: 0 20rpx 20rpx 0; 
+}
+
+.select-view-bg {
+  background-color: #ff8200;
+  color: #fff;
 }
 
 .no-select {

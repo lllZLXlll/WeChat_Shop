@@ -8,7 +8,7 @@
       <view class="page-topView viewHeight">
 
         <view class="page_leftView">
-          <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg" class="productSelectImage" mode="aspectFill" />
+          <image src="{{selectProductInfo.product.productImage}}" class="productSelectImage" />
         </view>
 
         <view class="page_rightView">
@@ -21,7 +21,9 @@
           <view class="productSelectPirceView">
             <text class="redText">￥{{selectProductInfo.product.price}}</text>
             <text>库存{{selectProductInfo.product.count}}件</text>
-            <text>{{selectProductInfo.selectClassText}}</text>
+            <view class='text-view'>
+              <text>{{selectProductInfo.product.class ? '已选择 ' + selectProductInfo.product.class : '请选择 颜色分类'}}</text>
+            </view>
           </view>
         </view>
 
@@ -32,7 +34,9 @@
 
         <view class="selectClassView">
           <block wx:for="{{selectProductInfo.productCalsss}}" wx:key="{{item.id}}">
-            <view class="classViewBG"> <text class="classText" bindtap='selectProduct' data-id='{{item.id}}'>{{item.class}}</text> </view>
+            <view class="classViewBG {{item.id == selectProductInfo.select_product_id ? 'select-view-bg' : null}}" bindtap='selectProduct' data-index='{{index}}'>
+              <text>{{item.class}}</text>
+            </view>
           </block>
         </view>
 
@@ -55,7 +59,7 @@
           <view class="classViewBG count-margin" bindtap='add_select_product' wx:if='{{selectProductInfo.product.id != -1}}'>
             <image src="../../images/productInfo/icon_add.png" class="countImage" />
           </view>
-          <view class="classViewBG count-margin no-select" bindtap='add_select_product' wx:else></view>
+          <view class="classViewBG count-margin no-select count-width" bindtap='add_select_product' wx:else></view>
         </view>
       </view>
 
