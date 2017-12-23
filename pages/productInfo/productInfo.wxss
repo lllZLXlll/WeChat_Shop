@@ -158,6 +158,14 @@
 .tjImageItemView {
   display: flex;
   flex: 1;
+  flex-direction: column;
+  color: #999;
+  font-size: 32rpx;
+  align-items: center;
+}
+
+.tjImageItemView text {
+  margin: 10rpx 0 10rpx 0;
 }
 
 .bottomView {
@@ -375,6 +383,14 @@
   border-radius: 30rpx;
   font-size: 28rpx;
   margin: 0 20rpx 20rpx 0; 
+}
+
+.no-select {
+  background-color: #fff;
+}
+
+.count-width {
+  width: 30rpx;
 }
 
 .product-count-view {

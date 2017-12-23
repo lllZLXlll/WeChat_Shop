@@ -11,9 +11,9 @@
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
       circular="{{circular}}" class="swiper"
     > 
-    <block wx:for="{{imgUrls}}" >
+    <block wx:for="{{productInfo.productImages}}" wx:key="{{item.id}}">
        <swiper-item>  
-        <image src="{{item}}" class="maxImage" mode="aspectFill" />
+        <image src="{{item.image}}" class="maxImage" mode="scaleToFill" />
        </swiper-item>
     </block>
    </swiper>
@@ -24,14 +24,14 @@
   
     <!-- 标题，价格，销量等  -->
     <view class="productInfoView">
-      <text class="productTitle">小米手环2 什么什么什么小米手环2么</text>
+      <text class="productTitle">{{productInfo.name}}</text>
 
       <view class="productInfoBottomView">
         <view class="productBottomText">
-          <text class="productPrice"><text class="productPriceMin">￥</text>170.89</text>
+          <text class="productPrice"><text class="productPriceMin">￥</text>{{productInfo.price}}</text>
         </view>
         <view class="productBottomText">
-          <text class="productShowPrice">￥190.99</text>
+          <text class="productShowPrice">￥{{productInfo.showPrice}}</text>
         </view>
         <view class="productBottomText">
           <text></text>
@@ -40,10 +40,10 @@
 
       <view class="productInfoBottomView">
         <view class="productBottomText">
-          <text>快递：0.00</text>
+          <text>快递：{{productInfo.expressFee == 0 ? '包邮' : productInfo.expressFee}}</text>
         </view>
         <view class="productBottomText">
-          <text>销量：124单</text>
+          <text>销量：{{productInfo.salesVolume}}单</text>
         </view>
         <view class="productBottomText">
           <text></text>
@@ -84,10 +84,17 @@
         <text>图文详情</text>
       </view>
       <view class="tjImageView">
-        <block wx:for="{{imgUrls}}">
-          <view class="tjImageItemView">
-            <image src="{{item}}" class="maxImage" />
+        <block wx:for="{{productInfo.productImageText}}" wx:key='{{item.id}}'>
+
+          <view class="tjImageItemView" wx:if='{{item.detail == ""}}'>
+            <image src="{{item.image}}" class="maxImage" />
           </view>
+
+          <view class="tjImageItemView" wx:else>
+            <text>{{item.detail}}</text>
+            <image src="{{item.image}}" class="maxImage" />
+          </view>
+
         </block>
       </view>
     </view> 
@@ -125,6 +132,6 @@
 </view>
 
 <!-- 选择、分类、参数  -->
-<template is="productParam" data="{{translate: translate}}" />
+<template is="productParam" data="{{translate: translate, productParams: productInfo.productParams}}" />
 
-<template is="productSelect" data="{{translate_select: translate_select, select_product_count: select_product_count}}" />
+<template is="productSelect" data="{{translate_select: translate_select, selectProductInfo: selectProductInfo}}" />

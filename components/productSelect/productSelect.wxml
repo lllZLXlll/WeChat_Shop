@@ -19,9 +19,9 @@
           </view>
 
           <view class="productSelectPirceView">
-            <text class="redText">￥149</text>
-            <text>库存1492件</text>
-            <text>请选择 颜色分类</text>
+            <text class="redText">￥{{selectProductInfo.product.price}}</text>
+            <text>库存{{selectProductInfo.product.count}}件</text>
+            <text>{{selectProductInfo.selectClassText}}</text>
           </view>
         </view>
 
@@ -31,12 +31,11 @@
         <text class="classText">颜色分类</text>
 
         <view class="selectClassView">
-          <view class="classViewBG"> <text class="classText">手环2 黑色</text> </view>
-          <view class="classViewBG"> <text class="classText">手环2+红色腕带</text> </view>
-          <view class="classViewBG"> <text class="classText">手环2 蓝色</text> </view>
-          <view class="classViewBG"> <text class="classText">手环2+橙色腕带</text> </view>
-          <view class="classViewBG"> <text class="classText">手环2 红色</text> </view>
+          <block wx:for="{{selectProductInfo.productCalsss}}" wx:key="{{item.id}}">
+            <view class="classViewBG"> <text class="classText" bindtap='selectProduct' data-id='{{item.id}}'>{{item.class}}</text> </view>
+          </block>
         </view>
+
       </view>
 
       <view class="page-topView product-count-view">
@@ -45,17 +44,18 @@
         </view>
 
         <view class="count-view-left count-view-right">
-          <view class="classViewBG count-margin" bindtap='remove_select_product'>
+          <view class="classViewBG count-margin" bindtap='remove_select_product' wx:if='{{selectProductInfo.select_product_count > 1 && selectProductInfo.product.id != -1}}'>
             <image src="../../images/productInfo/icon_remove.png" class="countImage" />
           </view>
           
-          <view class="classViewBG count-margin"> 
-            <text class="classText">{{select_product_count}}</text> 
+          <view class="classViewBG count-margin count-width"> 
+            <text class="classText">{{selectProductInfo.select_product_count}}</text> 
           </view>
           
-          <view class="classViewBG count-margin" bindtap='add_select_product'>
+          <view class="classViewBG count-margin" bindtap='add_select_product' wx:if='{{selectProductInfo.product.id != -1}}'>
             <image src="../../images/productInfo/icon_add.png" class="countImage" />
           </view>
+          <view class="classViewBG count-margin no-select" bindtap='add_select_product' wx:else></view>
         </view>
       </view>
 

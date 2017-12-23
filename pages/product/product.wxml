@@ -4,10 +4,15 @@
   <view class="page-bottom" style="{{translate}}">
     <view class="page-content">
       <block wx:for="{{productTypeData}}" wx:key="{{item.id}}" >
-        <view class="page-content-itemView">
+        <view class="page-content-itemView {{productClass  == item.id ? 'selectClassText' : ''}}" data-id='{{item.id}}' bindtap='selectType'>
             <text>{{item.type}}</text>
         </view>
+
+        <view class="page-btn" data-id='' bindtap='selectType'>
+          <text>清除</text>
+        </view>
       </block>
+
     </view>
     <view class="page-right" bindtap="tap_ch" />
   </view>
@@ -46,7 +51,7 @@
         <view style="width: 100%;height: 160rpx;"></view>
         <view wx:if="{{classification == 1}}" class="productView">
           <block wx:for="{{page.page}}" wx:key="{{item.id}}" >
-            <view class="productItemView" bindtap='toProductInfo'>
+            <view class="productItemView" data-id='{{item.id}}' bindtap='toProductInfo'>
               <view class="productImageView">
                 <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
               </view>
@@ -76,7 +81,7 @@
     </view>
 
     <!-- 布局2  -->
-    <view class="" wx:if="{{classification == 2}}">
+    <view class="contentView" wx:if="{{classification == 2}}">
       <scroll-view scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" scroll-top="{{scrollTop}}"
         style="height: {{windowHeight}}px"
       > 

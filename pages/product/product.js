@@ -1,4 +1,3 @@
-//index.js
 //获取应用实例
 const app = getApp();
 const serverUrl = app.globalData.serverUrl;
@@ -39,6 +38,8 @@ Page({
     salesVolumeSort: '',
     // 按价格排序搜索
     priceSort: '',
+    // 按商品分类类型搜索
+    productClass: '',
     // 价格排序图片
     priceSortImage: '../../images/product/icon_sort_asc.png',
 
@@ -83,15 +84,13 @@ Page({
         name: _this.data.inputValue,
         salesVolumeSort: _this.data.salesVolumeSort,
         priceSort: _this.data.priceSort,
+        productClass: _this.data.productClass,
       },
       success: function (res) {
         if (res.data.error == 'code-0000') {
-
           _this.hideoast();
-
           _this.setData({ isLoad: false });
 
-          // 登录成功，用户openid保存到微信存储中
           _this.setData({ 
             page: res.data.page,
             isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
@@ -154,11 +153,10 @@ Page({
         name: _this.data.inputValue,
         salesVolumeSort: _this.data.salesVolumeSort,
         priceSort: _this.data.priceSort,
+        productClass: _this.data.productClass,
       },
       success: function (res) {
-        console.log(res.data)
         if (res.data.error == 'code-0000') {
-          // 登录成功，用户openid保存到微信存储中
           res.data.page.page = _this.data.page.page.concat(res.data.page.page);
           _this.setData({ 
             page: res.data.page,
@@ -178,14 +176,7 @@ Page({
   },
 
 
-  classClick: function() {
-    console.log('分类');
-  },
-  searchClick: function () {
-    console.log('搜索');
-  },
-
-  // 侧边栏切换效果 begin
+  // 侧边栏 begin
   tap_ch: function (e) {
     var _this = this;
     if (_this.data.open) {
@@ -198,7 +189,6 @@ Page({
       wx.request({
         url: serverUrl + 'queryProductType',
         success: function (res) {
-          console.log(res.data)
           if (res.data.error == 'code-0000') {
             _this.setData({
               productTypeData: res.data.resultList
@@ -213,7 +203,15 @@ Page({
       _this.data.open = true;
     }
   },
-  // 侧边栏切换效果 end
+
+  selectType: function(e) {
+    var _this = this;
+    _this.tap_ch();
+    _this.setData({ productClass: e.currentTarget.dataset.id });
+    _this.getProductData();
+  },
+
+  // 侧边栏 end
 
   // tab改变回调
   bindChange: function (e) {
@@ -292,7 +290,6 @@ Page({
   // 切换分类
   setIconClass: function() {
     var _this = this;
-    console.log(_this.data.classification)
     if (_this.data.classification == 2) {
       this.setData({ 
         icon_class: '../../images/product/icon_class1.png',
@@ -305,10 +302,9 @@ Page({
         });
     }
   },
-  toProductInfo: function (object) {
-    console.log(object)
+  toProductInfo: function (e) {
     wx.navigateTo({
-      url: '../productInfo/productInfo'
+      url: '../productInfo/productInfo?id=' + e.currentTarget.dataset.id
     })
   },
 
