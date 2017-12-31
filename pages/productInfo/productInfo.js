@@ -29,6 +29,8 @@ Page({
       select_product_id: -1,
     },
 
+    // 商品图片
+    images: [],
 
 
     // 商品选择分类页面数据 end
@@ -46,17 +48,31 @@ Page({
         console.log(res)
         if (res.data.error == 'code-0000') {
           _this.hideoast();
-
+          // 返回数据map
+          var resultMap = res.data.resultMap;
+          // 商品图片集合
+          var productImages = resultMap.productImages;
+          // 选中商品信息
           var selectProductInfo = _this.data.selectProductInfo;
-          selectProductInfo.productCalsss = res.data.resultMap.productCalsss;
-          selectProductInfo.product.price = res.data.resultMap.price;
-          selectProductInfo.product.count = res.data.resultMap.count;
-          selectProductInfo.product.productImage = res.data.resultMap.productImage;
+
+          selectProductInfo.productCalsss = resultMap.productCalsss;
+          selectProductInfo.product.price = resultMap.price;
+          selectProductInfo.product.count = resultMap.count;
+          selectProductInfo.product.productImage = resultMap.productImage;
           selectProductInfo.product.id = -1;
 
+          var images = new Array();
+          var count = productImages.length;
+          if (productImages.length > 0) {
+            for (var i = 0; i < count; i++) {
+              images[i] = productImages[i].image;
+            }
+          }
+
           _this.setData({
-            productInfo: res.data.resultMap,
+            productInfo: resultMap,
             selectProductInfo: selectProductInfo,
+            images: images,
           });
         }
       },
@@ -149,6 +165,15 @@ Page({
     this.setData({
       selectProductInfo: selectProductInfo,
     });
+  },
+
+  // 查看图片
+  openImages: function (e) {
+    var _this = this;
+    wx.previewImage({
+      current: e.currentTarget.dataset.image, // 当前显示图片的http链接
+      urls: _this.data.images // 需要预览的图片http链接列表
+    })
   },
 
 })
