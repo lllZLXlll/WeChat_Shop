@@ -9,10 +9,12 @@ Page({
     interval: 3000,
     duration: 1000,
     circular: true,
-    // 产品参数样式
+    // 商品参数样式
     translate: 'transform: translateX(-1000px)',
-    // 产品分类选择样式
+    // 商品分类选择样式
     translate_select: 'transform: translateX(-1000px)',
+    // 商品收藏图片
+    collectionImage: '../../images/productInfo/icon_collection.png',
 
     // 商品数据
     productInfo: [],
@@ -175,5 +177,43 @@ Page({
       urls: _this.data.images // 需要预览的图片http链接列表
     })
   },
+
+  // 添加收藏
+  addCollection: function (e) {
+    var _this = this;
+    // 商品id
+    var productId = e.currentTarget.dataset.productid;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    // 添加收藏
+    wx.request({
+      url: serverUrl + 'addCollectionProduct',
+      data: {
+        productId: productId,
+        openid: openid
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.error == 'code-0000') {
+          _this.setData({
+            collectionImage: '../../images/productInfo/icon_collection1.png'
+          });
+        }
+      },
+      complete: function (e) {
+        if (e.errMsg == app.globalData.requestTimeout) {
+          wx.showToast({
+            title: '网络请求超时',
+            image: '../../images/user/icon_error.png'
+          });
+        } else if (e.errMsg == app.globalData.requestFail) {
+          wx.showToast({
+            title: '网络请求失败',
+            image: '../../images/user/icon_error.png'
+          });
+        }
+      }
+    });
+  }
 
 })

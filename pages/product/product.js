@@ -33,7 +33,7 @@ Page({
     isBottomText: false,
 
     // 搜索框的值
-    inputValue: '', 
+    inputValue: '',
     // 按销量排序搜索
     salesVolumeSort: '',
     // 按价格排序搜索
@@ -45,10 +45,10 @@ Page({
 
   },
   // 界面渲染回调
-  onLoad: function() {
+  onLoad: function () {
     var _this = this;
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         _this.setData({
           windowHeight: res.windowHeight,
           screenHeight: res.screenHeight,
@@ -57,11 +57,11 @@ Page({
     })
 
     _this.getProductData();
-   
+
   },
 
   // 展示加载框
-  showToast: function() {
+  showToast: function () {
     wx.showLoading({
       title: '加载中...',
       // mask: true,
@@ -91,7 +91,7 @@ Page({
           _this.hideoast();
           _this.setData({ isLoad: false });
 
-          _this.setData({ 
+          _this.setData({
             page: res.data.page,
             isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
           });
@@ -101,27 +101,34 @@ Page({
           }
         }
       },
-      complete: function(e) {
+      complete: function (e) {
         _this.hideoast();
-
-        if (e.errMsg == app.globalData.requestTimeout) {
-          wx.showToast({
-            title: '网络请求超时',
-            image: '../../images/user/icon_error.png'
-          });
-          _this.setData({isBottomText: true });
-        } else if (e.errMsg == app.globalData.requestFail) {
-          wx.showToast({
-            title: '网络请求失败',
-            image: '../../images/user/icon_error.png'
-          });
-          _this.setData({ isBottomText: true });
+        if (e.errMsg != app.globalData.requestOk) {
+          if (e.errMsg == app.globalData.requestTimeout) {
+            wx.showToast({
+              title: '网络请求超时',
+              image: '../../images/user/icon_error.png'
+            });
+            _this.setData({ isBottomText: true });
+          } else if (e.errMsg == app.globalData.requestFail) {
+            wx.showToast({
+              title: '网络请求失败',
+              image: '../../images/user/icon_error.png'
+            });
+            _this.setData({ isBottomText: true });
+          } else {
+            wx.showToast({
+              title: '请求失败',
+              image: '../../images/user/icon_error.png'
+            });
+            _this.setData({ isBottomText: true });
+          }
         }
       }
     });
   },
 
-  srechData: function() {
+  srechData: function () {
     var _this = this;
 
     // 如果输入框没有值就不请求
@@ -132,16 +139,16 @@ Page({
   },
 
   // 上拉加载
-  loadPage: function() {
+  loadPage: function () {
     var _this = this;
     if (_this.data.isLoad)
       return;
-    else 
-      _this.setData({isLoad: true});
+    else
+      _this.setData({ isLoad: true });
 
     // 总页数等于当前页数不加载
     if (_this.data.page.pageTotalNum <= _this.data.page.pageNum) {
-      _this.setData({isBottomText: true});
+      _this.setData({ isBottomText: true });
       return;
     }
 
@@ -158,7 +165,7 @@ Page({
       success: function (res) {
         if (res.data.error == 'code-0000') {
           res.data.page.page = _this.data.page.page.concat(res.data.page.page);
-          _this.setData({ 
+          _this.setData({
             page: res.data.page,
             isLoad: false
           });
@@ -204,7 +211,7 @@ Page({
     }
   },
 
-  selectType: function(e) {
+  selectType: function (e) {
     var _this = this;
     _this.tap_ch();
     _this.setData({ productClass: e.currentTarget.dataset.id });
@@ -262,7 +269,7 @@ Page({
     _this.getProductData(null, _this.loadPage);
   },
   // 商品列表滚动到顶部回调
-  topRefresh: function() {
+  topRefresh: function () {
     // wx.showToast({
     //   title: '滚动到顶部回调',
     //   icon: 'success',
@@ -270,7 +277,7 @@ Page({
     // })
   },
   // 商品列表滚动到底部回调
-  bottomRefresh: function(e) {
+  bottomRefresh: function (e) {
     // console.log(e)
     // wx.showToast({
     //   title: '滚动到底部回调',
@@ -278,28 +285,28 @@ Page({
     //   mask: true,
 
     // })
-  } ,
+  },
 
   // 回到顶部
-  toTop: function() {
+  toTop: function () {
     var _this = this;
-    _this.setData({scrollTop: 0});
+    _this.setData({ scrollTop: 0 });
   },
 
 
   // 切换分类
-  setIconClass: function() {
+  setIconClass: function () {
     var _this = this;
     if (_this.data.classification == 2) {
-      this.setData({ 
+      this.setData({
         icon_class: '../../images/product/icon_class1.png',
         classification: 1,
-        });
-    }else {
+      });
+    } else {
       this.setData({
         icon_class: '../../images/product/icon_class2.png',
         classification: 2
-        });
+      });
     }
   },
   toProductInfo: function (e) {

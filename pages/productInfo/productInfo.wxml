@@ -111,12 +111,9 @@
       <image src="../../images/productInfo/icon_msg.png" class="iconImage" />
       <text>客服</text>
     </view>
-    <view class="itemView">
-      <image src="../../images/productInfo/icon_collection.png" class="iconImage" />
-      <text>收藏</text>
-    </view>
-    <view class="itemView">
-      <image src="../../images/productInfo/icon_collection1.png" class="iconImage" />
+   
+    <view class="itemView" bindtap='addCollection' data-productid='{{productInfo.id}}'>
+      <image src='{{collectionImage}}' class="iconImage" />
       <text>已收藏</text>
     </view>
   </view>
