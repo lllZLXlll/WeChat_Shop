@@ -147,9 +147,6 @@ Page({
                         city: e.userInfo.city,
                         avatarUrl: e.userInfo.avatarUrl,
                       },
-                      header: {
-                        'content-type': 'application/json' // 默认值
-                      },
                       success: function (res) {
                         console.log(res.data)
                         if (res.data.error == 'code-0000') {

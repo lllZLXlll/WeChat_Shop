@@ -15,7 +15,8 @@ Page({
     translate_select: 'transform: translateX(-1000px)',
     // 商品收藏图片
     collectionImage: '../../images/productInfo/icon_collection.png',
-
+    // 商品是否收藏 0否 1是
+    collectionProduct: 0,
     // 商品数据
     productInfo: [],
 
@@ -40,11 +41,19 @@ Page({
   onLoad: function (param) {
     var _this = this;
     _this.showToast();
+
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    if (!openid) {
+      openid = null;
+    }
+
     // 发起网络请求
     wx.request({
       url: serverUrl + 'queryProductDetailInfoById',
       data: {
-        productId: param.id
+        productId: param.id,
+        openid: openid
       },
       success: function (res) {
         console.log(res)
@@ -75,6 +84,8 @@ Page({
             productInfo: resultMap,
             selectProductInfo: selectProductInfo,
             images: images,
+            collectionProduct: resultMap.collectionProduct,
+            collectionImage: resultMap.collectionProduct == 0 ? '../../images/productInfo/icon_collection.png' : '../../images/productInfo/icon_collection1.png',
           });
         }
       },
@@ -181,23 +192,46 @@ Page({
   // 添加收藏
   addCollection: function (e) {
     var _this = this;
-    // 商品id
-    var productId = e.currentTarget.dataset.productid;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    if (!openid) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录才能收藏宝贝',
+        success: function (res) {
+          if (res.confirm) {
+            _this.getUserInfo(_this.addCollectionProduct);
+          } else if (res.cancel) {
+            console.log('用户点击取消');
+            return;
+          }
+        }
+      });
+    } else {
+      _this.addCollectionProduct();
+    }
+
+  },
+
+  addCollectionProduct: function () {
+    var _this = this;
     // 用户openid
     var openid = wx.getStorageSync("openid");
     // 添加收藏
     wx.request({
       url: serverUrl + 'addCollectionProduct',
       data: {
-        productId: productId,
+        productId: _this.data.productInfo.id,
         openid: openid
       },
       success: function (res) {
         console.log(res)
         if (res.data.error == 'code-0000') {
-          _this.setData({
-            collectionImage: '../../images/productInfo/icon_collection1.png'
-          });
+          if (res.data.type == 1) {
+            _this.setData({ collectionImage: '../../images/productInfo/icon_collection1.png' });
+          } else {
+            _this.setData({ collectionImage: '../../images/productInfo/icon_collection.png' });
+          }
         }
       },
       complete: function (e) {
@@ -214,6 +248,45 @@ Page({
         }
       }
     });
-  }
+  },
+
+  // 获取用户信息
+  getUserInfo: function (addCollectionFun) {
+    var _this = this;
+
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          wx.getUserInfo({
+            lang: 'zh_CN',
+            success(e) {
+              //发起网络请求
+              wx.request({
+                url: serverUrl + 'login',
+                data: {
+                  jdCode: res.code,
+                  nickName: e.userInfo.nickName,
+                  gender: e.userInfo.gender,
+                  country: e.userInfo.country,
+                  province: e.userInfo.province,
+                  city: e.userInfo.city,
+                  avatarUrl: e.userInfo.avatarUrl,
+                },
+                success: function (res) {
+                  console.log(res.data)
+                  if (res.data.error == 'code-0000') {
+                    // 登录成功，用户openid保存到微信存储中
+                    wx.setStorageSync("openid", res.data.openid);
+                    addCollectionFun();
+                  }
+                }
+              })
+            }
+          });
+        }
+      }
+    });
+
+  },
 
 })
