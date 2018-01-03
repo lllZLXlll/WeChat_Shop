@@ -58,7 +58,7 @@
       </view>
 
 
-      <view class="view-data-item">
+      <view class="view-data-item" bindtap='toPageCollectionPro'>
         <view class="felxView paddingLeft">
           <image src="../../images/user/icon_collect.png" class="user-data-image" />
         </view>

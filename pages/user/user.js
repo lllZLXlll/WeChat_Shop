@@ -165,6 +165,7 @@ Page({
     })
 
   },
+
   // 跳转收货地址页面
   toPageReceivingAddress: function() {
     var _this = this;
@@ -184,6 +185,29 @@ Page({
     } else {
       wx.navigateTo({
         url: '../receivingAddress/receivingAddress'
+      })
+    }
+  },
+
+  // 跳转收藏页面
+  toPageCollectionPro: function() {
+    var _this = this;
+    // 看是否登录
+    if (_this.data.userInfo.nickName == null) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录哦',
+        success: function (res) {
+          if (res.confirm) {
+            _this.getUserInfo();
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../collectionProduct/collectionProduct'
       })
     }
   },
