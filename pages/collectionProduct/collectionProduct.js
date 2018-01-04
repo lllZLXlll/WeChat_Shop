@@ -12,7 +12,7 @@ Page({
     // 滚动视图位置
     scrollTop: 0,
 
-    // 商品列表数据
+    // 列表数据
     page: [],
     isLoad: false,
     isBottomText: false,
@@ -165,22 +165,66 @@ Page({
   },
 
   // 长按事件，展示 取消、删除 按钮
-  longtap: function (e) {
+  longpress: function (e) {
     var productId = e.currentTarget.dataset.id;
     this.setData({ selectDelId: productId });
   },
 
   // 取消删除遮罩
-  cancelDelete: function(e) {
+  cancelDelete: function (e) {
     this.setData({ selectDelId: -1 });
   },
 
   // 删除收藏
-  deleteCollection: function(e) {
-    this.setData({ selectDelId: -1 });
-    wx.showToast({
-      title: '删除收藏成功',
-      showToast: 'success'
+  deleteCollection: function (e) {
+    var _this = this;
+    var openid = wx.getStorageSync("openid");
+    
+    // 发起网络请求
+    wx.request({
+      url: serverUrl + 'delCollectionById',
+      data: {
+        openid: openid,
+        productId: _this.data.selectDelId
+      },
+      success: function (res) {
+        if (res.data.error == 'code-0000') {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'success'
+          });
+
+          _this.setData({ selectDelId: -1 });
+
+          _this.getCollectionProductData();
+        } else {
+          wx.showToast({
+            title: res.data.message,
+            image: '../../images/user/icon_error.png'
+          });
+        }
+      },
+      complete: function (e) {
+        if (e.errMsg != app.globalData.requestOk) {
+          if (e.errMsg == app.globalData.requestTimeout) {
+            wx.showToast({
+              title: '网络请求超时',
+              image: '../../images/user/icon_error.png'
+            });
+          } else if (e.errMsg == app.globalData.requestFail) {
+            wx.showToast({
+              title: '网络请求失败',
+              image: '../../images/user/icon_error.png'
+            });
+          } else {
+            wx.showToast({
+              title: '请求失败',
+              image: '../../images/user/icon_error.png'
+            });
+          }
+          _this.setData({ isBottomText: true });
+        }
+      }
     });
   },
 

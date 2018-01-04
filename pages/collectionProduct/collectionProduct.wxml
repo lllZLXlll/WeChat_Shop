@@ -6,7 +6,7 @@
     <scroll-view class="contentView" scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" scroll-top="{{scrollTop}}" style="height: {{windowHeight}}px">
       <view class="productView">
         <block wx:for="{{page.page}}" wx:key="{{item.id}}">
-          <view class="productItemView" data-id='{{item.id}}' bindlongtap='longtap' bindtouchstart='touchStart' bindtouchend='touchEnd'>
+          <view class="productItemView" data-id='{{item.id}}' bindlongpress='longpress' bindtouchstart='touchStart' bindtouchend='touchEnd'>
             <view class="productImageView" data-id='{{item.id}}' bindtap='toProductInfo'>
               <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
             </view>
