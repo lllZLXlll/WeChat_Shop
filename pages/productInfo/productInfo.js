@@ -30,6 +30,9 @@ Page({
       select_product_count: 1,
       // 选择分类商品的id
       select_product_id: -1,
+      // 从分类、加入购物车、立即购买点击进入选择页面状态不同，底部展示按钮也不同
+      // 1：选择分类 2：加入购物车 3：立即购买
+      selectStatus: 1,
     },
 
     // 商品图片
@@ -135,7 +138,110 @@ Page({
     }
   },
 
+  shoppingCartPurchase: function (e) {
+    var _this = this;
+    var _type = e.currentTarget.dataset.type;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    // 判断用户是否登录
+    if (!openid) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录哦!',
+        success: function (res) {
+          if (res.confirm) {
+            // 添加购物车
+            if (_type == 1) {
+              _this.getUserInfo(_this.addShoppingCart);
+            } else if (_type == 2) { // 直接购买商品
+
+            }
+          } else if (res.cancel) {
+            console.log('用户点击取消');
+            return;
+          }
+        }
+      });
+    } else {
+      if (_type == 1) {
+        _this.addShoppingCart();
+      } else if (_type == 2) {
+
+      }
+    }
+  },
+
+  // 添加购物车
+  addShoppingCart: function (e) {
+    var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    var selectProductInfo = _this.data.selectProductInfo;
+    console.log(_this.data.selectProductInfo)
+    // 选择了商品
+    if (selectProductInfo.select_product_id != -1) {
+
+      // 发起网络请求
+      _this.showToast();
+      wx.request({
+        url: serverUrl + 'addShoppingCart',
+        data: {
+          openid: openid,
+          productId: selectProductInfo.product.productId,
+          productClassId: selectProductInfo.select_product_id,
+          productCount: selectProductInfo.select_product_count,
+        },
+        success: function (res) {
+          _this.hideoast();
+          if (res.data.error == 'code-0000') {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'success'
+            });
+            _this.tap_ch_select();
+          } else {
+            wx.showToast({
+              title: res.data.message,
+              image: '../../images/user/icon_error.png'
+            });
+          }
+        },
+        complete: function (e) {
+          if (e.errMsg != app.globalData.requestOk) {
+            _this.hideoast();
+            if (e.errMsg == app.globalData.requestTimeout) {
+              wx.showToast({
+                title: '网络请求超时',
+                image: '../../images/user/icon_error.png'
+              });
+            } else if (e.errMsg == app.globalData.requestFail) {
+              wx.showToast({
+                title: '网络请求失败',
+                image: '../../images/user/icon_error.png'
+              });
+            } else {
+              wx.showToast({
+                title: '请求失败',
+                image: '../../images/user/icon_error.png'
+              });
+            }
+          }
+        }
+      });
+    } else {
+      wx.showToast({
+        title: '请先选择商品',
+        image: '../../images/user/icon_error.png'
+      });
+    }
+  },
+
   tap_ch_select: function (e) {
+    if (e) {
+      var selectProductInfo = this.data.selectProductInfo;
+      selectProductInfo.selectStatus = e.currentTarget.dataset.status;
+      this.setData({ selectProductInfo: selectProductInfo });
+    }
     if (this.data.open) {
       this.setData({
         translate_select: 'transform: translateX(-1000px)'

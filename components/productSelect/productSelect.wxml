@@ -65,11 +65,21 @@
 
     </scroll-view>
 
-    <view class="page-btn-view">
-      <view class="page-btn" bindtap="tap_ch_select">
+    <view class="page-btn-view" wx:if='{{selectProductInfo.selectStatus == 1}}'>
+      <view class="page-btn" data-type='1' bindtap="shoppingCartPurchase">
         <text>加入购物车</text>
       </view>
-      <view class="page-btn page-btn-purchase" bindtap="tap_ch_select">
+      <view class="page-btn page-btn-purchase" data-type='2' bindtap="tap_ch_select">
+        <text>立即购买</text>
+      </view>
+    </view>
+    <view class="page-btn-view" wx:if='{{selectProductInfo.selectStatus == 2}}'>
+      <view class="page-btn" data-type='1' bindtap="shoppingCartPurchase">
+        <text>加入购物车</text>
+      </view>
+    </view>
+    <view class="page-btn-view" wx:if='{{selectProductInfo.selectStatus == 3}}'>
+      <view class="page-btn page-btn-purchase" data-type='2' bindtap="tap_ch_select">
         <text>立即购买</text>
       </view>
     </view>

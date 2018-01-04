@@ -57,18 +57,18 @@
         </view>
         <view class="productBottomText renzheng">
           <image src="../../images/productInfo/icon_ok.png" class="icon_image" />
-          <text class="icon_text">正品保证</text>
+          <text class="icon_text">极速发货</text>
         </view>
         <view class="productBottomText renzheng">
           <image src="../../images/productInfo/icon_ok.png" class="icon_image" />
-          <text class="icon_text">正品保证</text>
+          <text class="icon_text">信誉良好</text>
         </view>
       </view>
     </view>
 
     <!-- 选择、产品参数  -->
     <view class="selectView">
-      <view class="selectItemView selectBorder" bindtap='tap_ch_select'>
+      <view class="selectItemView selectBorder" data-status='1' bindtap='tap_ch_select'>
         <text class="selectText">选择 产品分类</text>
         <image src="../../images/productInfo/icon_goTo.png" class="icon_image" />
       </view>
@@ -124,10 +124,10 @@
   </view>
 
   <view class="footerItemView footerItemView2">
-    <view class="btnItemView viewColor">
+    <view class="btnItemView viewColor" data-status='2' bindtap='tap_ch_select'>
       <text>加入购物车</text>
     </view>
-    <view class="btnItemView">
+    <view class="btnItemView" data-status='3' bindtap='tap_ch_select'>
       <text>立即购买</text>
     </view>
   </view>
