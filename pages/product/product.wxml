@@ -1,6 +1,8 @@
 <!--product.wxml-->
 <view class="bodyView">
 
+  <!-- <contact-button type="default-dark" size="20" session-from="weapp">
+    </contact-button> -->
   <view class="page-bottom" style="{{translate}}">
     <view class="page-content">
       <block wx:for="{{productTypeData}}" wx:key="{{item.id}}" >

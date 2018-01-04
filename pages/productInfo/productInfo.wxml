@@ -7,21 +7,20 @@
 <view class="bodyView">
   <!-- banner图片 -->
   <view class="bannerView">
-   <swiper indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
-      circular="{{circular}}" class="swiper"
-    > 
-    <block wx:for="{{productInfo.productImages}}" wx:key="{{item.id}}">
-       <swiper-item>  
-        <view bindtap='openImages' data-image='{{item.image}}'><image src="{{item.image}}" class="maxImage" mode="scaleToFill" /></view>
-       </swiper-item>
-    </block>
-   </swiper>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" class="swiper">
+      <block wx:for="{{productInfo.productImages}}" wx:key="{{item.id}}">
+        <swiper-item>
+          <view bindtap='openImages' data-image='{{item.image}}'>
+            <image src="{{item.image}}" class="maxImage" mode="scaleToFill" />
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
 
   <!-- 内容  -->
   <view class="productContentView">
-  
+
     <!-- 标题，价格，销量等  -->
     <view class="productInfoView">
       <text class="productTitle">{{productInfo.name}}</text>
@@ -97,7 +96,7 @@
 
         </block>
       </view>
-    </view> 
+    </view>
 
   </view>
 
@@ -108,10 +107,12 @@
 <view class="footerView">
   <view class="footerItemView">
     <view class="itemView">
-      <image src="../../images/productInfo/icon_msg.png" class="iconImage" />
+       <image src="../../images/productInfo/icon_msg.png" class="iconImage" /> 
+      <!-- <contact-button type="default-dark" size="20" session-from="weapp">
+    </contact-button> -->
       <text>客服</text>
     </view>
-   
+
     <view class="itemView" bindtap='addCollection' wx:if='{{collectionProduct == 0}}'>
       <image src='{{collectionImage}}' class="iconImage" />
       <text>收藏</text>
@@ -120,7 +121,6 @@
       <image src='{{collectionImage}}' class="iconImage" />
       <text>已收藏</text>
     </view>
-
   </view>
 
   <view class="footerItemView footerItemView2">
