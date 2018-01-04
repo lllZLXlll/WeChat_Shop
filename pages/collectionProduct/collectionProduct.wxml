@@ -1,39 +1,48 @@
-
 <view class="bodyView">
 
   <view class="page-top">
-    
-    <!-- 布局1  -->
-      <scroll-view class="contentView" scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" scroll-top="{{scrollTop}}"
-       style="height: {{windowHeight}}px"
-      >
-        <view class="productView">
-          <block wx:for="{{page.page}}" wx:key="{{item.id}}" >
-            <view class="productItemView" data-id='{{item.id}}' bindtap='toProductInfo' bindtouchstart='touchStart' bindtouchend='touchEnd'>
-              <view class="productImageView">
-                <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
-              </view>
-              <view class="productTitleView">
-                <text>{{item.name}}</text>
-              </view>
-              <view class="productPriceView">
-                <view class="productBottomView1">
-                  <text class="proceMinText">￥</text>
-                  <text class="proceText">{{item.price}}</text>
-                </view>
-              </view>
-            </view>
-            <view wx:if="{{index % 2 == 0}}">
-              <view class="marginView" />
-            </view>
-          </block>
-        </view>
-        
-        <!-- 列表底部组件 -->
-        <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
-        <view wx:else class="view-bottom-text"><image src="../../images/product/icon_loading.gif" class="loadingImage"/></view>
 
-      </scroll-view>
+    <!-- 布局1  -->
+    <scroll-view class="contentView" scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" scroll-top="{{scrollTop}}" style="height: {{windowHeight}}px">
+      <view class="productView">
+        <block wx:for="{{page.page}}" wx:key="{{item.id}}">
+          <view class="productItemView" data-id='{{item.id}}' bindlongtap='longtap' bindtouchstart='touchStart' bindtouchend='touchEnd'>
+            <view class="productImageView" data-id='{{item.id}}' bindtap='toProductInfo'>
+              <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
+            </view>
+            <view class="productTitleView" data-id='{{item.id}}' bindtap='toProductInfo'>
+              <text>{{item.name}}</text>
+            </view>
+            <view class="productPriceView" data-id='{{item.id}}' bindtap='toProductInfo'>
+              <view class="productBottomView1">
+                <text class="proceMinText">￥</text>
+                <text class="proceText">{{item.price}}</text>
+              </view>
+            </view>
+
+            <!-- 删除遮罩层 -->
+            <view class="view-delete" wx:if='{{item.id == selectDelId}}' bindtap='cancelDelete'>
+              <view class="view-delete-btn" bindtap='deleteCollection'>
+                <text class="view-delete-text">删除</text>
+              </view>
+            </view>
+
+          </view>
+
+          <view wx:if="{{index % 2 == 0}}">
+            <view class="marginView" />
+          </view>
+
+        </block>
+      </view>
+
+      <!-- 列表底部组件 -->
+      <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
+      <view wx:else class="view-bottom-text">
+        <image src="../../images/product/icon_loading.gif" class="loadingImage" />
+      </view>
+
+    </scroll-view>
 
   </view>
 </view>

@@ -22,6 +22,8 @@ Page({
     // 触摸结束时间
     touchEndTime: 0,
 
+    // 选中删除id
+    selectDelId: -1,
   },
 
   // 界面渲染回调
@@ -143,12 +145,8 @@ Page({
     // 判断是否长按
     var time = this.data.touchEndTime - this.data.touchStartTime;
 
-    // 是长按则展示删除按钮
-    if (time > 500) {
-      console.log(time)
-      // 在此处做长按展示灰色遮罩中间 取消、删除 按钮，点击取消就去掉遮罩，点击删除就删除该收藏
-
-    } else {
+    // 不是长按，如不做判断点击事件和长按事件会冲突，连个都会执行
+    if (time < 500) {
       wx.navigateTo({
         url: '../productInfo/productInfo?id=' + productId
       })
@@ -166,6 +164,25 @@ Page({
     this.setData({ touchEndTime: e.timeStamp })
   },
 
+  // 长按事件，展示 取消、删除 按钮
+  longtap: function (e) {
+    var productId = e.currentTarget.dataset.id;
+    this.setData({ selectDelId: productId });
+  },
+
+  // 取消删除遮罩
+  cancelDelete: function(e) {
+    this.setData({ selectDelId: -1 });
+  },
+
+  // 删除收藏
+  deleteCollection: function(e) {
+    this.setData({ selectDelId: -1 });
+    wx.showToast({
+      title: '删除收藏成功',
+      showToast: 'success'
+    });
+  },
 
 
 })

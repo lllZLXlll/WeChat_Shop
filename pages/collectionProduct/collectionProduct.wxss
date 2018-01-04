@@ -126,6 +126,8 @@
   height: 450rpx;
   background-color: #fff;
   border-radius: 20rpx;
+  position:relative;
+  z-index: 10;
 }
 
 .productImageView {
@@ -372,4 +374,40 @@
   justify-content: center;
   color: #999;
   font-size: 30rpx;
+}
+
+/* 长按删除遮罩 */
+.view-delete {
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+}
+
+.view-delete-btn {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 90rpx;
+  background-color: red;
+  margin-left: -60rpx;
+  margin-top: -60rpx;
+  z-index: 100;
+}
+
+.view-delete-text {
+  color: #fff;
+  font-size: 32rpx;
+  position:absolute;
+  width: 64rpx;
+  height: 42rpx;
+  left:50%;
+  top:50%;
+  margin-top: -21rpx;
+  margin-left: -32rpx
 }
