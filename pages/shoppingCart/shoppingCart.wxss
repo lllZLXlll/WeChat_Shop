@@ -59,7 +59,7 @@ text {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 160rpx;
+  height: 180rpx;
   background-color: #fff;
   border-top-width: 1rpx;
   border-top-color: #eee;
@@ -76,8 +76,8 @@ text {
 }
 
 .productImage {
-  width: 140rpx;
-  height: 140rpx;
+  width: 160rpx;
+  height: 160rpx;
 }
 
 .view-product-content {
@@ -88,7 +88,7 @@ text {
 
 .view-content-top, .view-content-bottom {
   display: flex;
-  flex: 1;
+  flex: 1; 
 }
 
 .product-title {
