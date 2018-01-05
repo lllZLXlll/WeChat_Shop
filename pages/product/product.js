@@ -102,8 +102,8 @@ Page({
         }
       },
       complete: function (e) {
-        _this.hideoast();
         if (e.errMsg != app.globalData.requestOk) {
+          _this.hideoast();
           if (e.errMsg == app.globalData.requestTimeout) {
             wx.showToast({
               title: '网络请求超时',

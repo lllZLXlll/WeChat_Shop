@@ -7,15 +7,15 @@
     </view>
 
     <view class="view-product-image">
-      <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg" class="productImage" />
+      <image src="{{productInfo.productImage}}" class="productImage" />
     </view>
 
     <view class="view-product-content">
       <view class="view-content-top">
-        <text class="product-title">小米手环2 水电费老司机反垄断机构减肥无国界的反光镜水电费反垄断机构减肥无国界的反光镜</text>
+        <text class="product-title">{{productInfo.class}}</text>
       </view>
       <view class="view-content-bottom">
-        <text class="pridceText">￥149.00</text>
+        <text class="pridceText">￥{{productInfo.price}}</text>
 
         <view class="view-content-count">
           <view class="classViewBG count-margin">
@@ -23,7 +23,7 @@
           </view>
         
           <view class="classViewBG count-margin"> 
-            <text class="classText">1</text> 
+            <text class="classText">{{productInfo.productCount}}</text> 
           </view>
           
           <view class="classViewBG count-margin">
