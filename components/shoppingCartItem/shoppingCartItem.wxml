@@ -10,7 +10,7 @@
       <image src="{{productInfo.productImage}}" class="productImage" />
     </view>
 
-    <view class="view-product-content">
+    <view class="view-product-content" bindtap='toProductInfo' data-id='{{productInfo.id}}'>
       <view class="view-content-top">
         <text class="product-title">{{productInfo.class}}</text>
       </view>

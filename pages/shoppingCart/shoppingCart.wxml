@@ -3,7 +3,7 @@
 <view class="bodyView">
 
   <!-- 购物车列表 -->
-  <scroll-view class="view-content-item" scroll-y="true" bindscrolltolower='loadPage' enable-back-to-top="true" style="height: {{windowHeight - 40}}px">
+  <view>
 
     <!-- 头部  -->
     <view class="view-title">
@@ -16,15 +16,16 @@
     </view>
 
     <block wx:for="{{page.page}}" wx:key="{{item.id}}">
-      <template is="shoppingCartItem" data="{{productInfo: item}}" />
+      <template is="shoppingCartItem" data="{{productInfo: item, index: index}}" />
     </block>
 
-    <!-- 列表底部组件 -->
-    <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
-    <view wx:else class="view-bottom-text">
-      <image src="../../images/product/icon_loading.gif" class="loadingImage" />
-    </view>
-  </scroll-view>
+  </view>
+
+  <!-- 列表底部组件 -->
+  <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
+  <view wx:else class="view-bottom-text">
+    <image src="../../images/product/icon_loading.gif" class="loadingImage" />
+  </view>
 
 
   <!-- 底部结算 -->
@@ -35,7 +36,6 @@
     </view>
 
     <view class="view-bottom-center">
-      <!-- <text class="bottom-center-text1">不含运费</text> -->
       <text class="bottom-center-text2">不含运费,合计:</text>
       <text class="bottom-center-text3">￥14995.00</text>
     </view>
@@ -43,8 +43,6 @@
     <view class="view-bottom-right">
       <text class="clearing-text">结算(1)</text>
     </view>
-
-
   </view>
 
 

@@ -64,6 +64,7 @@ Page({
         openid: openid,
       },
       success: function (res) {
+        wx.hideNavigationBarLoading() //完成停止加载
         if (res.data.error == 'code-0000') {
           _this.hideoast();
           _this.setData({ isLoad: false });
@@ -135,6 +136,27 @@ Page({
       }
     });
 
+  },
+
+  // 下拉刷新
+  onPullDownRefresh: function(e) {
+    console.log('--------下拉刷新-------');
+    wx.stopPullDownRefresh() //停止下拉刷新
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.getProductData();
+  },
+
+  // 上拉加载
+  onReachBottom: function(e) {
+    console.log('--------上拉加载-------');
+    this.loadPage();
+  },
+
+  // 跳转商品详情页面
+  toProductInfo: function(e) {
+    wx.navigateTo({
+      url: '../productInfo/productInfo?id=' + e.currentTarget.dataset.id
+    })
   },
   
 })
