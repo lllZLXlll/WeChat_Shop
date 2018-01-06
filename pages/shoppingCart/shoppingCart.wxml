@@ -9,7 +9,7 @@
       <view class="view-title-left">
         <text class="title-text">购物车</text>
       </view>
-      <view class="view-title-right">
+      <view class="view-title-right" bindtap='delProduct'>
         <image src="../../images/shoppingCart/icon_garbage.png" class="iconClass" />
       </view>
     </view>
@@ -45,11 +45,11 @@
 
     <view class="view-bottom-center">
       <text class="bottom-center-text2">不含运费,合计:</text>
-      <text class="bottom-center-text3">￥14995.00</text>
+      <text class="bottom-center-text3">￥{{allMoney}}</text>
     </view>
 
     <view class="view-bottom-right">
-      <text class="clearing-text">结算(1)</text>
+      <text class="clearing-text">结算({{allProCount}})</text>
     </view>
   </view>
 

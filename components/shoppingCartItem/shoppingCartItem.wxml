@@ -9,19 +9,22 @@
       <image src="../../images/shoppingCart/icon_select_1.png" class="icon-notSelected" />
     </view>
 
-    <view class="view-product-image">
+    <view class="view-product-image" bindtap='toProductInfo' data-id='{{productInfo.id}}'>
       <image src="{{productInfo.productImage}}" class="productImage" />
     </view>
 
-    <view class="view-product-content" bindtap='toProductInfo' data-id='{{productInfo.id}}'>
-      <view class="view-content-top">
+    <view class="view-product-content">
+      <view class="view-content-top" bindtap='toProductInfo' data-id='{{productInfo.id}}'>
         <text class="product-title">{{productInfo.class}}</text>
       </view>
       <view class="view-content-bottom">
         <text class="pridceText">￥{{productInfo.price}}</text>
 
         <view class="view-content-count">
-          <view class="classViewBG count-margin">
+          <view class="classViewBG count-margin" bindtap='removeCount' data-index='{{index}}' wx:if='{{productInfo.productCount > 1}}'>
+            <image src="../../images/productInfo/icon_remove.png" class="countImage" />
+          </view>
+          <view class="classViewBG count-margin" wx:else>
             <image src="../../images/productInfo/icon_remove.png" class="countImage" />
           </view>
         
@@ -29,7 +32,7 @@
             <text class="classText">{{productInfo.productCount}}</text> 
           </view>
           
-          <view class="classViewBG count-margin">
+          <view class="classViewBG count-margin" bindtap='addCount' data-index='{{index}}'>
             <image src="../../images/productInfo/icon_add.png" class="countImage" />
           </view>
         </view>
