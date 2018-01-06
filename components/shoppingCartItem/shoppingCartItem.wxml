@@ -2,8 +2,11 @@
 
   <!-- 购物车列表 -->
   <view class="view-product-item">
-    <view class="view-select-icon">
-      <image src="../../images/shoppingCart/icon_select_1.png" class="iconClass" />
+    <view class="view-select-icon" wx:if='{{productInfo.isSelected}}' bindtap='notSelectedProduct' data-index='{{index}}'>
+      <image src="../../images/shoppingCart/icon_select_2.png" class="iconClass" />
+    </view>
+    <view class="view-select-icon" wx:else bindtap='selectedProduct' data-index='{{index}}'>
+      <image src="../../images/shoppingCart/icon_select_1.png" class="icon-notSelected" />
     </view>
 
     <view class="view-product-image">

@@ -55,9 +55,17 @@ text {
 }
 
 .iconClass {
-  width: 35rpx;
-  height: 35rpx;
+  width: 36rpx;
+  height: 36rpx;
 }
+
+.icon-notSelected {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 2rpx;
+  margin-right: 2rpx;
+}
+
 /* 红色d81e06  */
 
 
@@ -197,7 +205,7 @@ text {
   font-size: 24rpx;
 }
 .bottom-center-text3 {
-  color: red;
+  color: #d81e06;
 }
 
 .clearing-text {

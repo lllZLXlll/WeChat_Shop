@@ -10,7 +10,10 @@ Page({
     isBottomText: false,
 
     // 是否有数据
-    isData: true
+    isData: true,
+
+    // 是否全选
+    isSelectAll: false,
 
   },
 
@@ -58,12 +61,13 @@ Page({
         if (res.data.error == 'code-0000') {
           _this.hideoast();
           _this.setData({ isLoad: false });
-          console.log(res.data.page)
-
+          var page = res.data.page;
+          console.log(page)
+          
           if (res.data.page.page.length > 0) {
             _this.setData({
-              page: res.data.page,
-              isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
+              page: page,
+              isBottomText: page.pageTotalNum <= 1 ? true : false,
               isData: true 
             });
           } else {
@@ -153,6 +157,53 @@ Page({
     wx.navigateTo({
       url: '../productInfo/productInfo?id=' + e.currentTarget.dataset.id
     })
+  },
+
+  // 选中购物车商品
+  selectedProduct: function(e) {
+    var _this = this;
+    var index = e.currentTarget.dataset.index;
+    var page = _this.data.page;
+    page.page[index].isSelected = true;
+    
+    _this.setData({page: page});
+
+  },
+
+  // 取消选中购物车商品
+  notSelectedProduct: function (e) {
+    var _this = this;
+    var index = e.currentTarget.dataset.index;
+    var page = _this.data.page;
+    page.page[index].isSelected = false;
+
+    _this.setData({ page: page });
+  },
+
+  // 全选
+  selectedAll: function(e) {
+    var _this = this;
+    var page = _this.data.page;
+    var length = page.page.length;
+    for (var i = 0; i < length; i++) {
+      page.page[i].isSelected = true;
+    }
+
+    _this.setData({ page: page, isSelectAll: true});
+
+  },
+
+  // 全选
+  notSelectedAll: function(e) {
+    var _this = this;
+    var page = _this.data.page;
+    var length = page.page.length;
+    for (var i = 0; i < length; i++) {
+      page.page[i].isSelected = false;
+    }
+
+    _this.setData({ page: page, isSelectAll: false});
+
   },
 
 })
