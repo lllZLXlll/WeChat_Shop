@@ -4,9 +4,8 @@
 
   <!-- 购物车列表 -->
   <view>
-
     <!-- 头部  -->
-    <view class="view-title">
+    <view class="view-title {{!isData ? 'border-bottom' : '' }}">
       <view class="view-title-left">
         <text class="title-text">购物车</text>
       </view>
@@ -19,17 +18,21 @@
       <template is="shoppingCartItem" data="{{productInfo: item, index: index}}" />
     </block>
 
+    <view class="view-nullCart" wx:if='{{!isData}}'>
+        <image src="../../images/shoppingCart/icon_nullCart.png" class="image-nullCart" />
+        <text class='text-nullCart'>不买点东西拿什么犒劳这么辛苦的你~</text>
+    </view>
   </view>
 
   <!-- 列表底部组件 -->
-  <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
-  <view wx:else class="view-bottom-text">
+  <view wx:if='{{isBottomText && isData}}' class="view-bottom-text">- 没有更多了 -</view>
+  <view wx:if='{{!isBottomText && isData}}' class="view-bottom-text">
     <image src="../../images/product/icon_loading.gif" class="loadingImage" />
   </view>
 
 
   <!-- 底部结算 -->
-  <view class="view-bottom">
+  <view class="view-bottom" wx:if='{{isData}}'>
     <view class="view-bottom-left">
       <image src="../../images/shoppingCart/icon_select_2.png" class="iconClass" />
       <text class="bottom-left-text">全选</text>

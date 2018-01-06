@@ -9,25 +9,15 @@ Page({
     isLoad: false,
     isBottomText: false,
 
-    // 屏幕高度
-    screenHeight: 0,
-    // 屏幕剩余高度
-    windowHeight: 0,
+    // 是否有数据
+    isData: true
+
   },
 
   // 界面渲染回调
   onLoad: function () {
     var _this = this;
 
-    wx.getSystemInfo({
-      success: function (res) {
-        _this.setData({
-          windowHeight: res.windowHeight,
-          screenHeight: res.screenHeight,
-        });
-      },
-    });
-    
     _this.getProductData();
 
   },
@@ -69,11 +59,17 @@ Page({
           _this.hideoast();
           _this.setData({ isLoad: false });
           console.log(res.data.page)
-          _this.setData({
-            page: res.data.page,
-            isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
-          });
 
+          if (res.data.page.page.length > 0) {
+            _this.setData({
+              page: res.data.page,
+              isBottomText: res.data.page.pageTotalNum <= 1 ? true : false,
+              isData: true 
+            });
+          } else {
+            // 没有数据
+            _this.setData({ isData: false });
+          }
         }
       },
       complete: function (e) {
@@ -139,7 +135,7 @@ Page({
   },
 
   // 下拉刷新
-  onPullDownRefresh: function(e) {
+  onPullDownRefresh: function (e) {
     console.log('--------下拉刷新-------');
     wx.stopPullDownRefresh() //停止下拉刷新
     wx.showNavigationBarLoading() //在标题栏中显示加载
@@ -147,16 +143,16 @@ Page({
   },
 
   // 上拉加载
-  onReachBottom: function(e) {
+  onReachBottom: function (e) {
     console.log('--------上拉加载-------');
     this.loadPage();
   },
 
   // 跳转商品详情页面
-  toProductInfo: function(e) {
+  toProductInfo: function (e) {
     wx.navigateTo({
       url: '../productInfo/productInfo?id=' + e.currentTarget.dataset.id
     })
   },
-  
+
 })

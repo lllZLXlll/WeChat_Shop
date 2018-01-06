@@ -27,6 +27,9 @@ text {
   background-color: #fff;
   display: flex;
   flex-direction: row;
+}
+
+.border-bottom {
   border-bottom-width: 1rpx;
   border-bottom-color: #eee;
   border-bottom-style: solid;
@@ -214,4 +217,24 @@ text {
 .loadingImage {
   width: 45rpx;
   height: 45rpx;
+}
+
+/* 空购物车 */
+.view-nullCart {
+  display: flex;
+  flex-direction: column;
+  margin-top: 260rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-nullCart {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.text-nullCart {
+  margin-top: 30rpx;
+  font-size: 30rpx;
+  color: #999;
 }
