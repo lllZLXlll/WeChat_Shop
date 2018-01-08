@@ -107,17 +107,17 @@
 <view class="footerView">
   <view class="footerItemView">
     <button open-type="contact" class="itemView" style="background-color: rgba(0,0,0,0);">
-      <image src="../../images/productInfo/icon_msg.png" class="iconImage" />
-      <text class="footerText">客服</text> 
+         <image src="../../images/productInfo/icon_msg.png" class="iconImage" /> 
+        <!-- <text class="footerText">客服</text>  -->
     </button>
 
     <view class="itemView" bindtap='addCollection' wx:if='{{collectionProduct == 0}}'>
-      <image src='{{collectionImage}}' class="iconImage" />
-      <text class="footerText">收藏</text> 
+       <image src='{{collectionImage}}' class="iconImage" /> 
+      <!-- <text class="footerText">收藏</text>  -->
     </view>
     <view class="itemView" bindtap='addCollection' wx:else>
       <image src='{{collectionImage}}' class="iconImage" />
-      <text class="footerText">已收藏</text>
+      <!-- <text class="footerText">已收藏</text> -->
     </view>
   </view>
 

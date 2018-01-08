@@ -198,15 +198,14 @@
 
 .itemView {
   display: flex;
-  flex: 1;
-  flex-direction: column;
+  width: 50%;
   align-items: center;
+  justify-content: center;
 }
 
 .iconImage {
-  width: 50rpx;
-  height: 50rpx;
-  margin-top: 5rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 
 .footerText {

@@ -334,9 +334,15 @@ Page({
         console.log(res)
         if (res.data.error == 'code-0000') {
           if (res.data.type == 1) {
-            _this.setData({ collectionImage: '../../images/productInfo/icon_collection1.png' });
+            _this.setData({ 
+              collectionImage: '../../images/productInfo/icon_collection1.png',
+              collectionProduct: 1,
+            });
           } else {
-            _this.setData({ collectionImage: '../../images/productInfo/icon_collection.png' });
+            _this.setData({ 
+              collectionImage: '../../images/productInfo/icon_collection.png',
+              collectionProduct: 0,
+            });
           }
         }
       },
