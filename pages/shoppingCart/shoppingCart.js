@@ -47,6 +47,7 @@ Page({
     // 用户openid
     var openid = wx.getStorageSync("openid");
     if (!openid) {
+      _this.setData({ isData: false });
       return;
     }
 
@@ -75,7 +76,7 @@ Page({
             });
           } else {
             // 没有数据
-            _this.setData({ isData: false });
+            _this.setData({ isData: false, isSelectAll: false });
           }
         }
       },
@@ -166,6 +167,7 @@ Page({
   delProduct: function (e) {
     var _this = this;
     var page = _this.data.page;
+    if (!page.page) return;
     var length = page.page.length;
     var array = [];
     for (var i = 0; i < length; i++) {

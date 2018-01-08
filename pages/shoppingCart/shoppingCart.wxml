@@ -14,7 +14,7 @@
       </view>
     </view>
 
-    <block wx:for="{{page.page}}" wx:key="{{item.id}}">
+    <block wx:for="{{page.page}}" wx:key="{{item.id}}" wx:if='{{isData}}'>
       <template is="shoppingCartItem" data="{{productInfo: item, index: index}}" />
     </block>
 
