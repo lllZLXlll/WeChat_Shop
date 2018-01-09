@@ -5,9 +5,9 @@ App({
   },
   globalData: {
     // 服务器地址 test
-    serverUrl: 'http://localhost:8080/zlx/',
+    // serverUrl: 'http://localhost:8080/zlx/',
     // pro
-    // serverUrl: 'https://zzzlllxxx.com/zlx/',
+    serverUrl: 'https://zzzlllxxx.com/zlx/',
 
     // 请求成功返回字符串
     requestOk: 'request:ok',

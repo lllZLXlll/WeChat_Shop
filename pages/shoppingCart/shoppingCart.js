@@ -47,6 +47,8 @@ Page({
     // 用户openid
     var openid = wx.getStorageSync("openid");
     if (!openid) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
       _this.setData({ isData: false });
       return;
     }
@@ -59,7 +61,6 @@ Page({
         openid: openid,
       },
       success: function (res) {
-        wx.hideNavigationBarLoading() //完成停止加载
         if (res.data.error == 'code-0000') {
           _this.hideoast();
           _this.setData({ isLoad: false });
@@ -81,6 +82,8 @@ Page({
         }
       },
       complete: function (e) {
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
         if (e.errMsg != app.globalData.requestOk) {
           _this.hideoast();
           if (e.errMsg == app.globalData.requestTimeout) {
@@ -145,9 +148,11 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function (e) {
     console.log('--------下拉刷新-------');
-    wx.stopPullDownRefresh() //停止下拉刷新
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.getProductData();
+    setTimeout(function () {
+      //要延时执行的代码  
+    }, 1000)
   },
 
   // 上拉加载
