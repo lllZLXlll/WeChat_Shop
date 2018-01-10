@@ -42,6 +42,8 @@ Page({
   },
 
   getProductData: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+
     var _this = this;
 
     // 用户openid
@@ -51,7 +53,6 @@ Page({
       return;
     }
 
-    _this.showToast();
     // 发起网络请求
     wx.request({
       url: serverUrl + 'queryShoppingCartList',
@@ -59,9 +60,7 @@ Page({
         openid: openid,
       },
       success: function (res) {
-        wx.hideNavigationBarLoading() //完成停止加载
         if (res.data.error == 'code-0000') {
-          _this.hideoast();
           _this.setData({ isLoad: false });
           var page = res.data.page;
           console.log(page)
@@ -81,8 +80,8 @@ Page({
         }
       },
       complete: function (e) {
+        wx.hideNavigationBarLoading() //完成停止标题栏中加载
         if (e.errMsg != app.globalData.requestOk) {
-          _this.hideoast();
           if (e.errMsg == app.globalData.requestTimeout) {
             wx.showToast({
               title: '网络请求超时',
@@ -101,6 +100,9 @@ Page({
           }
           _this.setData({ isBottomText: true });
         }
+
+        // 一定要放在最后，不然下拉后会卡在下面无法返回上去
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     });
   },
@@ -145,8 +147,6 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function (e) {
     console.log('--------下拉刷新-------');
-    wx.stopPullDownRefresh() //停止下拉刷新
-    wx.showNavigationBarLoading() //在标题栏中显示加载
     this.getProductData();
   },
 
@@ -190,7 +190,6 @@ Page({
         array: JSON.stringify(array),
       },
       success: function (res) {
-        wx.hideNavigationBarLoading() //完成停止加载
         if (res.data.error == 'code-0000') {
           _this.hideoast();
           wx.showToast({
