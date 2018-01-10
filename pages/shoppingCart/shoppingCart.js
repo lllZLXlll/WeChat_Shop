@@ -49,6 +49,8 @@ Page({
     // 用户openid
     var openid = wx.getStorageSync("openid");
     if (!openid) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
       _this.setData({ isData: false });
       return;
     }
