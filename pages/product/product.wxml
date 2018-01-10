@@ -103,9 +103,9 @@
                     <text class="proceText">{{item.price}}</text>
                   </view> 
                   <view class="productBottomView2"><text class="countText">{{item.salesVolume}}人付款</text></view> 
-                  <view class="productBottomView3">
+                  <!-- <view class="productBottomView3">
                     <image src="../../images/product/icon_shoppingCart.png" class="shoppingCartClass"/>
-                  </view> 
+                  </view>  -->
                 </view>
               </view>
             </view>

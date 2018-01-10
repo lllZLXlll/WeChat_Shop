@@ -268,24 +268,6 @@ Page({
 
     _this.getProductData(null, _this.loadPage);
   },
-  // 商品列表滚动到顶部回调
-  topRefresh: function () {
-    // wx.showToast({
-    //   title: '滚动到顶部回调',
-    //   icon: 'success',
-    //   mask: true,
-    // })
-  },
-  // 商品列表滚动到底部回调
-  bottomRefresh: function (e) {
-    // console.log(e)
-    // wx.showToast({
-    //   title: '滚动到底部回调',
-    //   icon: 'success',
-    //   mask: true,
-
-    // })
-  },
 
   // 回到顶部
   toTop: function () {
@@ -293,8 +275,7 @@ Page({
     _this.setData({ scrollTop: 0 });
   },
 
-
-  // 切换分类
+  // 切换展示分类
   setIconClass: function () {
     var _this = this;
     if (_this.data.classification == 2) {

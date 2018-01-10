@@ -198,6 +198,7 @@ Page({
             title: res.data.message,
             icon: 'success'
           });
+          _this.setData({ isSelectAll : false});
           _this.getProductData();
         } else {
           wx.showToast({
