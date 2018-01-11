@@ -8,6 +8,7 @@
     "pages/user/user",
     "pages/receivingAddress/receivingAddress",
     "pages/collectionProduct/collectionProduct",
+    "pages/settlement/settlement",
     
     "pages/logs/logs",
 

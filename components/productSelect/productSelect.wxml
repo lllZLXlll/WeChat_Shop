@@ -69,7 +69,7 @@
       <view class="page-btn" data-type='1' bindtap="shoppingCartPurchase">
         <text>加入购物车</text>
       </view>
-      <view class="page-btn page-btn-purchase" data-type='2' bindtap="tap_ch_select">
+      <view class="page-btn page-btn-purchase" data-type='2' bindtap="shoppingCartPurchase">
         <text>立即购买</text>
       </view>
     </view>
@@ -79,7 +79,7 @@
       </view>
     </view>
     <view class="page-btn-view" wx:if='{{selectProductInfo.selectStatus == 3}}'>
-      <view class="page-btn page-btn-purchase" data-type='2' bindtap="tap_ch_select">
+      <view class="page-btn page-btn-purchase" data-type='2' bindtap="shoppingCartPurchase">
         <text>立即购买</text>
       </view>
     </view>

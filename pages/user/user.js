@@ -1,5 +1,5 @@
 //获取应用实例
-const app = getApp()
+const app = getApp();
 const serverUrl = app.globalData.serverUrl;
 
 Page({

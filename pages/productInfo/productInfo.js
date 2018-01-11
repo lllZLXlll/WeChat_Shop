@@ -154,7 +154,8 @@ Page({
             if (_type == 1) {
               _this.getUserInfo(_this.addShoppingCart);
             } else if (_type == 2) { // 直接购买商品
-
+              // 跳转到结算页面
+              _this.getUserInfo(_this.toPageSettlement);
             }
           } else if (res.cancel) {
             console.log('用户点击取消');
@@ -166,7 +167,8 @@ Page({
       if (_type == 1) {
         _this.addShoppingCart();
       } else if (_type == 2) {
-
+        // 跳转到结算页面
+        _this.toPageSettlement();
       }
     }
   },
@@ -334,12 +336,12 @@ Page({
         console.log(res)
         if (res.data.error == 'code-0000') {
           if (res.data.type == 1) {
-            _this.setData({ 
+            _this.setData({
               collectionImage: '../../images/productInfo/icon_collection1.png',
               collectionProduct: 1,
             });
           } else {
-            _this.setData({ 
+            _this.setData({
               collectionImage: '../../images/productInfo/icon_collection.png',
               collectionProduct: 0,
             });
@@ -363,7 +365,7 @@ Page({
   },
 
   // 获取用户信息
-  getUserInfo: function (addCollectionFun) {
+  getUserInfo: function (fun) {
     var _this = this;
 
     wx.login({
@@ -389,7 +391,8 @@ Page({
                   if (res.data.error == 'code-0000') {
                     // 登录成功，用户openid保存到微信存储中
                     wx.setStorageSync("openid", res.data.openid);
-                    addCollectionFun();
+                    if (fun)
+                      fun();
                   }
                 }
               })
@@ -399,6 +402,23 @@ Page({
       }
     });
 
+  },
+
+  // 跳转到结算页面
+  toPageSettlement: function (e) {
+    // 选择了商品
+    if (this.data.selectProductInfo.select_product_id != -1) {
+      wx.navigateTo({
+        url: '../settlement/settlement?productId=' + this.data.selectProductInfo.product.productId + '&productCount=' + this.data.selectProductInfo.select_product_count + '&productClassId=' + this.data.selectProductInfo.select_product_id
+      });
+
+      this.tap_ch_select();
+    } else {
+      wx.showToast({
+        title: '请先选择商品',
+        image: '../../images/user/icon_error.png'
+      });
+    }
   },
 
 })
