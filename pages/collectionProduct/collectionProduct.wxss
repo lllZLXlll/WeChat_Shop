@@ -335,3 +335,17 @@
   margin-top: -21rpx;
   margin-left: -32rpx
 }
+
+.loadingImage {
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.view-bottom-text {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 30rpx;
+}
