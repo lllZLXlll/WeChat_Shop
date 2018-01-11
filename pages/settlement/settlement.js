@@ -30,8 +30,10 @@ Page({
         _this.hideoast();
         console.log(res)
         if (res.data.error == 'code-0000') {
+          var productInfo = res.data.productInfo;
+          productInfo.productCount = productCount;
           _this.setData({
-            productInfo: res.data.productInfo,
+            productInfo: productInfo,
             address: res.data.address,
           });
         } else {

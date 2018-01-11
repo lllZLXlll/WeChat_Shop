@@ -1,5 +1,45 @@
+<view>
+  <!-- 收货地址 -->
+  <view class='view-address'>
+    <view class='view-address-left'>
+      <image src="../../images/settlement/icon_address.png" class="icon-image-address" />
+    </view>
+    <view class='view-address-center'>
+      <view class='view-address-center-top-text'>
+        <text class="text-left">收货人： {{address.userName}}</text>
+        <text class="text-right">{{address.telNumber}}</text>
+      </view>
+      <view class='view-address-center-bottom-text'>
+        <text>收货地址： {{address.provinceName}}{{address.cityName}}{{address.countyName}}{{address.detailInfo}}</text>
+      </view>
 
-<view class="bodyView">
-  <image src="../../images/settlement/icon_hr.png" class="icon-image-hr" />
+    </view>
+    <view class='view-address-right'>
+      <image src="../../images/productInfo/icon_goTo.png" class="icon-image-address" />
+    </view>
+  </view>
+
+  <view class="view-hr">
+    <image src="../../images/settlement/icon_hr.png" class="icon-image-hr" />
+  </view>
+
+  <view class="productItemView">
+    <view class="productItemleft">
+      <image src="{{productInfo.productImage}}" class="productImage" mode="scaleToFill" />
+    </view>
+    <view class="productItemRight">
+      <text class="productTitleView2">{{productInfo.productName}}</text>
+      <text class="productTitleView2 productInfo">{{productInfo.expressFee == 0 ? '包邮' : product.expressFee + '元'}}</text>
+      <view class="productPriceView priceView2">
+        <view class="productBottomView1">
+          <text class="proceMinText">￥</text>
+          <text class="proceText">{{productInfo.price}}</text>
+        </view>
+        <view class="productBottomView2">
+          <text class="countText">x {{productInfo.productCount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
 
 </view>

@@ -13,12 +13,171 @@ text {
   color: transparent;
 }
 
+.view-address {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  height: 160rpx;
+  background-color: #fff;
+}
 
-.bodyView {
-  
+.view-address-left {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-address-center {
+  display: flex;
+  flex: 8;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.view-address-right {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-image-address {
+  width: 50rpx;
+  height: 50rpx;
 }
 
 .icon-image-hr {
   width: 100%;
   height: 16rpx;
+}
+
+.view-address-center-top-text {
+  display: flex;
+  flex: 1;
+  color: #333;
+  font-size: 30rpx;
+  flex-direction: row;
+  width:100%;
+}
+
+.view-address-center-bottom-text {
+  display: flex;
+  flex: 2;
+  color: #333;
+  font-size: 30rpx;
+}
+
+.text-left {
+  display: flex;
+  flex: 1;
+}
+
+.text-right {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.view-hr {
+  margin-top: -40rpx;
+}
+
+.productItemView {
+  padding-bottom: 10rpx;
+  width: 100%;
+  height: 230rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+}
+
+.productItemleft{
+  display: flex;
+  flex: 1;
+}
+
+.productItemRight {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  margin-left: 15rpx;
+  border-top-width: 1rpx;
+  border-top-color: #eee;
+  border-top-style: solid;
+}
+
+.productTitleView2 {
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+  padding-right: 15rpx;
+  color: #333;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  font-size: 32rpx;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  display: flex;
+  flex:2.5;
+}
+
+.productInfo {
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.productPriceView {
+  padding-left: 10rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.priceView2 {
+  display: flex;
+  flex: 1;
+  padding-left: 0;
+
+}
+
+.productBottomView1 {
+  flex-direction: row;
+  display: flex;
+  flex: 1;
+}
+
+.proceMinText {
+  color: red;
+  font-size: 26rpx;
+  display: flex;
+  align-self: flex-end;
+}
+
+.proceText {
+  color: red;
+  font-size: 32rpx;
+  display: flex;
+  align-items: flex-end;
+}
+
+.productBottomView2 {
+  display: flex;
+  padding-right:20rpx;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+}
+
+.countText {
+  margin-left: 20rpx;
+  color: red;
+  font-size: 30rpx;
+  display: flex;
+  align-self: flex-end;
 }
