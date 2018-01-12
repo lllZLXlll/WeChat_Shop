@@ -101,8 +101,8 @@ Page({
   // 提交订单
   submitOrder: function (e) {
     var _this = this;
-    var productId = _this.data.productInfo.productId;
-    var productClassId = _this.data.productInfo.productClassId;
+    var productId = _this.data.productInfo.id;
+    var productClassId = _this.data.productInfo.classId;
     var productCount = _this.data.productInfo.productCount;
     var addressId = _this.data.address.id;
     // 用户openid
