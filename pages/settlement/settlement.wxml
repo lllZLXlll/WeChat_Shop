@@ -64,7 +64,7 @@
       <text class="text-red">{{productInfo.price * productInfo.productCount}}元</text>
     </view>
 
-    <view class="view-bottom-right">
+    <view class="view-bottom-right" bindtap='submitOrder'>
       <text class="clearing-text">提交订单</text>
     </view>
   </view>
