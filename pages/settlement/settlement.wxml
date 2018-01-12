@@ -29,7 +29,8 @@
     </view>
     <view class="productItemRight">
       <text class="productTitleView2">{{productInfo.productName}}</text>
-      <text class="productTitleView2 productInfo">{{productInfo.expressFee == 0 ? '包邮' : product.expressFee + '元'}}</text>
+      <text class="productTitleView2 productInfo">{{productInfo.productClassName}}</text>
+
       <view class="productPriceView priceView2">
         <view class="productBottomView1">
           <text class="proceMinText">￥</text>
@@ -39,6 +40,32 @@
           <text class="countText">x {{productInfo.productCount}}</text>
         </view>
       </view>
+    </view>
+  </view>
+
+  <view class="view-item">
+    <text class="text-left">快递</text>
+    <text class="text-right text-red">{{productInfo.expressFee == 0 ? '包邮' : product.expressFee + '元'}}</text>
+  </view>
+
+  <view class="view-item">
+    <text class="text-left">买家留言</text>
+    <input class="input-text" placeholder="选填：填写内容已和卖家协商确认" maxlength="200" confirm-type='done' bindinput="bindKeyInput" />
+  </view>
+
+  <view class="view-item">
+    <text class="text-right">共{{productInfo.productCount}}件宝贝 小计： <text class="text-red">{{productInfo.price * productInfo.productCount}}元</text></text>
+  </view>
+
+  <!-- 底部提交订单 -->
+  <view class="view-bottom">
+    <view class="view-bottom-center">
+      <text>合计:</text>
+      <text class="text-red">{{productInfo.price * productInfo.productCount}}元</text>
+    </view>
+
+    <view class="view-bottom-right">
+      <text class="clearing-text">提交订单</text>
     </view>
   </view>
 

@@ -5,8 +5,15 @@ const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
+    // 单个商品结算
+    // 商品信息
     productInfo: null,
+    // 收货地址
     address: null,
+    // 买家留言
+    inputValue: null,
+
+    // 多个商品结算
   },
 
   onLoad: function(param) {
@@ -71,7 +78,6 @@ Page({
 
   },
 
-
   // 展示加载框
   showToast: function () {
     wx.showLoading({
@@ -84,5 +90,12 @@ Page({
     wx.hideLoading();
   },
 
+
+  // 获取搜索框的值
+  bindKeyInput: function (e) {
+    this.setData({
+      inputValue: e.detail.value
+    })
+  },
 
 })
