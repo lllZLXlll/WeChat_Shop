@@ -92,8 +92,6 @@ Page({
 
   // 监听页面显示 当从当前页面跳转到另一页面，另一页面销毁时会执行
   onShow: function (e) {
-    console.log('onShow');
-    console.log(app.globalData.address);
     this.setData({ address: app.globalData.address });
     app.globalData.address = null;
   },
@@ -154,18 +152,21 @@ Page({
       // 用户openid
       var openid = wx.getStorageSync("openid");
 
+      var params = {
+        productId: productId,
+        productClassId: productClassId,
+        productCount: productCount,
+        addressId: addressId,
+        describes: inputValue,
+        openid: openid
+      };
+
       // 查询结算信息
       _this.showToast();
       wx.request({
         url: serverUrl + 'addOrder',
-        data: {
-          productId: productId,
-          productClassId: productClassId,
-          productCount: productCount,
-          addressId: addressId,
-          describe: inputValue,
-          openid: openid
-        },
+        method: 'POST',
+        data: JSON.stringify(params),
         success: function (res) {
           _this.hideoast();
           console.log(res)
