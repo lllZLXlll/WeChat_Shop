@@ -1,9 +1,10 @@
 <view>
   <!-- 收货地址 -->
-  <view class='view-address'>
+  <view class='view-address' bindtap='selectAddress' wx:if='{{address}}'>
     <view class='view-address-left'>
       <image src="../../images/settlement/icon_address.png" class="icon-image-address" />
     </view>
+
     <view class='view-address-center'>
       <view class='view-address-center-top-text'>
         <text class="text-left">收货人： {{address.userName}}</text>
@@ -12,8 +13,24 @@
       <view class='view-address-center-bottom-text'>
         <text>收货地址： {{address.provinceName}}{{address.cityName}}{{address.countyName}}{{address.detailInfo}}</text>
       </view>
-
     </view>
+
+    <view class='view-address-right'>
+      <image src="../../images/productInfo/icon_goTo.png" class="icon-image-address" />
+    </view>
+  </view>
+
+  <view class='view-address' bindtap='selectAddress' wx:else>
+    <view class='view-address-left'>
+      <image src="../../images/settlement/icon_address.png" class="icon-image-address" />
+    </view>
+
+    <view class='view-address-center'>
+      <view class='view-address-center-top-text view-center'>
+        <text class="text-center">请先选择收货地址！</text>
+      </view>
+    </view>
+
     <view class='view-address-right'>
       <image src="../../images/productInfo/icon_goTo.png" class="icon-image-address" />
     </view>

@@ -4,7 +4,7 @@
   <!-- 地址列表 -->
   <block wx:for="{{addressList}}" wx:key="{{item.id}}" >
     <view class="view-address-item">
-      <view class="view-address-top">
+      <view class="view-address-top" data-index="{{index}}" bindtap="selectAddress">
         <view class="view-address-top-left">
           <text>{{item.userName}}</text>
         </view>
@@ -13,7 +13,7 @@
         </view>
       </view>
 
-      <view class="view-address-center">
+      <view class="view-address-center" data-index="{{index}}" bindtap="selectAddress">
         <text>{{item.provinceName}}{{item.cityName}}{{item.countyName}} {{item.detailInfo}}</text>
       </view>
 
@@ -33,6 +33,11 @@
       </view>
     </view>
   </block>
+
+  <view class="view-null" wx:if="{{addressList.length == 0}}">
+    <image src="../../images/user/icon_notAddress.png" class="image-notAddress" />
+    <text>想要宝贝准确送达首先得添加地址哦~</text>
+  </view>
 
    <view class="page-bottom-btn" bindtap="addReceivingAddress">
       <text class="btn-text">添加收货地址</text>

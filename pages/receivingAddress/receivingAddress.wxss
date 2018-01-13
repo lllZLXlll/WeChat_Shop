@@ -114,3 +114,22 @@ text {
 .redText {
   color: red;
 }
+
+.view-null {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-top:300rpx;
+}
+
+.image-notAddress {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.view-null text{
+  color: #999;
+  margin-top: 20rpx;
+}

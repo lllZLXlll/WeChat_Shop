@@ -7,7 +7,16 @@ Page({
   data: {
     // 单个商品结算
     // 商品信息
-    productInfo: null,
+    productInfo: {
+      productName: '',
+      productClassName: '',
+      price: '',
+      productCount: '',
+      expressFee: 0,
+      productCount: 0,
+      
+      
+    },
     // 收货地址
     address: null,
     // 买家留言
@@ -72,10 +81,21 @@ Page({
               image: '../../images/user/icon_error.png'
             });
           }
+          setTimeout(function () {
+            wx.navigateBack();
+          }, 2000);
         }
       }
     });
 
+  },
+
+  // 监听页面显示 当从当前页面跳转到另一页面，另一页面销毁时会执行
+  onShow: function (e) {
+    console.log('onShow');
+    console.log(app.globalData.address);
+    this.setData({ address: app.globalData.address });
+    app.globalData.address = null;
   },
 
   // 展示加载框
@@ -98,71 +118,97 @@ Page({
     })
   },
 
+  // 选择地址
+  selectAddress: function (e) {
+    var _this = this;
+    // 跳转收货地址页面
+    wx.navigateTo({
+      url: '../receivingAddress/receivingAddress?isSelect=true'
+    })
+  },
+
   // 提交订单
   submitOrder: function (e) {
     var _this = this;
-    var productId = _this.data.productInfo.id;
-    var productClassId = _this.data.productInfo.classId;
-    var productCount = _this.data.productInfo.productCount;
-    var addressId = _this.data.address.id;
-    // 用户openid
-    var openid = wx.getStorageSync("openid");
 
-    // 查询结算信息
-    _this.showToast();
-    wx.request({
-      url: serverUrl + 'addOrder',
-      data: {
-        productId: productId,
-        productClassId: productClassId,
-        productCount: productCount,
-        addressId: addressId,
-        openid: openid
-      },
-      success: function (res) {
-        _this.hideoast();
-        console.log(res)
-        if (res.data.error == 'code-0000') {
-          wx.showModal({
-            title: '提示',
-            content: '模拟调用微信支付, 点击取消跳转订单详情',
-            success: function (res) {
-              if (res.confirm) {
-                console.log('用户点击确定')
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-            }
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            image: '../../images/user/icon_error.png'
-          });
+    if (!_this.data.address) {
+      wx.showModal({
+        title: '提示',
+        content: '请先选择您的收货地址',
+        success: function (result) {
+          if (result.confirm) {
+            // 跳转收货地址页面
+            wx.navigateTo({
+              url: '../receivingAddress/receivingAddress?isSelect=true'
+            });
+          }
+          return;
         }
-      },
-      complete: function (e) {
-        if (e.errMsg != app.globalData.requestOk) {
+      })
+    } else {
+      var productId = _this.data.productInfo.id;
+      var productClassId = _this.data.productInfo.classId;
+      var productCount = _this.data.productInfo.productCount;
+      var addressId = _this.data.address.id;
+      // 用户openid
+      var openid = wx.getStorageSync("openid");
+
+      // 查询结算信息
+      _this.showToast();
+      wx.request({
+        url: serverUrl + 'addOrder',
+        data: {
+          productId: productId,
+          productClassId: productClassId,
+          productCount: productCount,
+          addressId: addressId,
+          openid: openid
+        },
+        success: function (res) {
           _this.hideoast();
-          if (e.errMsg == app.globalData.requestTimeout) {
-            wx.showToast({
-              title: '网络请求超时',
-              image: '../../images/user/icon_error.png'
-            });
-          } else if (e.errMsg == app.globalData.requestFail) {
-            wx.showToast({
-              title: '网络请求失败',
-              image: '../../images/user/icon_error.png'
-            });
+          console.log(res)
+          if (res.data.error == 'code-0000') {
+            wx.showModal({
+              title: '提示',
+              content: '模拟调用微信支付, 点击取消跳转订单详情',
+              success: function (e) {
+                if (e.confirm) {
+                  console.log('用户点击确定')
+                } else if (e.cancel) {
+                  console.log(res.data.order);
+                }
+              }
+            })
           } else {
             wx.showToast({
-              title: '请求失败',
+              title: res.data.message,
               image: '../../images/user/icon_error.png'
             });
           }
+        },
+        complete: function (e) {
+          if (e.errMsg != app.globalData.requestOk) {
+            _this.hideoast();
+            if (e.errMsg == app.globalData.requestTimeout) {
+              wx.showToast({
+                title: '网络请求超时',
+                image: '../../images/user/icon_error.png'
+              });
+            } else if (e.errMsg == app.globalData.requestFail) {
+              wx.showToast({
+                title: '网络请求失败',
+                image: '../../images/user/icon_error.png'
+              });
+            } else {
+              wx.showToast({
+                title: '请求失败',
+                image: '../../images/user/icon_error.png'
+              });
+            }
+          }
         }
-      }
-    });
+      });
+    }
 
   },
 

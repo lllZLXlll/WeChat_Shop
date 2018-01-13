@@ -5,17 +5,23 @@ const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
-    addressList: null
+    addressList: null,
+    isSelect: false,
   },
-  
-  onLoad: function(e) {
+
+  onLoad: function (param) {
     // 请求数据
     var _this = this;
-    _this.getAddressData();
+    var isSelect = param.isSelect;
 
+    if (isSelect) {
+      _this.setData({ isSelect: isSelect });
+    }
+
+    _this.getAddressData();
   },
 
-  getAddressData: function() {
+  getAddressData: function () {
     var _this = this;
     wx.showLoading({
       title: '加载中',
@@ -32,7 +38,6 @@ Page({
           success: function (res) {
             // 隐藏提示框
             wx.hideLoading();
-            console.log(res.data)
             if (res.data.error == 'code-0000') {
               _this.setData({
                 addressList: res.data.resultList
@@ -46,7 +51,7 @@ Page({
     }
   },
 
-  addReceivingAddress: function() {
+  addReceivingAddress: function () {
     var _this = this;
     // 调用微信添加收货地址
     wx.chooseAddress({
@@ -129,7 +134,7 @@ Page({
   },
 
   // 设置为默认地址
-  setAddressStatus: function(e) {
+  setAddressStatus: function (e) {
     // bindtap 通过 data-id 传参 通过 e.currentTarget.dataset.id 取值
     var _this = this;
 
@@ -146,7 +151,7 @@ Page({
           success: function (res) {
             console.log(res.data)
             if (res.data.error == 'code-0000') {
-             _this.getAddressData();
+              _this.getAddressData();
             } else {
               wx.showToast({
                 title: res.data.message,
@@ -201,5 +206,17 @@ Page({
         }
       }
     })
+  },
+
+  // 选择地址返回上一级页面
+  selectAddress: function (e) {
+    var _this = this;
+    var index = e.currentTarget.dataset.index;
+    var address = _this.data.addressList[index];
+    if (_this.data.isSelect) {
+      wx.navigateBack();
+    }
+    app.globalData.address = address;
+    
   },
 })

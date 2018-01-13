@@ -69,6 +69,12 @@ text {
   font-size: 30rpx;
 }
 
+.view-address-center-bottom-text1 {
+  display: flex;
+  color: #333;
+  font-size: 30rpx;
+}
+
 .text-left {
   display: flex;
   flex: 1;
@@ -258,4 +264,14 @@ text {
 
 .clearing-text {
   color: #fff;
+}
+
+.view-center {
+  align-items: center;
+  justify-content:center;
+}
+
+.text-center {
+  align-items: center;
+  justify-content: center;
 }
