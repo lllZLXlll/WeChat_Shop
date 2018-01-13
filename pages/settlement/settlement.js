@@ -150,6 +150,7 @@ Page({
       var productClassId = _this.data.productInfo.classId;
       var productCount = _this.data.productInfo.productCount;
       var addressId = _this.data.address.id;
+      var inputValue = _this.data.inputValue;
       // 用户openid
       var openid = wx.getStorageSync("openid");
 
@@ -162,6 +163,7 @@ Page({
           productClassId: productClassId,
           productCount: productCount,
           addressId: addressId,
+          describe: inputValue,
           openid: openid
         },
         success: function (res) {
