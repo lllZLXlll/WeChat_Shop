@@ -408,9 +408,19 @@ Page({
   toPageSettlement: function (e) {
     // 选择了商品
     if (this.data.selectProductInfo.select_product_id != -1) {
-      wx.navigateTo({
-        url: '../settlement/settlement?productId=' + this.data.selectProductInfo.product.productId + '&productCount=' + this.data.selectProductInfo.select_product_count + '&productClassId=' + this.data.selectProductInfo.select_product_id
-      });
+      var array = [{
+        productId: this.data.selectProductInfo.product.productId,
+        productClassId: this.data.selectProductInfo.select_product_id,
+        name: this.data.productInfo.name,
+        class: this.data.selectProductInfo.product.class,
+        price: this.data.productInfo.price,
+        expressFee: this.data.productInfo.expressFee,
+        productCount: this.data.selectProductInfo.select_product_count,
+        productImage: this.data.productInfo.productImage,
+      }];
+      app.globalData.orderProducts = array;
+
+      wx.navigateTo({ url: '../settlement/settlement' });
 
       this.tap_ch_select();
     } else {

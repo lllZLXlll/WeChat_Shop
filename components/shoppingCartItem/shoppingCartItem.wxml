@@ -9,12 +9,12 @@
       <image src="../../images/shoppingCart/icon_select_1.png" class="icon-notSelected" />
     </view>
 
-    <view class="view-product-image" bindtap='toProductInfo' data-id='{{productInfo.id}}'>
+    <view class="view-product-image" bindtap='toProductInfo' data-id='{{productInfo.productId}}'>
       <image src="{{productInfo.productImage}}" class="productImage" />
     </view>
 
     <view class="view-product-content">
-      <view class="view-content-top" bindtap='toProductInfo' data-id='{{productInfo.id}}'>
+      <view class="view-content-top" bindtap='toProductInfo' data-id='{{productInfo.productId}}'>
         <text class="product-title">{{productInfo.class}}</text>
       </view>
       <view class="view-content-bottom">

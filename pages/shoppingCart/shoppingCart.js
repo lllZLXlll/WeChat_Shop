@@ -320,4 +320,29 @@ Page({
 
   },
 
+  // 结算
+  settlement: function (e) {
+    var _this = this;
+    var page = _this.data.page;
+    if (!page.page) return;
+    var length = page.page.length;
+    var array = [];
+    for (var i = 0; i < length; i++) {
+      if (page.page[i].isSelected) {
+        array[i] = page.page[i];
+      }
+    }
+
+    if (!array.length > 0) return;
+    // 将选中的商品临时保存到常量中
+    app.globalData.orderProducts = array;
+    // 是否从购物车中结算的
+    app.globalData.isShoppingCart = 1;
+
+    wx.navigateTo({
+      url: '../settlement/settlement'
+    });
+
+  },
+
 })

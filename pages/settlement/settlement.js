@@ -5,31 +5,44 @@ const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
-    // 单个商品结算
     // 商品信息
-    productInfo: {
-      productName: '',
-      productClassName: '',
-      price: '',
-      productCount: '',
-      expressFee: 0,
-      productCount: 0,
-      
-      
-    },
+    orderProducts: [],
     // 收货地址
     address: null,
     // 买家留言
     inputValue: null,
-
-    // 多个商品结算
+    // 总快递费
+    expressFee: 0,
+    // 总订单金额
+    totalAmount: 0,
+    // 总商品数量
+    totalCount: 0,
   },
 
   onLoad: function (param) {
     var _this = this;
-    var productId = param.productId;
-    var productClassId = param.productClassId;
-    var productCount = param.productCount;
+
+    var orderProducts = app.globalData.orderProducts;
+    var expressFee = 0;
+    var totalAmount = 0;
+    var totalCount = 0;
+    if (orderProducts) {
+      for (var i in orderProducts) {
+        var item = orderProducts[i];
+        expressFee += Number(item.expressFee);
+        totalAmount += Number(item.productCount) * Number(item.price);
+        totalCount += Number(item.productCount);
+      }
+      _this.setData({
+        orderProducts: orderProducts,
+        expressFee: expressFee,
+        totalAmount: totalAmount,
+        totalCount: totalCount,
+      });
+
+    }
+
+
     // 用户openid
     var openid = wx.getStorageSync("openid");
 
@@ -38,18 +51,13 @@ Page({
     wx.request({
       url: serverUrl + 'queryOrderSettlementInfo',
       data: {
-        productId: productId,
-        productClassId: productClassId,
         openid: openid
       },
       success: function (res) {
         _this.hideoast();
         console.log(res)
         if (res.data.error == 'code-0000') {
-          var productInfo = res.data.productInfo;
-          productInfo.productCount = productCount;
           _this.setData({
-            productInfo: productInfo,
             address: res.data.address,
           });
         } else {
@@ -144,24 +152,17 @@ Page({
         }
       })
     } else {
-      var productId = _this.data.productInfo.id;
-      var productClassId = _this.data.productInfo.classId;
-      var productCount = _this.data.productInfo.productCount;
-      var addressId = _this.data.address.id;
-      var inputValue = _this.data.inputValue;
       // 用户openid
       var openid = wx.getStorageSync("openid");
 
       var params = {
-        productId: productId,
-        productClassId: productClassId,
-        productCount: productCount,
-        addressId: addressId,
-        describes: inputValue,
-        openid: openid
+        orderProducts: _this.data.orderProducts,
+        isShoppingCart: app.globalData.isShoppingCart,
+        openid: openid,
+        addressId: _this.data.address.id,
+        describes: _this.data.inputValue,
       };
 
-      // 查询结算信息
       _this.showToast();
       wx.request({
         url: serverUrl + 'addOrder',
@@ -171,6 +172,10 @@ Page({
           _this.hideoast();
           console.log(res)
           if (res.data.error == 'code-0000') {
+            app.globalData.isShoppingCart = -1;
+            app.globalData.address = null;
+            app.globalData.orderProducts = null;
+            
             wx.showModal({
               title: '提示',
               content: '模拟调用微信支付, 点击取消跳转订单详情',
