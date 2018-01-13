@@ -19,6 +19,7 @@ text {
   width: 100%;
   height: 160rpx;
   background-color: #fff;
+  margin-bottom: 16rpx;
 }
 
 .view-address-left {
@@ -59,7 +60,7 @@ text {
   color: #333;
   font-size: 30rpx;
   flex-direction: row;
-  width:100%;
+  width: 100%;
 }
 
 .view-address-center-bottom-text {
@@ -78,13 +79,13 @@ text {
 .text-left {
   display: flex;
   flex: 1;
-  align-items:center;
+  align-items: center;
 }
 
 .text-right {
   display: flex;
   flex: 1;
-  align-items:center;
+  align-items: center;
   justify-content: flex-end;
 }
 
@@ -100,7 +101,7 @@ text {
   flex-direction: row;
 }
 
-.productItemleft{
+.productItemleft {
   display: flex;
   flex: 1;
 }
@@ -126,9 +127,9 @@ text {
   font-size: 32rpx;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp:2;
+  -webkit-line-clamp: 2;
   display: flex;
-  flex:2.5;
+  flex: 2.5;
 }
 
 .productInfo {
@@ -148,7 +149,6 @@ text {
   display: flex;
   flex: 1;
   padding-left: 0;
-
 }
 
 .productBottomView1 {
@@ -173,7 +173,7 @@ text {
 
 .productBottomView2 {
   display: flex;
-  padding-right:20rpx;
+  padding-right: 20rpx;
 }
 
 .productImage {
@@ -215,6 +215,7 @@ text {
 }
 
 /* 底部结算 */
+
 .view-bottom {
   width: 100%;
   height: 80rpx;
@@ -249,6 +250,15 @@ text {
   justify-content: flex-end;
 }
 
+.view-bg-color {
+  background-color: #ff8200;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 .view-bottom-right {
   background-color: #d81e06;
 }
@@ -257,6 +267,7 @@ text {
   color: #333;
   font-size: 24rpx;
 }
+
 .bottom-center-text3 {
   color: #d81e06;
 }
@@ -267,7 +278,7 @@ text {
 
 .view-center {
   align-items: center;
-  justify-content:center;
+  justify-content: center;
 }
 
 .text-center {

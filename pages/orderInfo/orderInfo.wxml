@@ -1,6 +1,6 @@
 <view>
   <!-- 收货地址 -->
-  <view class='view-address' bindtap='selectAddress' wx:if='{{address}}'>
+  <view class='view-address'>
     <view class='view-address-left'>
       <image src="../../images/settlement/icon_address.png" class="icon-image-address" />
     </view>
@@ -16,28 +16,8 @@
     </view>
 
     <view class='view-address-right'>
-      <image src="../../images/productInfo/icon_goTo.png" class="icon-image-address" />
+      <!-- <image src="../../images/productInfo/icon_goTo.png" class="icon-image-address" /> -->
     </view>
-  </view>
-
-  <view class='view-address' bindtap='selectAddress' wx:else>
-    <view class='view-address-left'>
-      <image src="../../images/settlement/icon_address.png" class="icon-image-address" />
-    </view>
-
-    <view class='view-address-center'>
-      <view class='view-address-center-top-text view-center'>
-        <text class="text-center">请先选择收货地址！</text>
-      </view>
-    </view>
-
-    <view class='view-address-right'>
-      <image src="../../images/productInfo/icon_goTo.png" class="icon-image-address" />
-    </view>
-  </view>
-
-  <view class="view-hr">
-    <image src="../../images/settlement/icon_hr.png" class="icon-image-hr" />
   </view>
 
   <block wx:for="{{orderProducts}}" wx:key="{{item.productId}}">
@@ -69,24 +49,34 @@
 
   <view class="view-item">
     <text class="text-left">买家留言</text>
-    <input class="input-text" placeholder="选填：填写内容已和卖家协商确认" maxlength="200" confirm-type='done' bindinput="bindKeyInput" />
+    <input class="input-text" value="{{describes}}" maxlength="200" disabled="true" />
   </view>
 
   <view class="view-item">
-    <text class="text-right">共{{totalCount}}件宝贝 小计： <text class="text-red">{{totalAmount}}元</text></text>
+    <text class="text-right">需付款： <text class="text-red">{{totalAmount}}元</text></text>
   </view>
 
   <view class="view-margin"></view>
 
   <!-- 底部提交订单 -->
-  <view class="view-bottom">
-    <view class="view-bottom-center">
-      <text>合计： </text>
-      <text class="text-red"> {{totalAmount}}元</text>
+  <view class="view-bottom" wx:if="{{!isCancelOrder}}">
+    <view class="view-bottom-left">
     </view>
+    <view class="view-bg-color" bindtap='cancelOrder'>
+      <text class="clearing-text">取消订单</text>
+    </view>
+    <view class="view-bottom-right" bindtap='payment'>
+      <text class="clearing-text">付款</text>
+    </view>
+  </view>
 
-    <view class="view-bottom-right" bindtap='submitOrder'>
-      <text class="clearing-text">提交订单</text>
+  <view class="view-bottom" wx:else>
+    <view class="view-bottom-left">
+    </view>
+    <view class="view-bottom-left">
+    </view>
+    <view class="view-bottom-right" bindtap='delOrder'>
+      <text class="clearing-text">删除订单</text>
     </view>
   </view>
 

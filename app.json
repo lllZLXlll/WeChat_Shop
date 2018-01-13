@@ -9,6 +9,7 @@
     "pages/receivingAddress/receivingAddress",
     "pages/collectionProduct/collectionProduct",
     "pages/settlement/settlement",
+    "pages/orderInfo/orderInfo",
     
     "pages/logs/logs",
 

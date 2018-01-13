@@ -175,7 +175,7 @@ Page({
             app.globalData.isShoppingCart = -1;
             app.globalData.address = null;
             app.globalData.orderProducts = null;
-            
+
             wx.showModal({
               title: '提示',
               content: '模拟调用微信支付, 点击取消跳转订单详情',
@@ -183,7 +183,9 @@ Page({
                 if (e.confirm) {
                   console.log('用户点击确定')
                 } else if (e.cancel) {
-                  console.log(res.data.order);
+                  wx.redirectTo({
+                    url: '../orderInfo/orderInfo?order=' + res.data.order
+                  });
                 }
               }
             })
