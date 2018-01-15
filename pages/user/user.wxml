@@ -22,7 +22,7 @@
 
   <!-- 全部订单、代付款、代发货、待收货 -->
   <view class="view-order">
-    <view class="view-order-item" bindtap='getUserInfo'>
+    <view class="view-order-item" bindtap='allOrder'>
       <image src="../../images/user/icon_order.png" class="user-order-image" />
       <text class="user-order-text">全部订单</text>
     </view>

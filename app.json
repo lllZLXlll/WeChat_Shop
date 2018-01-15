@@ -10,6 +10,7 @@
     "pages/collectionProduct/collectionProduct",
     "pages/settlement/settlement",
     "pages/orderInfo/orderInfo",
+    "pages/orderList/orderList",
     
     "pages/logs/logs",
 

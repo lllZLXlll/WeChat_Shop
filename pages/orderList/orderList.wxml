@@ -1,0 +1,47 @@
+<view class="bodyView">
+  <scroll-view>
+    <view class="swiper-tab">
+      <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">全部订单</view>
+      <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">待付款</view>
+      <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">待发货</view>
+      <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">待收货</view>
+    </view>
+  </scroll-view>
+
+  <block wx:for="{{orderProducts}}" wx:key="{{item.productId}}">
+    <view class="productItemView">
+      <view class="productItemleft">
+        <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
+      </view>
+      <view class="productItemRight">
+        <text class="productTitleView2">{{item.name}}</text>
+        <text class="productTitleView2 productInfo">{{item.class}}</text>
+
+        <view class="productPriceView priceView2">
+          <view class="productBottomView1">
+            <text class="proceMinText">￥</text>
+            <text class="proceText">{{item.price}}</text>
+          </view>
+          <view class="productBottomView2">
+            <text class="countText">x {{item.productCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="view-item">
+    <text class="text-left">快递</text>
+    <text class="text-right text-red">{{expressFee == 0 ? '包邮' : expressFee + '元'}}</text>
+  </view>
+
+  <view class="view-item">
+    <text class="text-left">买家留言</text>
+    <input class="input-text" value="{{describes}}" maxlength="200" disabled="true" />
+  </view>
+
+  <view class="view-item">
+    <text class="text-right">需付款： <text class="text-red">{{totalAmount}}元</text></text>
+  </view>
+
+</view>

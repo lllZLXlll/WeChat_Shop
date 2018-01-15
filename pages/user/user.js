@@ -212,4 +212,11 @@ Page({
     }
   },
 
+  // 全部订单
+  allOrder: function (e) {
+    wx.navigateTo({
+      url: '../orderList/orderList'
+    })
+  },
+
 })
