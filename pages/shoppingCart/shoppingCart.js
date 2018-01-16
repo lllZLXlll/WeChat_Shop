@@ -74,6 +74,7 @@ Page({
               isData: true,
               allMoney: 0,
               allProCount: 0,
+              isSelectAll: false,
             });
           } else {
             // 没有数据
@@ -182,7 +183,7 @@ Page({
 
     // 用户openid
     var openid = wx.getStorageSync("openid");
-    
+
     _this.showToast();
     // 发起网络请求
     wx.request({
@@ -198,7 +199,7 @@ Page({
             title: res.data.message,
             icon: 'success'
           });
-          _this.setData({ isSelectAll : false});
+          _this.setData({ isSelectAll: false });
           _this.getProductData();
         } else {
           wx.showToast({
@@ -237,8 +238,24 @@ Page({
     var _this = this;
     var index = e.currentTarget.dataset.index;
     var page = _this.data.page;
+    var length = page.page.length;
+    var money = 0;
+    var count = 0;
+
     page.page[index].productCount = page.page[index].productCount + 1;
     _this.setData({ page: page });
+
+    for (var i = 0; i < length; i++) {
+      if (page.page[i].isSelected) {
+        money += page.page[i].price * page.page[i].productCount;
+        count += page.page[i].productCount;
+        _this.setData({
+          allMoney: money.toFixed(2),
+          allProCount: count,
+        });
+      }
+    }
+
   },
 
   // 减少商品数量
@@ -246,8 +263,23 @@ Page({
     var _this = this;
     var index = e.currentTarget.dataset.index;
     var page = _this.data.page;
+    var length = page.page.length;
+    var money = 0;
+    var count = 0;
+
     page.page[index].productCount = page.page[index].productCount - 1;
     _this.setData({ page: page });
+
+    for (var i = 0; i < length; i++) {
+      if (page.page[i].isSelected) {
+        money += page.page[i].price * page.page[i].productCount;
+        count += page.page[i].productCount;
+        _this.setData({
+          allMoney: money.toFixed(2),
+          allProCount: count,
+        });
+      }
+    }
   },
 
   // 选中购物车商品
@@ -255,15 +287,26 @@ Page({
     var _this = this;
     var index = e.currentTarget.dataset.index;
     var page = _this.data.page;
+    var length = page.page.length;
     page.page[index].isSelected = true;
     var money = parseFloat(_this.data.allMoney) + parseFloat(page.page[index].price * page.page[index].productCount);
+    var selectCount = 0;
 
     _this.setData({
       page: page,
       allMoney: money.toFixed(2),
-      allProCount: _this.data.allProCount + 1,
+      allProCount: _this.data.allProCount + page.page[index].productCount,
     });
 
+    for (var i = 0; i < length; i++) {
+      if (page.page[i].isSelected) {
+        selectCount++;
+      }
+    }
+
+    if (selectCount == length) {
+      _this.setData({ isSelectAll: true });
+    }
   },
 
   // 取消选中购物车商品
@@ -271,14 +314,26 @@ Page({
     var _this = this;
     var index = e.currentTarget.dataset.index;
     var page = _this.data.page;
+    var length = page.page.length;
     page.page[index].isSelected = false;
     var money = parseFloat(_this.data.allMoney) - parseFloat(page.page[index].price * page.page[index].productCount);
+    var selectCount = 0;
 
     _this.setData({
       page: page,
       allMoney: money.toFixed(2),
-      allProCount: _this.data.allProCount - 1,
+      allProCount: _this.data.allProCount - page.page[index].productCount,
     });
+
+    for (var i = 0; i < length; i++) {
+      if (page.page[i].isSelected) {
+        selectCount++;
+      }
+    }
+
+    if (selectCount == 0) {
+      _this.setData({ isSelectAll: false });
+    }
   },
 
   // 全选
@@ -287,17 +342,19 @@ Page({
     var page = _this.data.page;
     var length = page.page.length;
     var money = 0;
+    var count = 0;
 
     for (var i = 0; i < length; i++) {
       page.page[i].isSelected = true;
       money += page.page[i].price * page.page[i].productCount;
+      count += page.page[i].productCount;
     }
 
     _this.setData({
       page: page,
       isSelectAll: true,
       allMoney: money.toFixed(2),
-      allProCount: length,
+      allProCount: count,
     });
 
   },
