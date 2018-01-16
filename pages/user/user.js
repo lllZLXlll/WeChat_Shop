@@ -26,7 +26,7 @@ Page({
     })
   },
 
-  userLogin: function() {
+  userLogin: function () {
     var _this = this;
     wx.login({
       success: function (res) {
@@ -167,7 +167,7 @@ Page({
   },
 
   // 跳转收货地址页面
-  toPageReceivingAddress: function() {
+  toPageReceivingAddress: function () {
     var _this = this;
     // 看是否登录
     if (_this.data.userInfo.nickName == null) {
@@ -190,7 +190,7 @@ Page({
   },
 
   // 跳转收藏页面
-  toPageCollectionPro: function() {
+  toPageCollectionPro: function () {
     var _this = this;
     // 看是否登录
     if (_this.data.userInfo.nickName == null) {
@@ -214,9 +214,25 @@ Page({
 
   // 全部订单
   allOrder: function (e) {
-    wx.navigateTo({
-      url: '../orderList/orderList'
-    })
+    var _this = this;
+    // 看是否登录
+    if (_this.data.userInfo.nickName == null) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录哦',
+        success: function (res) {
+          if (res.confirm) {
+            _this.getUserInfo();
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../orderList/orderList?currentTab=1'
+      })
+    }
   },
 
 })

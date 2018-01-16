@@ -8,40 +8,62 @@
     </view>
   </scroll-view>
 
-  <block wx:for="{{orderProducts}}" wx:key="{{item.productId}}">
-    <view class="productItemView">
-      <view class="productItemleft">
-        <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
-      </view>
-      <view class="productItemRight">
-        <text class="productTitleView2">{{item.name}}</text>
-        <text class="productTitleView2 productInfo">{{item.class}}</text>
+  <block wx:for="{{page.page}}" wx:key="{{item.id}}">
 
-        <view class="productPriceView priceView2">
-          <view class="productBottomView1">
-            <text class="proceMinText">￥</text>
-            <text class="proceText">{{item.price}}</text>
-          </view>
-          <view class="productBottomView2">
-            <text class="countText">x {{item.productCount}}</text>
+    <block wx:for="{{item.productLIst}}" wx:key="{{item.id}}">
+      <view class="productItemView" bindtap='toOrderInfo' data-order='{{item.orderNumber}}'>
+        <view class="productItemleft">
+          <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
+        </view>
+        <view class="productItemRight">
+          <text class="productTitleView2">{{item.productName}}</text>
+          <text class="productTitleView2 productInfo">{{item.productClassName}}</text>
+
+          <view class="productPriceView priceView2">
+            <view class="productBottomView1">
+              <text class="proceMinText">￥</text>
+              <text class="proceText">{{item.productPrice}}</text>
+            </view>
+            <view class="productBottomView2">
+              <text class="countText">x {{item.productCount}}</text>
+            </view>
           </view>
         </view>
       </view>
+    </block>
+
+    <view class="view-item">
+      <text class="text-left">快递</text>
+      <text class="text-right text-red">{{item.expressFee == 0 ? '包邮' : item.expressFee + '元'}}</text>
     </view>
+
+    <view class="view-item">
+      <text class="text-left">订单号</text>
+      <text class="text-right">{{item.orderNumber}}</text>
+    </view>
+
+    <view class="view-item">
+      <text class="text-right">需付款： <text class="text-red">{{item.totalAmount}}元</text></text>
+    </view>
+
+    <view class="view-item" wx:if='{{item.orderType == 1}}'>
+      <text class="text-left"></text>
+      <button size="mini" bindtap='cancelOrder' data-order='{{item.orderNumber}}'>取消订单</button>
+      <text>　</text>
+      <button size="mini" type='warn'>付款</button>
+    </view>
+    <view class="view-item" wx:if='{{item.orderType == 3}}'>
+      <text class="text-left"></text>
+      <button size="mini" bindtap='delOrder' data-order='{{item.orderNumber}}'>删除订单</button>
+    </view>
+
+    <view class="view-margin"></view>
   </block>
 
-  <view class="view-item">
-    <text class="text-left">快递</text>
-    <text class="text-right text-red">{{expressFee == 0 ? '包邮' : expressFee + '元'}}</text>
-  </view>
-
-  <view class="view-item">
-    <text class="text-left">买家留言</text>
-    <input class="input-text" value="{{describes}}" maxlength="200" disabled="true" />
-  </view>
-
-  <view class="view-item">
-    <text class="text-right">需付款： <text class="text-red">{{totalAmount}}元</text></text>
+  <!-- 列表底部组件 -->
+  <view wx:if='{{isBottomText && isData}}' class="view-bottom-text">- 没有更多了 -</view>
+  <view wx:if='{{!isBottomText && isData}}' class="view-bottom-text">
+    <image src="../../images/product/icon_loading.gif" class="loadingImage" />
   </view>
 
 </view>

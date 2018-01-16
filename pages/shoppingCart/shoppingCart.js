@@ -8,7 +8,6 @@ Page({
     page: [],
     isLoad: false,
     isBottomText: false,
-
     // 是否有数据
     isData: true,
 

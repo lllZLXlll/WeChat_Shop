@@ -5,30 +5,24 @@ const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
-    // 商品信息
+    // 订单基本信息
+    orderInfo: null,
+    // 商品列表
     orderProducts: [],
     // 收货地址
     address: null,
-    // 买家留言
-    describes: null,
-    // 总快递费
-    expressFee: 0,
-    // 总订单金额
-    totalAmount: 0,
-    // 总商品数量
-    totalCount: 0,
-    // 订单号
-    order: null,
     // 是否已经取消订单
     isCancelOrder: false,
   },
 
   onLoad: function (param) {
     var _this = this;
-
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
     var order = param.order;
     var param = {
       order: order,
+      openid: openid,
     };
 
     _this.showToast();
@@ -40,16 +34,12 @@ Page({
         _this.hideoast();
         console.log(res)
         if (res.data.error == 'code-0000') {
-          var orderInfo = res.data.orderInfo;
 
           _this.setData({
             address: res.data.address,
-            orderProducts: orderInfo,
-            describes: orderInfo[0].describes,
-            expressFee: orderInfo[0].expressFee,
-            totalAmount: orderInfo[0].totalAmount,
-            totalCount: res.data.totalCount,
-            order: order,
+            orderInfo: res.data.orderInfo,
+            orderProducts: res.data.productLIst,
+            isCancelOrder: res.data.orderInfo.orderType == 3 ? true : false,
           });
         } else {
           wx.showToast({
@@ -101,8 +91,11 @@ Page({
   // 取消订单
   cancelOrder: function (e) {
     var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
     var param = {
-      order: _this.data.order
+      order: _this.data.orderInfo.orderNumber,
+      openid: openid,
     };
     wx.showModal({
       title: '提示',
@@ -156,8 +149,11 @@ Page({
 
   delOrder: function (e) {
     var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
     var param = {
-      order: _this.data.order
+      order: _this.data.orderInfo.orderNumber,
+      openid: openid,
     };
 
     _this.showToast();
@@ -177,7 +173,7 @@ Page({
           title: res.data.message,
           image: '../../images/user/icon_error.png'
         });
-        
+
       },
       complete: function (e) {
         if (e.errMsg != app.globalData.requestOk) {

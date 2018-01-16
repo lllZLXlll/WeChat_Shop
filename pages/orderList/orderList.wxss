@@ -184,3 +184,25 @@ text {
   display: flex;
   align-self: flex-end;
 }
+
+.view-margin {
+  height: 16rpx;
+}
+
+.view-bottom-text {
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 30rpx;
+}
+
+.loadingImage {
+  width: 45rpx;
+  height: 45rpx;
+}
+
+.view-marginLeft {
+  width: 20rpx;
+}

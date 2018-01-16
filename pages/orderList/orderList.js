@@ -6,43 +6,66 @@ Page({
   data: {
     // tab切换  
     currentTab: '0',
-    // 价格排序图片
-    priceSortImage: '../../images/product/icon_sort_asc.png',
 
-    // 商品信息
-    orderProducts: [],
+    // 订单数据
+    page: [],
+    isLoad: false,
+    isBottomText: false,
+    // 是否有数据
+    isData: true,
   },
 
   onLoad: function (e) {
     var _this = this;
+    if (e.currentTab) {
+      _this.setData({ currentTab: e.currentTab });
+    }
+
+  },
+
+  onShow: function (e) {
+    console.log(e);
+    this.getData();
+  },
+
+  getData: function (e) {
+    var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+
     var param = {
-      order: '2018011317123115927988',
+      openid: openid,
+      pageNum: 1,
     };
 
     _this.showToast();
     wx.request({
-      url: serverUrl + 'queryOrderInfo',
+      url: serverUrl + 'queryAllOrder',
       method: 'POST',
       data: JSON.stringify(param),
       success: function (res) {
         _this.hideoast();
         console.log(res)
         if (res.data.error == 'code-0000') {
-          var orderInfo = res.data.orderInfo;
+          _this.setData({ isLoad: false });
+          var page = res.data.page;
+          console.log(page)
 
-          _this.setData({
-            orderProducts: orderInfo,
-          });
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            image: '../../images/user/icon_error.png'
-          });
+          if (res.data.page.page.length > 0) {
+            _this.setData({
+              page: page,
+              isBottomText: page.pageTotalNum <= 1 ? true : false,
+              isData: true,
+            });
+          } else {
+            // 没有数据
+            _this.setData({ isData: false, });
+          }
         }
       },
       complete: function (e) {
+        wx.hideNavigationBarLoading() //完成停止标题栏中加载
         if (e.errMsg != app.globalData.requestOk) {
-          _this.hideoast();
           if (e.errMsg == app.globalData.requestTimeout) {
             wx.showToast({
               title: '网络请求超时',
@@ -59,14 +82,14 @@ Page({
               image: '../../images/user/icon_error.png'
             });
           }
-          setTimeout(function () {
-            wx.navigateBack();
-          }, 2000);
+          _this.setData({ isBottomText: true });
         }
+
+        // 一定要放在最后，不然下拉后会卡在下面无法返回上去
+        wx.stopPullDownRefresh() //停止下拉刷新
       }
     });
   },
-
 
   // 展示加载框
   showToast: function () {
@@ -96,12 +119,172 @@ Page({
 
   },
 
-  toPage: function (object) {
-    console.log(object)
-    wx.navigateTo({
-      url: '../productInfo/productInfo'
 
-      // url: '../../components/productSelect/productSelect'
+  // 上拉加载
+  loadPage: function () {
+    var _this = this;
+    if (_this.data.isLoad)
+      return;
+    else
+      _this.setData({ isLoad: true });
+
+    // 总页数等于当前页数不加载
+    if (_this.data.page.pageTotalNum <= _this.data.page.pageNum) {
+      _this.setData({ isBottomText: true });
+      return;
+    }
+
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+
+    var param = {
+      pageNum: _this.data.page.pageNum + 1,
+      openid: openid,
+    };
+
+    //发起网络请求
+    wx.request({
+      url: serverUrl + 'queryAllOrder',
+      method: 'POST',
+      data: JSON.stringify(param),
+      success: function (res) {
+        if (res.data.error == 'code-0000') {
+          res.data.page.page = _this.data.page.page.concat(res.data.page.page);
+          _this.setData({
+            page: res.data.page,
+            isLoad: false
+          });
+        }
+      }
+    });
+
+  },
+
+  // 下拉刷新
+  onPullDownRefresh: function (e) {
+    console.log('--------下拉刷新-------');
+    this.getData();
+  },
+
+  // 上拉加载
+  onReachBottom: function (e) {
+    console.log('--------上拉加载-------');
+    this.loadPage();
+  },
+
+  // 取消订单
+  cancelOrder: function (e) {
+    var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    var order = e.currentTarget.dataset.order;
+    var param = {
+      order: order,
+      openid: openid,
+    };
+    wx.showModal({
+      title: '提示',
+      content: '订单取消后不可恢复，确定要取消吗？',
+      success: function (res) {
+        if (res.confirm) {
+
+          _this.showToast();
+          wx.request({
+            url: serverUrl + 'updateOrderStatus',
+            method: 'POST',
+            data: JSON.stringify(param),
+            success: function (res) {
+              _this.hideoast();
+              if (res.data.error == 'code-0000') {
+                _this.getData();
+              }
+              wx.showToast({
+                title: res.data.message,
+                image: '../../images/user/icon_error.png'
+              });
+            },
+            complete: function (e) {
+              if (e.errMsg != app.globalData.requestOk) {
+                _this.hideoast();
+                if (e.errMsg == app.globalData.requestTimeout) {
+                  wx.showToast({
+                    title: '网络请求超时',
+                    image: '../../images/user/icon_error.png'
+                  });
+                } else if (e.errMsg == app.globalData.requestFail) {
+                  wx.showToast({
+                    title: '网络请求失败',
+                    image: '../../images/user/icon_error.png'
+                  });
+                } else {
+                  wx.showToast({
+                    title: '请求失败',
+                    image: '../../images/user/icon_error.png'
+                  });
+                }
+              }
+            }
+          });
+        }
+      }
+    })
+
+  },
+
+  delOrder: function (e) {
+    var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    var order = e.currentTarget.dataset.order;
+    var param = {
+      order: order,
+      openid: openid,
+    };
+
+    _this.showToast();
+    wx.request({
+      url: serverUrl + 'delOrder',
+      method: 'POST',
+      data: JSON.stringify(param),
+      success: function (res) {
+        _this.hideoast();
+        if (res.data.error == 'code-0000') {
+          _this.getData();
+        }
+        wx.showToast({
+          title: res.data.message,
+          image: '../../images/user/icon_error.png'
+        });
+
+      },
+      complete: function (e) {
+        if (e.errMsg != app.globalData.requestOk) {
+          _this.hideoast();
+          if (e.errMsg == app.globalData.requestTimeout) {
+            wx.showToast({
+              title: '网络请求超时',
+              image: '../../images/user/icon_error.png'
+            });
+          } else if (e.errMsg == app.globalData.requestFail) {
+            wx.showToast({
+              title: '网络请求失败',
+              image: '../../images/user/icon_error.png'
+            });
+          } else {
+            wx.showToast({
+              title: '请求失败',
+              image: '../../images/user/icon_error.png'
+            });
+          }
+        }
+      }
+    });
+  },
+
+  toOrderInfo: function (e) {
+    wx.navigateTo({
+      url: '../orderInfo/orderInfo?order=' + e.currentTarget.dataset.order
     })
   },
+
 })
