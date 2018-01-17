@@ -230,7 +230,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '../orderList/orderList?currentTab=1'
+        url: '../orderList/orderList?currentTab=' + e.currentTarget.dataset.index
       })
     }
   },

@@ -61,7 +61,7 @@
   </block>
 
   <!-- 列表底部组件 -->
-  <view wx:if='{{isBottomText && isData}}' class="view-bottom-text">- 没有更多了 -</view>
+  <view wx:if='{{isBottomText}}' class="view-bottom-text">- 没有更多了 -</view>
   <view wx:if='{{!isBottomText && isData}}' class="view-bottom-text">
     <image src="../../images/product/icon_loading.gif" class="loadingImage" />
   </view>

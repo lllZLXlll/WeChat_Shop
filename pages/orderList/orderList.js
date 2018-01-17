@@ -15,6 +15,10 @@ Page({
     isData: true,
   },
 
+  onShow: function (e) {
+    this.getData();
+  },
+
   onLoad: function (e) {
     var _this = this;
     if (e.currentTab) {
@@ -23,19 +27,30 @@ Page({
 
   },
 
-  onShow: function (e) {
-    console.log(e);
-    this.getData();
-  },
-
   getData: function (e) {
     var _this = this;
+    var currentTab = _this.data.currentTab;
+    if (currentTab == 0 || currentTab == 1) {
+      _this.queryOrder(currentTab);
+    }
+
+  },
+
+  queryOrder: function (currentTab) {
+    var _this = this;
+
     // 用户openid
     var openid = wx.getStorageSync("openid");
+    var orderType;
+
+    if (currentTab == 1) {
+      orderType = 1;
+    }
 
     var param = {
       openid: openid,
       pageNum: 1,
+      orderType: orderType,
     };
 
     _this.showToast();
@@ -51,16 +66,12 @@ Page({
           var page = res.data.page;
           console.log(page)
 
-          if (res.data.page.page.length > 0) {
-            _this.setData({
-              page: page,
-              isBottomText: page.pageTotalNum <= 1 ? true : false,
-              isData: true,
-            });
-          } else {
-            // 没有数据
-            _this.setData({ isData: false, });
-          }
+          _this.setData({
+            page: page,
+            isBottomText: page.pageTotalNum <= 1 ? true : false,
+            isData: res.data.page.page.length > 0 ? true : false,
+          });
+
         }
       },
       complete: function (e) {
@@ -108,13 +119,17 @@ Page({
   */
   swichNav: function (e) {
     var _this = this;
+    var currentTab = e.target.dataset.current;
 
-    if ((_this.data.currentTab === e.target.dataset.current) && e.target.dataset.current != 2) {
+    if (_this.data.currentTab === currentTab) {
       return false;
     } else {
       _this.setData({
-        currentTab: e.target.dataset.current
+        currentTab: currentTab
       })
+      if (currentTab == 0 || currentTab == 1) {
+        _this.queryOrder(currentTab);
+      }
     }
 
   },
@@ -136,10 +151,15 @@ Page({
 
     // 用户openid
     var openid = wx.getStorageSync("openid");
+    var orderType;
 
+    if (_this.data.currentTab == 1) {
+      orderType = 1;
+    }
     var param = {
       pageNum: _this.data.page.pageNum + 1,
       openid: openid,
+      orderType: orderType,
     };
 
     //发起网络请求

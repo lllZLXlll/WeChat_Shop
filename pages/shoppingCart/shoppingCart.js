@@ -19,13 +19,17 @@ Page({
     allProCount: 0,
   },
 
-  // 界面渲染回调
-  onLoad: function () {
-    var _this = this;
-
-    _this.getProductData();
-
+  onShow: function (e) {
+    this.getProductData();
   },
+
+  // 界面渲染回调
+  // onLoad: function () {
+  //   var _this = this;
+
+  //   _this.getProductData();
+
+  // },
 
   // 展示加载框
   showToast: function () {

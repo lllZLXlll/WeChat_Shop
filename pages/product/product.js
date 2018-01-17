@@ -44,6 +44,11 @@ Page({
     priceSortImage: '../../images/product/icon_sort_asc.png',
 
   },
+
+  onShow: function (e) {
+    this.getProductData();
+  },
+
   // 界面渲染回调
   onLoad: function () {
     var _this = this;
@@ -56,7 +61,7 @@ Page({
       },
     })
 
-    _this.getProductData();
+    //_this.getProductData();
 
   },
 

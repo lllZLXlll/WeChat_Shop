@@ -22,12 +22,12 @@
 
   <!-- 全部订单、代付款、代发货、待收货 -->
   <view class="view-order">
-    <view class="view-order-item" bindtap='allOrder'>
+    <view class="view-order-item" bindtap='allOrder' data-index='0'>
       <image src="../../images/user/icon_order.png" class="user-order-image" />
       <text class="user-order-text">全部订单</text>
     </view>
 
-    <view class="view-order-item">
+    <view class="view-order-item" bindtap='allOrder' data-index='1'>
       <image src="../../images/user/icon_payment.png" class="user-order-image" />
       <text class="user-order-text">待付款</text>
     </view>
