@@ -6,7 +6,7 @@
       <image src="../../images/orderInfo/icon_time.png" class="icon-image-time" />
     </view>
     <view class='view-orderPay-right'>
-      <text>{{orderTime}}</text>
+      <text class="text-orderPay">{{orderTime}}</text>
     </view>
   </view>
 
@@ -18,11 +18,11 @@
 
     <view class='view-address-center'>
       <view class='view-address-center-top-text'>
-        <text class="text-left">收货人： {{address.userName}}</text>
-        <text class="text-right">{{address.telNumber}}</text>
+        <text class="text-left">收货人： {{orderInfo.userName}}</text>
+        <text class="text-right">{{orderInfo.telNumber}}</text>
       </view>
       <view class='view-address-center-bottom-text'>
-        <text>收货地址： {{address.provinceName}}{{address.cityName}}{{address.countyName}}{{address.detailInfo}}</text>
+        <text>收货地址： {{orderInfo.address}}</text>
       </view>
     </view>
 
@@ -32,7 +32,7 @@
   </view>
 
   <block wx:for="{{orderProducts}}" wx:key="{{item.productId}}">
-    <view class="productItemView">
+    <view class="productItemView" data-id='{{item.productId}}' bindtap='toProductInfo'>
       <view class="productItemleft">
         <image src="{{item.productImage}}" class="productImage" mode="scaleToFill" />
       </view>

@@ -9,8 +9,6 @@ Page({
     orderInfo: null,
     // 商品列表
     orderProducts: [],
-    // 收货地址
-    address: null,
     // 是否已经取消订单
     isCancelOrder: false,
     // 订单倒计时
@@ -38,7 +36,6 @@ Page({
         if (res.data.error == 'code-0000') {
 
           _this.setData({
-            address: res.data.address,
             orderInfo: res.data.orderInfo,
             orderProducts: res.data.productLIst,
             isCancelOrder: res.data.orderInfo.orderType == 3 ? true : false,
@@ -86,33 +83,38 @@ Page({
   // 递归设置订单过期时间
   setOrderTime: function (orderCreateTime) {
     var _this = this;
-    if (orderCreateTime <= 0) {
+
+    var EndTime = new Date(orderCreateTime);
+    EndTime.setDate(EndTime.getDate() + 3);
+    var NowTime = new Date();
+    var t = EndTime.getTime() - NowTime.getTime();
+    // 判断是否已经过期
+    if (t <= 0) {
       _this.setData({ orderTime: '订单已过期，已自动取消' });
-    } else {
-      var EndTime = new Date(orderCreateTime);
-      EndTime.setDate(EndTime.getDate() + 3);
-      var NowTime = new Date();
-      var t = EndTime.getTime() - NowTime.getTime();
-      var d = 0;
-      var h = 0;
-      var m = 0;
-      var s = 0;
-      if (t >= 0) {
-        d = Math.floor(t / 1000 / 60 / 60 / 24);
-        h = Math.floor(t / 1000 / 60 / 60 % 24);
-        m = Math.floor(t / 1000 / 60 % 60);
-        s = Math.floor(t / 1000 % 60);
-      }
-
-      var orderTime = d + '天' + h + '时' + m + "分" + s + "秒";
-
-      this.setData({ orderTime: orderTime });
-
-      setTimeout(function() {
-        _this.setOrderTime(orderCreateTime);
-      }, 1000);
+      _this.autoCancelOrder();
+      return;
     }
-    
+
+    var d = 0;
+    var h = 0;
+    var m = 0;
+    var s = 0;
+    if (t >= 0) {
+      d = Math.floor(t / 1000 / 60 / 60 / 24);
+      h = Math.floor(t / 1000 / 60 / 60 % 24);
+      m = Math.floor(t / 1000 / 60 % 60);
+      s = Math.floor(t / 1000 % 60);
+    }
+
+    var orderTime = d + '天' + h + '时' + m + "分" + s + "秒";
+
+    this.setData({ orderTime: orderTime + '后自动取消订单' });
+
+    setTimeout(function () {
+      _this.setOrderTime(orderCreateTime);
+    }, 1000);
+
+
   },
 
   // 展示加载框
@@ -128,7 +130,7 @@ Page({
   },
 
   // 取消订单
-  cancelOrder: function (e) {
+  cancelOrder: function () {
     var _this = this;
     // 用户openid
     var openid = wx.getStorageSync("openid");
@@ -186,6 +188,28 @@ Page({
 
   },
 
+  // 倒计时后取消订单
+  autoCancelOrder: function() {
+    var _this = this;
+    // 用户openid
+    var openid = wx.getStorageSync("openid");
+    var param = {
+      order: _this.data.orderInfo.orderNumber,
+      openid: openid,
+    };
+    wx.request({
+      url: serverUrl + 'updateOrderStatus',
+      method: 'POST',
+      data: JSON.stringify(param),
+      success: function (res) {
+        console.log(res)
+        if (res.data.error == 'code-0000') {
+          _this.setData({ isCancelOrder: true });
+        }
+      },
+    });
+  },
+
   delOrder: function (e) {
     var _this = this;
     // 用户openid
@@ -237,6 +261,10 @@ Page({
       }
     });
   },
-
+  toProductInfo: function (e) {
+    wx.navigateTo({
+      url: '../productInfo/productInfo?id=' + e.currentTarget.dataset.id
+    })
+  },
 
 })

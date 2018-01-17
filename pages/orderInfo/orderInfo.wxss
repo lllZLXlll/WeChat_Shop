@@ -297,15 +297,26 @@ text {
   flex-direction: row;
   background-color: #fff;
   height: 120rpx;
+  padding: 0 20rpx 0 20rpx;
 }
 
 .view-orderPay-left, .view-orderPay-right {
+  display: flex;
   flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.view-orderPay-right {
+  flex: 2;
 }
 
 .icon-image-time {
   width: 100rpx;
   height: 100rpx;
+}
+
+.text-orderPay {
+  color: #000;
 }
