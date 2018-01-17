@@ -13,6 +13,8 @@ Page({
     address: null,
     // 是否已经取消订单
     isCancelOrder: false,
+    // 订单倒计时
+    orderTime: null,
   },
 
   onLoad: function (param) {
@@ -41,6 +43,11 @@ Page({
             orderProducts: res.data.productLIst,
             isCancelOrder: res.data.orderInfo.orderType == 3 ? true : false,
           });
+
+          if (res.data.orderInfo.orderType == 1) {
+            _this.setOrderTime(res.data.orderInfo.orderCreateTime);
+          }
+
         } else {
           wx.showToast({
             title: res.data.message,
@@ -74,6 +81,38 @@ Page({
       }
     });
 
+  },
+
+  // 递归设置订单过期时间
+  setOrderTime: function (orderCreateTime) {
+    var _this = this;
+    if (orderCreateTime <= 0) {
+      _this.setData({ orderTime: '订单已过期，已自动取消' });
+    } else {
+      var EndTime = new Date(orderCreateTime);
+      EndTime.setDate(EndTime.getDate() + 3);
+      var NowTime = new Date();
+      var t = EndTime.getTime() - NowTime.getTime();
+      var d = 0;
+      var h = 0;
+      var m = 0;
+      var s = 0;
+      if (t >= 0) {
+        d = Math.floor(t / 1000 / 60 / 60 / 24);
+        h = Math.floor(t / 1000 / 60 / 60 % 24);
+        m = Math.floor(t / 1000 / 60 % 60);
+        s = Math.floor(t / 1000 % 60);
+      }
+
+      var orderTime = d + '天' + h + '时' + m + "分" + s + "秒";
+
+      this.setData({ orderTime: orderTime });
+
+      setTimeout(function() {
+        _this.setOrderTime(orderCreateTime);
+      }, 1000);
+    }
+    
   },
 
   // 展示加载框

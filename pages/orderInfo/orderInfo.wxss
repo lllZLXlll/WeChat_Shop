@@ -288,5 +288,24 @@ text {
 
 .view-margin {
   margin-bottom: 80rpx;
-  height:80rpx;
+  height: 80rpx;
+}
+
+.view-orderPay {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  background-color: #fff;
+  height: 120rpx;
+}
+
+.view-orderPay-left, .view-orderPay-right {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-image-time {
+  width: 100rpx;
+  height: 100rpx;
 }

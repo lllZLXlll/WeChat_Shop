@@ -1,4 +1,15 @@
 <view>
+
+  <!-- 订单支付倒计时 -->
+  <view class='view-orderPay' wx:if='{{orderInfo.orderType == 1}}'>
+    <view class='view-orderPay-left'>
+      <image src="../../images/orderInfo/icon_time.png" class="icon-image-time" />
+    </view>
+    <view class='view-orderPay-right'>
+      <text>{{orderTime}}</text>
+    </view>
+  </view>
+
   <!-- 收货地址 -->
   <view class='view-address'>
     <view class='view-address-left'>
