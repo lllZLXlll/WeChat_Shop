@@ -33,6 +33,8 @@ Page({
       // 从分类、加入购物车、立即购买点击进入选择页面状态不同，底部展示按钮也不同
       // 1：选择分类 2：加入购物车 3：立即购买
       selectStatus: 1,
+      // 商品限购数量
+      buyCount: -1,
     },
 
     // 商品图片
@@ -73,6 +75,7 @@ Page({
           selectProductInfo.product.price = resultMap.price;
           selectProductInfo.product.count = resultMap.count;
           selectProductInfo.product.productImage = resultMap.productImage;
+          selectProductInfo.buyCount = resultMap.buyCount;
           selectProductInfo.product.id = -1;
 
           var images = new Array();
@@ -271,6 +274,16 @@ Page({
 
   add_select_product: function (e) {
     var selectProductInfo = this.data.selectProductInfo;
+
+    // 判断是否超过限购数量
+    if (selectProductInfo.buyCount > 0 && selectProductInfo.buyCount < selectProductInfo.select_product_count + 1) {
+      wx.showToast({
+        title: '只能购买这么多哦！',
+        icon: 'none',
+      })
+      return;
+    }
+
     selectProductInfo.select_product_count = selectProductInfo.select_product_count + 1;
     this.setData({
       selectProductInfo: this.data.selectProductInfo

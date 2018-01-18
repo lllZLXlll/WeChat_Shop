@@ -240,10 +240,20 @@ Page({
   addCount: function (e) {
     var _this = this;
     var index = e.currentTarget.dataset.index;
+    var buycount = e.currentTarget.dataset.buycount;
     var page = _this.data.page;
     var length = page.page.length;
     var money = 0;
     var count = 0;
+
+    // 判断是否超过限购数量
+    if (buycount > 0 && buycount < (page.page[index].productCount + 1)) {
+      wx.showToast({
+        title: '只能购买这么多哦！',
+        icon: 'none',
+      })
+      return;
+    }
 
     page.page[index].productCount = page.page[index].productCount + 1;
     _this.setData({ page: page });

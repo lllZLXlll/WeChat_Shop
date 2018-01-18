@@ -32,7 +32,7 @@
             <text class="classText">{{productInfo.productCount}}</text> 
           </view>
           
-          <view class="classViewBG count-margin" bindtap='addCount' data-index='{{index}}'>
+          <view class="classViewBG count-margin" bindtap='addCount' data-index='{{index}}' data-buycount='{{productInfo.buyCount}}'>
             <image src="../../images/productInfo/icon_add.png" class="countImage" />
           </view>
         </view>
