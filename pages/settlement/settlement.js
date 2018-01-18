@@ -194,6 +194,9 @@ Page({
               title: res.data.message,
               image: '../../images/user/icon_error.png'
             });
+            setTimeout(function () {
+              wx.navigateBack();
+            }, 2000);
           }
         },
         complete: function (e) {

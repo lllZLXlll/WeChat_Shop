@@ -465,3 +465,8 @@
   bottom: 54rpx;
   left: 54rpx;
 }
+
+.button-margin-bottom {
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+}

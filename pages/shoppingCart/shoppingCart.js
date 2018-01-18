@@ -239,8 +239,14 @@ Page({
   // 增加商品数量
   addCount: function (e) {
     var _this = this;
+    // 下标
     var index = e.currentTarget.dataset.index;
+    // 限购数量
     var buycount = e.currentTarget.dataset.buycount;
+    // 库存
+    var _count = e.currentTarget.dataset.count;
+    // 冻结库存
+    var freezecount = e.currentTarget.dataset.freezecount;
     var page = _this.data.page;
     var length = page.page.length;
     var money = 0;
@@ -248,6 +254,15 @@ Page({
 
     // 判断是否超过限购数量
     if (buycount > 0 && buycount < (page.page[index].productCount + 1)) {
+      wx.showToast({
+        title: '只能购买这么多哦！',
+        icon: 'none',
+      })
+      return;
+    }
+
+    // 判断是否超过库存数量
+    if (_count - freezecount < (page.page[index].productCount + 1)) {
       wx.showToast({
         title: '只能购买这么多哦！',
         icon: 'none',

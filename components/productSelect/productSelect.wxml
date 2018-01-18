@@ -18,11 +18,25 @@
             </view>
           </view>
 
-          <view class="productSelectPirceView">
+          <view class="productSelectPirceView" wx:if='{{selectProductInfo.select_product_id != -1}}'>
+            <text class="redText">￥{{selectProductInfo.product.price}}</text>
+            <text>库存{{selectProductInfo.product.count - selectProductInfo.product.freezeCount}}件</text>
+            <view class='text-view'>
+              <text>{{selectProductInfo.product.class ? '已选择 ' + selectProductInfo.product.class : '请选择 颜色分类'}}</text>
+            </view>
+          </view>
+          <view class="productSelectPirceView" wx:if='{{selectProductInfo.select_product_id == -1 && selectProductInfo.product.count > 0}}'>
             <text class="redText">￥{{selectProductInfo.product.price}}</text>
             <text>库存{{selectProductInfo.product.count}}件</text>
             <view class='text-view'>
               <text>{{selectProductInfo.product.class ? '已选择 ' + selectProductInfo.product.class : '请选择 颜色分类'}}</text>
+            </view>
+          </view>
+          <view class="productSelectPirceView" wx:if='{{selectProductInfo.product.count == 0}}'>
+            <text class="redText">￥{{selectProductInfo.product.price}}</text>
+            <text>库存{{selectProductInfo.product.count}}件</text>
+            <view class='text-view'>
+              <text>该商品已售罄</text>
             </view>
           </view>
         </view>
@@ -34,9 +48,9 @@
 
         <view class="selectClassView">
           <block wx:for="{{selectProductInfo.productCalsss}}" wx:key="{{item.id}}">
-            <view class="classViewBG {{item.id == selectProductInfo.select_product_id ? 'select-view-bg' : null}}" bindtap='selectProduct' data-index='{{index}}'>
-              <text>{{item.class}}</text>
-            </view>
+            <button size='mini' disabled='{{item.count - item.freezeCount <= 0 ? true : false}}' type='{{item.id == selectProductInfo.select_product_id ? "warn" : "default"}}' bindtap='selectProduct' data-index='{{index}}' class="button-margin-bottom">
+              {{item.class}}
+            </button>
           </block>
         </view>
 
@@ -51,11 +65,11 @@
           <view class="classViewBG count-margin" bindtap='remove_select_product' wx:if='{{selectProductInfo.select_product_count > 1 && selectProductInfo.product.id != -1}}'>
             <image src="../../images/productInfo/icon_remove.png" class="countImage" />
           </view>
-          
-          <view class="classViewBG count-margin count-width"> 
-            <text class="classText">{{selectProductInfo.select_product_count}}</text> 
+
+          <view class="classViewBG count-margin count-width">
+            <text class="classText">{{selectProductInfo.select_product_count}}</text>
           </view>
-          
+
           <view class="classViewBG count-margin" bindtap='add_select_product' wx:if='{{selectProductInfo.product.id != -1}}'>
             <image src="../../images/productInfo/icon_add.png" class="countImage" />
           </view>
@@ -83,6 +97,6 @@
         <text>立即购买</text>
       </view>
     </view>
-      
-    </view>
+
+  </view>
 </template>

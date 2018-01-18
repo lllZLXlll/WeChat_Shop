@@ -283,6 +283,14 @@ Page({
       })
       return;
     }
+    // 判断是否超过库存数量
+    if (selectProductInfo.product.count < selectProductInfo.select_product_count + selectProductInfo.product.freezeCount + 1) {
+      wx.showToast({
+        title: '只能购买这么多哦！',
+        icon: 'none',
+      })
+      return;
+    }
 
     selectProductInfo.select_product_count = selectProductInfo.select_product_count + 1;
     this.setData({
