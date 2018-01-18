@@ -11,6 +11,7 @@
     "pages/settlement/settlement",
     "pages/orderInfo/orderInfo",
     "pages/orderList/orderList",
+    "pages/logistics/logistics",
     
     "pages/logs/logs",
 

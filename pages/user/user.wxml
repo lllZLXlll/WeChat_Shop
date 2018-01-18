@@ -37,7 +37,7 @@
       <text class="user-order-text">待发货</text>
     </view>
 
-    <view class="view-order-item">
+    <view class="view-order-item" bindtap='receiveCargo'>
       <image src="../../images/user/icon_receiveCargo.png" class="user-order-image" />
       <text class="user-order-text">待收货</text>
     </view>

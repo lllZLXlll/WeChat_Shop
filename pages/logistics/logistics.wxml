@@ -1,0 +1,9 @@
+
+<!--index.wxml-->
+<view>
+  <block wx:for="{{traces}}" wx:key="{{item.acceptTime}}" >
+    <text>{{item.acceptTime}}-{{item.acceptStation}}</text>
+  </block>
+
+
+</view>

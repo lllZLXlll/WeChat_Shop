@@ -235,4 +235,11 @@ Page({
     }
   },
 
+  // 待收货
+  receiveCargo: function (e) {
+    wx.navigateTo({
+      url: '../logistics/logistics'
+    })
+  },
+
 })
