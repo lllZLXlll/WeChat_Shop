@@ -5,7 +5,39 @@ const serverUrl = app.globalData.serverUrl;
 
 Page({
   data: {
+    // banner图数据
     bannerList: [],
+    // 推荐商品数据
+    recommendedProList: [
+      { productId: 1,
+        productName: '小米手环1',
+        productImg_1:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_2:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_3:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg'
+      },
+      {
+        productId: 2,
+        productName: '小米手环2',
+        productImg_1:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_2:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_3:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg'
+      },
+      {
+        productId: 3,
+        productName: '小米手环3',
+        productImg_1:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_2:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_3:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg'
+      },
+      {
+        productId: 4,
+        productName: '小米手环4',
+        productImg_1:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_2:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg',
+        productImg_3:'http://localhost:8080/zlx/resources/admin/upload/home/20180122153800931.jpg'
+      },
+    ],
+
     indicatorDots: true,
     autoplay: true,
     interval: 3000,

@@ -1,42 +1,42 @@
-<!-- <import src="../components/swiper/swiper.wxml" /> -->
-
 <!--index.wxml-->
-<view class="bodyView">
+<view>
   <!-- banner图片 -->
-  <view class="bannerView">
-   <swiper indicator-dots="{{indicatorDots}}" indicator-color="rgba(255, 255, 255, .5)" indicator-active-color='#ff8200'
-      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
-      circular="{{circular}}" style="width: 750rpx;height: 375rpx;"
-    > 
-    <block wx:for="{{bannerList}}" wx:key="item.productId">
-       <swiper-item>
-        <image src="{{item.image}}" style="width: 750rpx;height: 375rpx;" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
-       </swiper-item>
-    </block>
-   </swiper>
+  <view>
+    <swiper indicator-dots="{{indicatorDots}}" indicator-color="rgba(255, 255, 255, .5)" indicator-active-color='#ff8200' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" style="width: 750rpx;height: 375rpx;">
+      <block wx:for="{{bannerList}}" wx:key="item.productId">
+        <swiper-item>
+          <image src="{{item.image}}" style="width: 750rpx;height: 375rpx;" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
 
-  <view class="ppView">
-    <text class="ppText">品牌街</text>
-  </view>
+  <!-- 推荐商品 -->
+  <view class="view-recommended">
 
-   <view class='ppImageView'>
-    <block wx:for="{{imgUrls}}">
-      <view class="ppImageItemView">
-        <image src="{{item}}" class="ppImage"/>
+    <block wx:for="{{recommendedProList}}" wx:key="{{item.productId}}">
+      <view class="view-recommended-view">
+        
+        <text>{{item.productName}}</text>
+        <view class="view-recommended-item">
+          <view class="view-recommended-item-left">
+            <image src="{{item.productImg_1}}" class="image-recommended" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+          </view>
+          <view class="view-recommended-item-right">
+            <view class="view-recommended-item-right-top">
+              <image src="{{item.productImg_2}}" class="image-recommended" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+            </view>
+            <view class="view-recommended-item-right-bottom">
+              <image src="{{item.productImg_3}}" class="image-recommended" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+            </view>
+          </view>
+
+        </view>
       </view>
-    </block>
-  </view>
 
-  <view class="ppView">
-    <text class="ppText">店家推荐</text>
-  </view>
-
-  <view class="tjImageView">
-    <block wx:for="{{imgUrls}}">
-      <view class="tjImageItemView" bindtap='toPage'>
-        <image src="{{item}}" class="maxImage" />
+      <view wx:if="{{index % 2 == 0}}" class="view-recommended-item-margin">
       </view>
+
     </block>
 
   </view>
