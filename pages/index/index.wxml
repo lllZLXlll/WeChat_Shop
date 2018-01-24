@@ -14,20 +14,20 @@
   <!-- 推荐商品 -->
   <view class="view-recommended">
 
-    <block wx:for="{{recommendedProList}}" wx:key="{{item.productId}}">
-      <view class="view-recommended-view">
+    <block wx:for="{{recommendedList}}" wx:key="{{item.productId}}">
+      <view class="view-recommended-view" bindtap='toProductInfo' data-id="{{item.productId}}">
         
         <text>{{item.productName}}</text>
         <view class="view-recommended-item">
           <view class="view-recommended-item-left">
-            <image src="{{item.productImg_1}}" class="image-recommended" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+            <image src="{{item.imageList[0]}}" class="image-recommended" mode="aspectFill"/>
           </view>
           <view class="view-recommended-item-right">
             <view class="view-recommended-item-right-top">
-              <image src="{{item.productImg_2}}" class="image-recommended" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+              <image src="{{item.imageList[1]}}" class="image-recommended" mode="aspectFill"/>
             </view>
             <view class="view-recommended-item-right-bottom">
-              <image src="{{item.productImg_3}}" class="image-recommended" mode="aspectFill" bindtap='toProductInfo' data-id="{{item.productId}}" />
+              <image src="{{item.imageList[2]}}" class="image-recommended" mode="aspectFill"/>
             </view>
           </view>
 
