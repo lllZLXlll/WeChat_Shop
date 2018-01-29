@@ -247,3 +247,9 @@ text {
   font-size: 30rpx;
   color: #999;
 }
+
+.view-button {
+  width: 35%;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}

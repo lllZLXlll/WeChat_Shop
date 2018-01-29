@@ -182,6 +182,7 @@ Page({
       }
     }
 
+    // 无选中的商品
     if (!array.length > 0) return;
 
     // 用户openid
@@ -428,6 +429,13 @@ Page({
       url: '../settlement/settlement'
     });
 
+  },
+
+  // 跳转商品页面
+  toProduct: function (e) {
+    wx.switchTab({
+      url: '/pages/product/product'
+    })
   },
 
 })

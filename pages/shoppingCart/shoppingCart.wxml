@@ -22,6 +22,10 @@
         <image src="../../images/shoppingCart/icon_nullCart.png" class="image-nullCart" />
         <text class='text-nullCart'>不买点东西拿什么犒劳这么辛苦的你~</text>
     </view>
+
+    <view class="view-button" wx:if='{{!isData}}'>
+      <button type='warn' bindtap='toProduct'>立即逛逛</button>
+    </view>
   </view>
 
   <!-- 列表底部组件 -->

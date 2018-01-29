@@ -237,9 +237,26 @@ Page({
 
   // 待收货
   receiveCargo: function (e) {
-    wx.navigateTo({
-      url: '../logistics/logistics'
-    })
+    var _this = this;
+    // 看是否登录
+    if (_this.data.userInfo.nickName == null) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登录哦',
+        success: function (res) {
+          if (res.confirm) {
+            _this.getUserInfo();
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../logistics/logistics'
+      })
+    }
+    
   },
 
 })
