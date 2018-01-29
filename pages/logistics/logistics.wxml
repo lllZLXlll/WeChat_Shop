@@ -1,8 +1,24 @@
 
 <!--index.wxml-->
 <view>
-  <block wx:for="{{traces}}" wx:key="{{item.acceptTime}}" >
-    <text>{{item.acceptTime}}-{{item.acceptStation}}</text>
+  <block wx:for="{{traces}}" wx:key="{{item.acceptTime}}">
+    <view class="view-item">
+      <view class='view-item-left'>
+        <text class='view-item-left-text {{index == 0 ? "text-color" : null}}'>{{item.acceptTime}}</text>
+      </view>
+
+      <view class="view-item-center" wx:if='{{index == traces.length - 1}}'>
+        <view class="view-item-center-round"></view>
+      </view>
+      <view class="view-item-center" wx:else>
+        <view class="view-item-center-round {{index == 0 ? 'round-color' : null}}"></view>
+        <view class="view-item-center-line"></view>
+      </view>
+
+      <view class="view-item-right">
+        <text class='{{index == 0 ? "text-color" : null}}'>{{item.acceptStation}}</text>
+      </view>
+    </view>
   </block>
 
 
