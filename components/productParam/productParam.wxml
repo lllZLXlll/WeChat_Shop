@@ -12,7 +12,7 @@
       <block wx:for="{{productParams}}" wx:key="{{item.id}}">
         <view class="page-itemView">
           <view class="page-leftView">
-            <text>{{item.key}}</text>
+            <text>{{item.paramKey}}</text>
           </view>
           <view class="page-leftView page-rightView">
             <text>{{item.detail}}</text>
